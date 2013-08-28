@@ -1,0 +1,25 @@
+<dynWorkspace X="-47" Y="6" Name="pedro" Category="Pedro's Category" ID="f567637c-30f0-4a9e-b68c-d2c5398842f6">
+  <dynElements>
+    <Dynamo.Nodes.dynFunction type="Dynamo.Nodes.dynFunction" guid="7d716fb5-5538-4476-ac97-c2074db4c4c3" nickname="cos-sine2" x="329.847637299843" y="145.305732873616" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <ID value="cd9e6826-fc5c-4a04-9b7f-8155c4df3429" />
+      <Name value="cos-sine2" />
+      <Inputs>
+        <Input value="" />
+      </Inputs>
+      <Outputs>
+        <Output value="" />
+        <Output value="" />
+      </Outputs>
+    </Dynamo.Nodes.dynFunction>
+    <Dynamo.Nodes.dynSymbol type="Dynamo.Nodes.dynSymbol" guid="c1529b17-53f7-4652-8a12-36745dde4582" nickname="Input" x="116.38134255604" y="183.434921955166" isVisible="true" isUpstreamVisible="true" lacing="Disabled">
+      <Symbol value="" />
+    </Dynamo.Nodes.dynSymbol>
+    <Dynamo.Nodes.dynAddition type="Dynamo.Nodes.dynAddition" guid="8de73dd6-023c-403b-8b51-19965192edb5" nickname="Add" x="512.83117395585" y="142.062104577432" isVisible="true" isUpstreamVisible="true" lacing="Longest" />
+  </dynElements>
+  <dynConnectors>
+    <Dynamo.Connectors.dynConnectorModel start="7d716fb5-5538-4476-ac97-c2074db4c4c3" start_index="0" end="8de73dd6-023c-403b-8b51-19965192edb5" end_index="0" portType="0" />
+    <Dynamo.Connectors.dynConnectorModel start="7d716fb5-5538-4476-ac97-c2074db4c4c3" start_index="1" end="8de73dd6-023c-403b-8b51-19965192edb5" end_index="1" portType="0" />
+    <Dynamo.Connectors.dynConnectorModel start="c1529b17-53f7-4652-8a12-36745dde4582" start_index="0" end="7d716fb5-5538-4476-ac97-c2074db4c4c3" end_index="0" portType="0" />
+  </dynConnectors>
+  <dynNotes />
+</dynWorkspace>

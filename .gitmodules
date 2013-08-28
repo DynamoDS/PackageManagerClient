@@ -1,0 +1,3 @@
+[submodule "third_party/RestSharp"]
+	path = third_party/RestSharp
+	url = https://github.com/restsharp/RestSharp.git
