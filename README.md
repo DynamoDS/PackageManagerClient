@@ -1,6 +1,8 @@
 #GRegClient 
 
+
 > GRegClient is a client for the GReg package manager written in C#.
+
 
 #### GRegClient is meant to map to all of the capabilities of GReg.  That said, it can do the following for you:
 
