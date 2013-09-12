@@ -20,7 +20,7 @@ namespace Greg.Requests
 
         public override Method HttpMethod
         {
-            get { return Method.POST; }
+            get { return Method.PUT; }
         }
 
         private readonly string _id;

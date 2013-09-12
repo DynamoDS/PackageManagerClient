@@ -15,12 +15,12 @@ namespace Greg.Requests
 
         public override string Path
         {
-            get { return "upvote/" + this._id; }
+            get { return "downvote/" + this._id; }
         }
 
         public override Method HttpMethod
         {
-            get { return Method.POST; }
+            get { return Method.PUT; }
         }
 
         private readonly string _id;
