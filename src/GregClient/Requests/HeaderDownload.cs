@@ -2,19 +2,19 @@
 
 namespace Greg.Requests
 {
-    public class HeaderDownload : Request
+
+    public class HeaderDownload : PackageReferenceRequest
     {
-        enum PackageHeaderDownloadRequestType { Id, EngineName };
 
         public HeaderDownload(string id)
         {
-            this._type = PackageHeaderDownloadRequestType.Id;
+            this._type = PackageReferenceStyle.Id;
             this._id = id;
         }
 
         public HeaderDownload(string engine, string name)
         {
-            this._type = PackageHeaderDownloadRequestType.EngineName;
+            this._type = PackageReferenceStyle.EngineAndName;
             this._name = name;
             this._engine = engine;
         }
@@ -23,11 +23,11 @@ namespace Greg.Requests
         {
             get
             {
-                if (this._type == PackageHeaderDownloadRequestType.Id)
+                if (this._type == PackageReferenceStyle.Id)
                 {
                     return "package/" + this._id;
                 }
-                else // if (this._type == PackageHeaderDownloadRequestType.ENGINE_NAME)
+                else 
                 {
                     return "package/" + this._engine + "/" + this._name;
                 }
@@ -38,11 +38,6 @@ namespace Greg.Requests
         {
             get { return Method.GET; }
         }
-
-        private readonly PackageHeaderDownloadRequestType _type;
-        private readonly string _id;
-        private readonly string _name;
-        private readonly string _engine;
 
         public override void Build(ref RestRequest request)
         {
