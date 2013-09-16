@@ -56,12 +56,18 @@ namespace Greg.Responses
         public T content { get; set; }
     }
 
+    public class Dependency
+    {
+        public string name { get; set; }
+        public string _id { get; set; }
+    }
+
     public class PackageVersion
     {
         public string version { get; set; }
-        public List<string> direct_dependency_ids { get; set; }
+        public List<Dependency> direct_dependency_ids { get; set; }
         public List<string> direct_dependency_versions { get; set; }
-        public List<string> full_dependency_ids { get; set; }
+        public List<Dependency> full_dependency_ids { get; set; }
         public List<string> full_dependency_versions { get; set; }
         public string engine_version { get; set; }
         public string engine_metadata { get; set; }

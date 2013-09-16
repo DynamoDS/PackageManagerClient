@@ -15,7 +15,7 @@ namespace GregClientSandbox
     internal class Samples
     {
         private static BasicProvider provider;
-        private static Client pmc = new Client(provider, "http://54.225.215.247:80");
+        private static Client pmc = new Client(provider, "http://107.20.146.184/");
 
         //private static ResponseBody UploadDynamoPackageTest()
         //{
@@ -83,6 +83,13 @@ namespace GregClientSandbox
             Console.WriteLine(pkgResponse.content);
         }
 
+        private static void DownloadByEngineTest()
+        {
+            var nv = HeaderCollectionDownload.ByEngine("dynamo");
+            var pkgResponse = pmc.ExecuteAndDeserializeWithContent<List<PackageHeader>>(nv);
+            Console.WriteLine(pkgResponse.content);
+        }
+
         private static void SearchWithQueryTest()
         {
             var nv = new Search("*ython");
@@ -97,8 +104,7 @@ namespace GregClientSandbox
             var pkgResponse = pmc.ExecuteAndDeserialize(nv);
             Console.WriteLine(pkgResponse.message);
         }
-
-
+        
 
         static void Main(string[] args)
         {
@@ -108,7 +114,7 @@ namespace GregClientSandbox
             //Console.WriteLine();
             //provider.GetAccessToken();
 
-            DownloadDynamoPackageByIdTest();
+            DownloadByEngineTest();
 
             //ValidateAuthTest();
             //var nv = UploadDynamoPackageTest();

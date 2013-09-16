@@ -48,10 +48,12 @@
   <ItemGroup>
     <Compile Include="AuthProviders\IAuthProvider.cs" />
     <Compile Include="AuthProviders\BasicProvider.cs" />
+    <Compile Include="Requests\Deprecate.cs" />
     <Compile Include="Requests\Downvote.cs" />
     <Compile Include="Requests\Search.cs" />
     <Compile Include="Requests\JSONRequest.cs" />
     <Compile Include="Requests\PackageDownload.cs" />
+    <Compile Include="Requests\Undeprecate.cs" />
     <Compile Include="Requests\Upvote.cs" />
     <Compile Include="Utility\FileUtilities.cs" />
     <Compile Include="Requests\HeaderCollectionDownload.cs" />

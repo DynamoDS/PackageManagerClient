@@ -17,7 +17,7 @@ namespace Greg.Requests
 
         public static HeaderCollectionDownload ByEngine(string engine)
         {
-            return new HeaderCollectionDownload("dynamo");
+            return new HeaderCollectionDownload(engine);
         }
 
         private HeaderCollectionDownload(CollectionDownloadType type)
