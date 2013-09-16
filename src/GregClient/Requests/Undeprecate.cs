@@ -31,7 +31,7 @@ namespace Greg.Requests
                 }
                 else
                 {
-                    return "undeprecate/" + this._engine + "/" + this._name;
+                    return "undeprecate/" + this._engine + "/" + Utility.UrlEncoding.Relaxed(this._name);
                 } 
             }
         }

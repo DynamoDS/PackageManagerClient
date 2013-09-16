@@ -50,6 +50,7 @@
     <Compile Include="AuthProviders\BasicProvider.cs" />
     <Compile Include="Requests\Deprecate.cs" />
     <Compile Include="Requests\Downvote.cs" />
+    <Compile Include="Requests\PackageReferenceRequest.cs" />
     <Compile Include="Requests\Search.cs" />
     <Compile Include="Requests\JSONRequest.cs" />
     <Compile Include="Requests\PackageDownload.cs" />
