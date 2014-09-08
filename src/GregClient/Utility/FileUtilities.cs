@@ -40,6 +40,21 @@ namespace Greg.Utility
             }
         }
 
+        /// <summary>
+        /// Compute MD5 checksum of file download
+        /// </summary>
+        /// <param name="filename"></param>
+        /// <returns></returns>
+        public static byte[] GetMD5Checksum(string filename)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filename))
+                {
+                    return md5.ComputeHash(stream);
+                }
+            }
+        }
 
         /// <summary>
         /// Create a SHA-256 Secure Hash from a file
@@ -127,6 +142,7 @@ namespace Greg.Utility
 
             return zipPath;
         }
+
 
         /// <summary>
         /// Given a path to a zip, extracts it and returns the 

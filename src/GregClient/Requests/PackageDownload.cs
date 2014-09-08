@@ -49,6 +49,16 @@ namespace Greg.Requests
             {
                 f.Write(response.RawBytes, 0, (int)response.ContentLength);
             }
+
+            var md5HeaderResp = response.Headers.FirstOrDefault(x => x.Name == "ETag");
+            if (md5HeaderResp == null) throw new Exception("Could not check integrity of package download!");
+
+            var md5HeaderComputed =
+                String.Join("", FileUtilities.GetMD5Checksum(tempOutput).Select(x => x.ToString("X"))).ToLower();
+
+            if (md5HeaderResp.Value.ToString() == md5HeaderComputed )
+                throw new Exception("Could not validate package integrity!  Please try again!");
+
             return tempOutput;
 
         }

@@ -29,7 +29,7 @@ namespace GregClientSandbox
 
         private static string DownloadPackageByIdTest()
         {
-            var nv = new PackageDownload("51d092b8e434798d18000005", "1.1.0");
+            var nv = new PackageDownload("5225e7dde2f476ca05000057");
             var response = pmc.Execute(nv);
             var pathDl = PackageDownload.GetFileFromResponse(response);
             var output = FileUtilities.UnZip(pathDl);
@@ -105,16 +105,36 @@ namespace GregClientSandbox
             Console.WriteLine(pkgResponse.message);
         }
         
-
         static void Main(string[] args)
         {
+            DownloadPackageByIdTest();
+            Console.Read();
+        }
+    }
+}
 
-            //var authUri = provider.GetRequestToken();
+
+
+
+//var authUri = pmc.GetRequestToken();
+//Process.Start( authUri.ToString() );
+
+//pmc.GetAccessToken();
+
+////var nv = UploadDynamoPackageTest();
+////var nv = UploadDynamoPackageVersionTest();
+////DownloadDynamoPackageTest();
+////DownloadAllPackagesTest();
+//ValidateAuthTest();
+
+//Console.Read();
+
+//var authUri = provider.GetRequestToken();
             //Process.Start(authUri.ToString());
             //Console.WriteLine();
             //provider.GetAccessToken();
 
-            DownloadByEngineTest();
+            // DownloadByEngineTest();
 
             //ValidateAuthTest();
             //var nv = UploadDynamoPackageTest();
@@ -128,9 +148,6 @@ namespace GregClientSandbox
             //ValidateAuthTest();
 
             //var path = FileUtilities.Zip(@"C:\Users\boyerp\Dropbox\Github\Autodesk\Dynamo\doc\distrib\nodes");
-
-            Console.Read();
-
 
             //var resetEvent = new ManualResetEvent(false);
 
@@ -168,26 +185,3 @@ namespace GregClientSandbox
             //resetEvent.Reset();
 
             //Console.ReadLine(); // to hold visual studio command line window open
-        }
-    }
-
-
-
-
-}
-
-
-
-
-//var authUri = pmc.GetRequestToken();
-//Process.Start( authUri.ToString() );
-
-//pmc.GetAccessToken();
-
-////var nv = UploadDynamoPackageTest();
-////var nv = UploadDynamoPackageVersionTest();
-////DownloadDynamoPackageTest();
-////DownloadAllPackagesTest();
-//ValidateAuthTest();
-
-//Console.Read();
