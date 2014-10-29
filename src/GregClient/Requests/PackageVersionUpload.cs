@@ -11,20 +11,20 @@ namespace Greg.Requests
 
         public PackageVersionUpload(string name, string version, string description, IEnumerable<string> keywords,
                                                 string contents, string engine, string engineVersion, string metadata, string group, 
-                                                List<string> files, IEnumerable<PackageDependency> dependencies )
+                                                List<string> files, IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl )
         {
             this.Files = files;
             this.RequestBody = new PackageVersionUploadRequestBody(name, version, description, keywords, contents, engine,
-                                                    engineVersion, metadata, group, dependencies);
+                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
         }
 
         public PackageVersionUpload(string name, string version, string description, IEnumerable<string> keywords,
                                         string contents, string engine, string engineVersion, string metadata, string group, string zipFile,
-                                        IEnumerable<PackageDependency> dependencies)
+                                        IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
         {
             this.ZipFile = zipFile;
             this.RequestBody = new PackageVersionUploadRequestBody(name, version, description, keywords, contents, engine,
-                                                    engineVersion, metadata, group, dependencies);
+                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
 
         }
 
@@ -79,7 +79,8 @@ namespace Greg.Requests
     {
         public PackageVersionUploadRequestBody(string name, string version, string description, 
                                     IEnumerable<string> keywords, string contents, string engine, string engineVersion, 
-                                    string metadata, string group, IEnumerable<PackageDependency> dependencies)
+                                    string metadata, string group, IEnumerable<PackageDependency> dependencies, 
+                                    string siteUrl, string repositoryUrl)
         {
             this.name = name;
             this.version = version;
@@ -91,6 +92,8 @@ namespace Greg.Requests
             this.group = group;
             this.engine_version = engineVersion;
             this.engine_metadata = metadata;
+            this.site_url = siteUrl;
+            this.repository_url = repositoryUrl;
         }
 
         public string group { get; set; }
@@ -104,6 +107,8 @@ namespace Greg.Requests
         public string engine_version { get; set; }
         public string engine { get; set; }
         public string engine_metadata { get; set; }
+        public string site_url { get; set; }
+        public string repository_url { get; set; }
     }
 
     public class PackageDependency

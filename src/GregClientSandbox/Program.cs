@@ -17,16 +17,6 @@ namespace GregClientSandbox
         private static BasicProvider provider;
         private static Client pmc = new Client(provider, "http://107.20.146.184/");
 
-        //private static ResponseBody UploadDynamoPackageTest()
-        //{
-        //    var keywords = new List<string>() {"neat", "ok"};
-
-        //    var nv = PackageUpload.MakeDynamoPackage("Align & IronPython2", "1.1.0", "description", keywords, "MIT",
-        //                                             "contents", "0.1.0", "", "group", new List<string>() { @"C:\Users\boyerp\Desktop\align.PNG", @"C:\Users\boyerp\Desktop\IronPython.dll" }, new List<PackageDependency>());
-        //    var response = pmc.ExecuteAndDeserialize(nv);
-        //    return response;
-        //}
-
         private static string DownloadPackageByIdTest()
         {
             var nv = new PackageDownload("5225e7dde2f476ca05000057");
@@ -41,7 +31,7 @@ namespace GregClientSandbox
             var keywords = new List<string>() {"neat", "ok"};
             var nv = new PackageVersionUpload("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
                 new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" }, 
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") });
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "");
             //var response = pmc.ExecuteAndDeserialize(nv);
             Console.WriteLine(nv.RequestBody.AsJson());
         }
@@ -50,8 +40,8 @@ namespace GregClientSandbox
         {
             var keywords = new List<string>() { "neat", "ok" };
             var nv = new PackageVersionUpload("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
-                new List<string>() { "../../../../test/pedro.dyf", "../../../../test/RootNode.dyf" }, 
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") });
+                new List<string>() { "../../../../test/pedro.dyf", "../../../../test/RootNode.dyf" },
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "");
 
             var rr = new RestRequest();
             nv.Build(ref rr);
@@ -107,81 +97,10 @@ namespace GregClientSandbox
         
         static void Main(string[] args)
         {
-            DownloadPackageByIdTest();
+            //DownloadPackageByIdTest();
+            DownloadAllPackagesTest();
             Console.Read();
         }
     }
 }
 
-
-
-
-//var authUri = pmc.GetRequestToken();
-//Process.Start( authUri.ToString() );
-
-//pmc.GetAccessToken();
-
-////var nv = UploadDynamoPackageTest();
-////var nv = UploadDynamoPackageVersionTest();
-////DownloadDynamoPackageTest();
-////DownloadAllPackagesTest();
-//ValidateAuthTest();
-
-//Console.Read();
-
-//var authUri = provider.GetRequestToken();
-            //Process.Start(authUri.ToString());
-            //Console.WriteLine();
-            //provider.GetAccessToken();
-
-            // DownloadByEngineTest();
-
-            //ValidateAuthTest();
-            //var nv = UploadDynamoPackageTest();
-            //SearchWithQueryTest();
-
-            //DownloadPackageByIdTest();
-            
-            ////var nv = UploadDynamoPackageVersionTest();
-            ////DownloadDynamoPackageTest();
-            ////DownloadAllPackagesTest();
-            //ValidateAuthTest();
-
-            //var path = FileUtilities.Zip(@"C:\Users\boyerp\Dropbox\Github\Autodesk\Dynamo\doc\distrib\nodes");
-
-            //var resetEvent = new ManualResetEvent(false);
-
-            //var requestTokenCallback = new Action<Uri, string>(delegate(Uri uri, string s)
-            //    {
-            //        Console.WriteLine("This is the request token: " + s);
-            //        Console.WriteLine(uri.ToString());
-            //        Process.Start(uri.ToString());
-            //        resetEvent.Set();
-            //    });
-
-            //var handle = pmc.GetRequestTokenAsync(requestTokenCallback, Client.AuthorizationPageViewMode.Desktop);
-
-            //resetEvent.WaitOne();
-            //resetEvent.Reset(); // set a breakpoint here, awaiting user login
-
-            //var accessTokenCallback = new Action<string>(delegate(string s)
-            //{
-            //    Console.WriteLine("This is the access token: " + s);
-            //    resetEvent.Set();
-            //});
-
-            //handle = pmc.GetAccessTokenAsync(accessTokenCallback);
-
-            //resetEvent.WaitOne();
-            //resetEvent.Reset();
-
-            //pmc.ExecuteAndDeserializeWithContentAsync<List<PackageHeader>>(HeaderCollectionDownload.All(), (response)
-            //                                                                                               =>
-            //    {
-            //        Console.WriteLine(response.message);
-            //        Console.WriteLine(response.content);
-            //    });
-
-            //resetEvent.Reset();
-
-            //Console.ReadLine(); // to hold visual studio command line window open

@@ -12,21 +12,21 @@ namespace Greg.Requests
 
         public PackageUpload(string name, string version, string description, IEnumerable<string> keywords, string license,
                                                 string contents, string engine, string engineVersion, string metadata, string group, List<string> files,
-                                                IEnumerable<PackageDependency> dependencies)
+                                                IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
         {
             this.Files = files;
             this.RequestBody = new PackageUploadRequestBody(name, version, description, keywords, license, contents, engine,
-                                                    engineVersion, metadata, group, dependencies);
+                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
 
         }
 
         public PackageUpload(string name, string version, string description, IEnumerable<string> keywords, string license,
-                                        string contents, string engine, string engineVersion, string metadata, string group, string zipFile, 
-                                        IEnumerable<PackageDependency> dependencies)
+                                        string contents, string engine, string engineVersion, string metadata, string group, string zipFile,
+                                        IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
         {
             this.ZipFile = zipFile;
             this.RequestBody = new PackageUploadRequestBody(name, version, description, keywords, license, contents, engine,
-                                                    engineVersion, metadata, group, dependencies);
+                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
 
         }
 
@@ -84,8 +84,9 @@ namespace Greg.Requests
 
         public PackageUploadRequestBody(string name, string version, string description,
                                     IEnumerable<string> keywords, string license,
-                                    string contents, string engine, string engineVersion, 
-                                    string metadata, string group, IEnumerable<PackageDependency> dependencies)
+                                    string contents, string engine, string engineVersion,
+                                    string metadata, string group, IEnumerable<PackageDependency> dependencies,
+                                    string siteUrl, string repositoryUrl)
         {
             this.name = name;
             this.version = version;
@@ -98,6 +99,8 @@ namespace Greg.Requests
             this.group = group;
             this.engine_version = engineVersion;
             this.engine_metadata = metadata;
+            this.site_url = siteUrl;
+            this.repository_url = repositoryUrl;
         }
 
         public string file_hash { get; set; }
@@ -112,5 +115,7 @@ namespace Greg.Requests
         public string engine_version { get; set; }
         public string engine_metadata { get; set; }
         public string engine { get; set; }
+        public string site_url { get; set; }
+        public string repository_url { get; set; }
     }
 }

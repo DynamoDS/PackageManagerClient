@@ -104,6 +104,9 @@ namespace Greg.Responses
         public Boolean deprecated { get; set; }
         public List<Comment> comments { get; set; }
         public List<PackageVersion> versions { get; set; }
+        public string site_url { get; set; }
+        public string repository_url { get; set; }
+
         public string _id { get; set; }
     }
 
