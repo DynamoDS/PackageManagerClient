@@ -29,25 +29,30 @@ namespace GregClientSandbox
         private static void UploadDynamoPackageVersionTest()
         {
             var keywords = new List<string>() {"neat", "ok"};
-            var nv = new PackageVersionUpload("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
-                new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" }, 
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "");
-            //var response = pmc.ExecuteAndDeserialize(nv);
-            Console.WriteLine(nv.RequestBody.AsJson());
+            var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
+                            new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", 
+                            false, new List<String>());
+
+            var files = new List<string>() {"../test/pedro.dyf", "../test/RootNode.dyf"};
+            var request = new PackageVersionUpload(nv, files);
+            Console.WriteLine(request.RequestBody.AsJson());
         }
 
         private static void UploadDynamoPackageVersionWithFilesTest()
         {
             var keywords = new List<string>() { "neat", "ok" };
-            var nv = new PackageVersionUpload("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
-                new List<string>() { "../../../../test/pedro.dyf", "../../../../test/RootNode.dyf" },
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "");
+            var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>() );
+
+            var files = new List<string>() {"../../../../test/pedro.dyf", "../../../../test/RootNode.dyf"};
+
+            var request = new PackageVersionUpload(nv, files);
 
             var rr = new RestRequest();
-            nv.Build(ref rr);
+            request.Build(ref rr);
 
             //var response = pmc.ExecuteAndDeserialize(nv);
-            Console.WriteLine(nv.RequestBody.AsJson());
+            Console.WriteLine(request.RequestBody.AsJson());
         }
 
         private static void DownloadDynamoPackageByEngineAndNameTest()

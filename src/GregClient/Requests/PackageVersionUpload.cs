@@ -8,24 +8,16 @@ namespace Greg.Requests
 {
     public class PackageVersionUpload : JsonRequest
     {
-
-        public PackageVersionUpload(string name, string version, string description, IEnumerable<string> keywords,
-                                                string contents, string engine, string engineVersion, string metadata, string group, 
-                                                List<string> files, IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl )
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, IEnumerable<string> files )
         {
             this.Files = files;
-            this.RequestBody = new PackageVersionUploadRequestBody(name, version, description, keywords, contents, engine,
-                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
+            this.RequestBody = requestBody;
         }
 
-        public PackageVersionUpload(string name, string version, string description, IEnumerable<string> keywords,
-                                        string contents, string engine, string engineVersion, string metadata, string group, string zipFile,
-                                        IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, string zipFile )
         {
             this.ZipFile = zipFile;
-            this.RequestBody = new PackageVersionUploadRequestBody(name, version, description, keywords, contents, engine,
-                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
-
+            this.RequestBody = requestBody;
         }
 
         public IEnumerable<string> Files { get; set; }
@@ -73,42 +65,6 @@ namespace Greg.Requests
             request.Files.Add(p);
         }
 
-    }
-
-    public class PackageVersionUploadRequestBody : RequestBody
-    {
-        public PackageVersionUploadRequestBody(string name, string version, string description, 
-                                    IEnumerable<string> keywords, string contents, string engine, string engineVersion, 
-                                    string metadata, string group, IEnumerable<PackageDependency> dependencies, 
-                                    string siteUrl, string repositoryUrl)
-        {
-            this.name = name;
-            this.version = version;
-            this.description = description;
-            this.dependencies = dependencies;
-            this.keywords = keywords;
-            this.contents = contents;
-            this.engine = engine;
-            this.group = group;
-            this.engine_version = engineVersion;
-            this.engine_metadata = metadata;
-            this.site_url = siteUrl;
-            this.repository_url = repositoryUrl;
-        }
-
-        public string group { get; set; }
-        public string name { get; set; }
-        public string file_hash { get; set; }
-        public string version { get; set; }
-        public string description { get; set; }
-        public IEnumerable<PackageDependency> dependencies { get; set; }
-        public IEnumerable<string> keywords { get; set; }
-        public string contents { get; set; }
-        public string engine_version { get; set; }
-        public string engine { get; set; }
-        public string engine_metadata { get; set; }
-        public string site_url { get; set; }
-        public string repository_url { get; set; }
     }
 
     public class PackageDependency

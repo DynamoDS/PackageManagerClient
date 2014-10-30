@@ -10,23 +10,16 @@ namespace Greg.Requests
     public class PackageUpload : JsonRequest
     {
 
-        public PackageUpload(string name, string version, string description, IEnumerable<string> keywords, string license,
-                                                string contents, string engine, string engineVersion, string metadata, string group, List<string> files,
-                                                IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
+        public PackageUpload(PackageUploadRequestBody requestBody, IEnumerable<string> files)
         {
             this.Files = files;
-            this.RequestBody = new PackageUploadRequestBody(name, version, description, keywords, license, contents, engine,
-                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
-
+            this.RequestBody = requestBody;
         }
 
-        public PackageUpload(string name, string version, string description, IEnumerable<string> keywords, string license,
-                                        string contents, string engine, string engineVersion, string metadata, string group, string zipFile,
-                                        IEnumerable<PackageDependency> dependencies, string siteUrl, string repositoryUrl)
+        public PackageUpload(PackageUploadRequestBody requestBody, string zipFile )
         {
             this.ZipFile = zipFile;
-            this.RequestBody = new PackageUploadRequestBody(name, version, description, keywords, license, contents, engine,
-                                                    engineVersion, metadata, group, dependencies, siteUrl, repositoryUrl);
+            this.RequestBody = requestBody;
 
         }
 
@@ -74,48 +67,5 @@ namespace Greg.Requests
             request.Files.Add(p);
         }
 
-    }
-
-    public class PackageUploadRequestBody : RequestBody
-    {
-        public PackageUploadRequestBody()
-        {
-        }
-
-        public PackageUploadRequestBody(string name, string version, string description,
-                                    IEnumerable<string> keywords, string license,
-                                    string contents, string engine, string engineVersion,
-                                    string metadata, string group, IEnumerable<PackageDependency> dependencies,
-                                    string siteUrl, string repositoryUrl)
-        {
-            this.name = name;
-            this.version = version;
-            this.description = description;
-            this.keywords = keywords;
-            this.dependencies = dependencies;
-            this.license = license;
-            this.contents = contents;
-            this.engine = engine;
-            this.group = group;
-            this.engine_version = engineVersion;
-            this.engine_metadata = metadata;
-            this.site_url = siteUrl;
-            this.repository_url = repositoryUrl;
-        }
-
-        public string file_hash { get; set; }
-        public string name { get; set; }
-        public string version { get; set; }
-        public string description { get; set; }
-        public string group { get; set; }
-        public IEnumerable<string> keywords { get; set; }
-        public IEnumerable<PackageDependency> dependencies { get; set; }
-        public string license { get; set; }
-        public string contents { get; set; }
-        public string engine_version { get; set; }
-        public string engine_metadata { get; set; }
-        public string engine { get; set; }
-        public string site_url { get; set; }
-        public string repository_url { get; set; }
     }
 }
