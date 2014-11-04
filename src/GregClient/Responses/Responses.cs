@@ -74,6 +74,8 @@ namespace Greg.Responses
         public string contents { get; set; }
         public string created { get; set; }
         public string url { get; set; }
+        public Boolean contains_binaries { get; set; }
+        public List<string> node_libraries { get; set; }
     }
 
     public class User

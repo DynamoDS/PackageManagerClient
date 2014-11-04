@@ -4,11 +4,16 @@ namespace Greg.Requests
 {
     public class PackageVersionUploadRequestBody : RequestBody
     {
+        internal PackageVersionUploadRequestBody()
+        {
+            
+        }
+
         public PackageVersionUploadRequestBody(string name, string version, string description, 
             IEnumerable<string> keywords, string contents, string engine, string engineVersion, 
             string metadata, string group, IEnumerable<PackageDependency> dependencies,
             string siteUrl, string repositoryUrl, bool containsBinaries,
-            IEnumerable<string> nodeLibraryNames)
+            IEnumerable<string> nodeLibraryNames )
         {
             this.name = name;
             this.version = version;
@@ -26,13 +31,14 @@ namespace Greg.Requests
             this.node_libraries = nodeLibraryNames;
         }
 
-        public string group { get; set; }
-        public string name { get; set; }
         public string file_hash { get; set; }
+        
+        public string name { get; set; }
         public string version { get; set; }
         public string description { get; set; }
-        public IEnumerable<PackageDependency> dependencies { get; set; }
+        public string group { get; set; }
         public IEnumerable<string> keywords { get; set; }
+        public IEnumerable<PackageDependency> dependencies { get; set; }
         public string contents { get; set; }
         public string engine_version { get; set; }
         public string engine { get; set; }
