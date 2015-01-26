@@ -25,7 +25,7 @@ namespace Greg.Requests
 
         private readonly string _query;
 
-        public override void Build(ref RestRequest request)
+        internal override void Build(ref RestRequest request)
         {
 
         }

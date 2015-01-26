@@ -39,7 +39,7 @@ namespace Greg.Requests
             get { return Method.GET; }
         }
 
-        public override void Build(ref RestRequest request)
+        internal override void Build(ref RestRequest request)
         {
 
         }

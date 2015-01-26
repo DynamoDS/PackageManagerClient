@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Authentication;
-using System.Text;
-using Greg.Requests;
+using Greg.AuthProviders;
 using RestSharp;
 
 namespace Greg
 {
     public interface IAuthProvider
     {
-        /// <summary>
-        /// Get authentication data for a request
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
+        event Func<object, bool> RequestLogin;
+        event Action<LoginState> LoginStateChanged;
+
+        LoginState LoginState { get; }
+        string Username { get; }
+
         void SignRequest(ref RestRequest m, RestClient client);
+
+        void Logout();
+        bool Login();
     }
 }

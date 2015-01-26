@@ -29,6 +29,6 @@ namespace Greg.Requests
 
         public bool ForceAuthentication { get; set; }
         
-        public abstract void Build(ref RestRequest request);
+        internal abstract void Build(ref RestRequest request);
     }
 }

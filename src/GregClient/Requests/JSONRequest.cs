@@ -8,7 +8,7 @@ namespace Greg.Requests
 {
     public abstract class JsonRequest : Request
     {
-        public override void Build(ref RestRequest request)
+        internal override void Build(ref RestRequest request)
         {
             request.RequestFormat = DataFormat.Json;
             request.AddBody(this.RequestBody);

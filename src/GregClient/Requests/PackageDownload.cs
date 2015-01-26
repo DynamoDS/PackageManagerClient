@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Greg.Responses;
 using Greg.Utility;
 using RestSharp;
 
@@ -34,13 +35,14 @@ namespace Greg.Requests
         private readonly string _id;
         private readonly string _version;
 
-        public override void Build(ref RestRequest request)
+        internal override void Build(ref RestRequest request)
         {
 
         }
 
-        public static string GetFileFromResponse(IRestResponse response)
+        public static string GetFileFromResponse(Response gregResponse)
         {
+            var response = gregResponse.InternalRestReponse;
            
             if ( !(response.ResponseUri != null && response.ResponseUri.AbsolutePath != null) ) return "";
 

@@ -10,16 +10,16 @@ namespace Greg.Responses
     {
         protected static JsonDeserializer jsonDeserializer = new JsonDeserializer();
 
-        public Response(IRestResponse response)
+        internal Response(IRestResponse response)
         {
-            RestReponse = response;
+            InternalRestReponse = response;
         }
 
         public ResponseBody Deserialize()
         {
             try
             {
-                return jsonDeserializer.Deserialize<ResponseBody>(RestReponse);
+                return jsonDeserializer.Deserialize<ResponseBody>(InternalRestReponse);
             }
             catch
             {
@@ -27,7 +27,7 @@ namespace Greg.Responses
             }
         }
 
-        protected IRestResponse RestReponse { get; set; }
+        internal IRestResponse InternalRestReponse { get; set; }
     }
 
     public class ResponseWithContent<T> : Response
@@ -39,7 +39,7 @@ namespace Greg.Responses
 
         public ResponseWithContentBody<T> DeserializeWithContent()
         {
-            return jsonDeserializer.Deserialize<ResponseWithContentBody<T>>(RestReponse);
+            return jsonDeserializer.Deserialize<ResponseWithContentBody<T>>(InternalRestReponse);
         }
     }
 

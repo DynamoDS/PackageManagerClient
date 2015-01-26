@@ -33,7 +33,7 @@ namespace Greg.Requests
             get { return Method.PUT; }
         }
 
-        public override void Build(ref RestRequest request)
+        internal override void Build(ref RestRequest request)
         {
             // zip up and get hash for zip
             if (Files != null)

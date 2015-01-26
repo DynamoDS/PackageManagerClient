@@ -14,8 +14,8 @@ namespace GregClientSandbox
 {
     internal class Samples
     {
-        private static BasicProvider provider;
-        private static Client pmc = new Client(provider, "http://107.20.146.184/");
+        private static BasicProvider provider = new BasicProvider("username", "foo", "password", "bar");
+        private static GregClient pmc = new GregClient(provider, "http://107.20.146.184/");
 
         private static string DownloadPackageByIdTest()
         {
