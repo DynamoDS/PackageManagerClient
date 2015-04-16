@@ -35,7 +35,7 @@
       <HintPath>..\..\third_party\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp">
-      <HintPath>..\..\third_party\RestSharp\RestSharp\bin\Debug\RestSharp.dll</HintPath>
+      <HintPath>..\..\third_party\RestSharp\RestSharp\bin\$(Configuration)\RestSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -58,6 +58,7 @@
     <Compile Include="Requests\Search.cs" />
     <Compile Include="Requests\JSONRequest.cs" />
     <Compile Include="Requests\PackageDownload.cs" />
+    <Compile Include="Requests\TermsOfUse.cs" />
     <Compile Include="Requests\Undeprecate.cs" />
     <Compile Include="Requests\Upvote.cs" />
     <Compile Include="Utility\FileUtilities.cs" />
