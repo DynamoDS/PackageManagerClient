@@ -84,6 +84,12 @@ namespace Greg.Responses
         public string _id { get; set; }
     }
 
+    public class TermsOfUseStatus
+    {
+        public string user_id { get; set; }
+        public Boolean accepted { get; set; }
+    }
+
     public class Comment
     {
         public string text { get; set; }
