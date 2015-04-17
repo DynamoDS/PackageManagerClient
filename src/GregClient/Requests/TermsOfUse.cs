@@ -12,6 +12,9 @@ namespace Greg.Requests
 
         public TermsOfUse(bool queryAcceptanceStatus)
         {
+            // both endpoints require authentication by the user
+            this.ForceAuthentication = true;
+
             httpMethod = queryAcceptanceStatus ? Method.GET : Method.PUT;
         }
 
