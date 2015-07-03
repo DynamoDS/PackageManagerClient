@@ -19,3 +19,11 @@ GRegClient is a client for the GReg package manager written in C#.  You can find
 
 * magically find all of the dependencies your package has (that's up to you)
 * provide Autodesk 360 login credentials
+
+#### Steps to build GRegClientNET solution:
+
+1. Navigate to `GRegClientNET\third_party\RestSharp` folder
+2. Build `RestSharp.sln` solution (both `Debug` and `Release` configurations)
+3. Build `GRegClientNET\src\GregClient.sln` solution
+
+Note: Step 1 and 2 are only done once after cloning the repo for the first time
