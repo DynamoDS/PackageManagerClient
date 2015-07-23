@@ -4,16 +4,14 @@ namespace Greg.Requests
 {
     public class BanPackage : Request
     {
-        private enum Action { Ban, Unban }
+        public enum Action { Ban, Unban }
         private readonly Action banAction;
         private readonly string packageId;
 
-        public BanPackage(string packageId, bool banPackage)
+        public BanPackage(string packageId, BanPackage.Action banAction)
         {
-            // both endpoints require authentication by the user
-            this.ForceAuthentication = true;
             this.packageId = packageId;
-            this.banAction = banPackage ? Action.Ban : Action.Unban;
+            this.banAction = banAction;
         }
 
         public override string Path
