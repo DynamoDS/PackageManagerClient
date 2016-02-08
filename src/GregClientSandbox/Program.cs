@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Security.Cryptography;
 using Greg;
 using Greg.Requests;
 using Greg.Responses;
@@ -14,8 +11,18 @@ namespace GregClientSandbox
 {
     internal class Samples
     {
-        private static BasicProvider provider = new BasicProvider("username", "foo", "password", "bar");
-        private static GregClient pmc = new GregClient(provider, "http://107.20.146.184/");
+        /// <summary>
+        /// A basic auth provider specifying the test user
+        /// name and password that correspond to the test environment on Greg.
+        /// </summary>
+        private static BasicProvider provider = new BasicProvider("test", "e0jlZfJfKS");
+
+        /// <summary>
+        /// A GregClient specifying the local host. The alternate IP provided is for 
+        /// production Reach. 
+        /// </summary>
+        //private static GregClient pmc = new GregClient(provider, "http://107.20.146.184/");
+        private static GregClient pmc = new GregClient(provider, "http://localhost:8080/");
 
         private static string DownloadPackageByIdTest()
         {
@@ -92,18 +99,27 @@ namespace GregClientSandbox
             Console.WriteLine(pkgResponse.content);
         }
         
-
         private static void ValidateAuthTest()
         {
             var nv = new ValidateAuth();
             var pkgResponse = pmc.ExecuteAndDeserialize(nv);
             Console.WriteLine(pkgResponse.message);
         }
+
+        private static void GetWhitelistTest()
+        {
+            var nv = WhitelistHeaderCollectionDownload.All();
+            var pkgResponse = pmc.ExecuteAndDeserializeWithContent<List<PackageHeader>>(nv);
+
+            Console.WriteLine(pkgResponse.message);
+            Console.WriteLine(pkgResponse.content);
+        }
         
         static void Main(string[] args)
         {
             //DownloadPackageByIdTest();
-            DownloadAllPackagesTest();
+            //DownloadAllPackagesTest();
+            GetWhitelistTest();
             Console.Read();
         }
     }

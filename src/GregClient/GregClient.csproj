@@ -34,8 +34,9 @@
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\third_party\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\..\third_party\RestSharp\RestSharp\bin\$(Configuration)\RestSharp.dll</HintPath>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net4\RestSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +63,7 @@
     <Compile Include="Requests\TermsOfUse.cs" />
     <Compile Include="Requests\Undeprecate.cs" />
     <Compile Include="Requests\Upvote.cs" />
+    <Compile Include="Requests\WhitelistHeaderCollectionDownload.cs" />
     <Compile Include="Utility\FileUtilities.cs" />
     <Compile Include="Requests\HeaderCollectionDownload.cs" />
     <Compile Include="Requests\HeaderDownload.cs" />
@@ -75,6 +77,9 @@
     <Compile Include="Responses\Responses.cs" />
     <Compile Include="Utility\PackageUtilities.cs" />
     <Compile Include="Utility\Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
