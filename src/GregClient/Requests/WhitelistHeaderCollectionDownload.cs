@@ -2,7 +2,7 @@
 
 namespace Greg.Requests
 {
-    class WhitelistHeaderCollectionDownload : HeaderCollectionDownload
+    public class WhitelistHeaderCollectionDownload : HeaderCollectionDownload
     {
         public override string Path
         {
