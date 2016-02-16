@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Autodesk, Inc.")]
 [assembly: AssemblyProduct("greg-client")]
-[assembly: AssemblyCopyright("Copyright © Autodesk, Inc. 2013")]
+[assembly: AssemblyCopyright("Copyright © Autodesk, Inc. 2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
