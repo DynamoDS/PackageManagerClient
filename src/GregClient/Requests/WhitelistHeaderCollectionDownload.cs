@@ -19,7 +19,6 @@ namespace Greg.Requests
 
         protected WhitelistHeaderCollectionDownload(CollectionDownloadType type) : base(type)
         {
-            ForceAuthentication = true;
         }
 
         protected WhitelistHeaderCollectionDownload(string engine) : base(engine)
