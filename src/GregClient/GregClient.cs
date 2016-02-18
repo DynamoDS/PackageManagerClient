@@ -9,7 +9,7 @@ namespace Greg
     {
         private readonly RestClient _client;
 
-        public string BaseUrl { get { return _client.BaseUrl; } }
+        public string BaseUrl { get { return _client.BaseUrl.ToString(); } }
 
         public readonly IAuthProvider _authProvider;
         public IAuthProvider AuthProvider
