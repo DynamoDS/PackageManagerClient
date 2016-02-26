@@ -4,7 +4,7 @@ namespace Greg.Requests
 {
     public class HeaderCollectionDownload : Request
     {
-        private enum CollectionDownloadType
+        protected enum CollectionDownloadType
         {
             ByEngine,
             All
@@ -20,19 +20,19 @@ namespace Greg.Requests
             return new HeaderCollectionDownload(engine);
         }
 
-        private HeaderCollectionDownload(CollectionDownloadType type)
+        protected HeaderCollectionDownload(CollectionDownloadType type)
         {
             this._type = type;
         }
 
-        private HeaderCollectionDownload(string engine)
+        protected HeaderCollectionDownload(string engine)
         {
             this._engine = engine;
             this._type = CollectionDownloadType.ByEngine;
         }
 
-        private string _engine;
-        private CollectionDownloadType _type;
+        protected string _engine;
+        protected CollectionDownloadType _type;
 
         public override string Path
         {

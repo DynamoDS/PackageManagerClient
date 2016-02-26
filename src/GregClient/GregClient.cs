@@ -47,7 +47,8 @@ namespace Greg
 
         public ResponseWithContentBody<T> ExecuteAndDeserializeWithContent<T>(Request m)
         {
-            return new ResponseWithContent<T>( this.ExecuteInternal(m) ).DeserializeWithContent();
+            var response = this.ExecuteInternal(m);
+            return new ResponseWithContent<T>(response).DeserializeWithContent();
         }
 
     }
