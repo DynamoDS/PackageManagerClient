@@ -115,7 +115,13 @@ namespace GregClientSandbox
 
             if (pkgResponse == null)
             {
-                Console.WriteLine("The package response is null.");
+                Console.WriteLine("There was an error with the whitelist request.");
+                return;
+            }
+
+            if (pkgResponse.content == null)
+            {
+                Console.WriteLine("The package response content was null.");
                 return;
             }
 
