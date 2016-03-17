@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
@@ -45,9 +46,22 @@ namespace Greg
             return Execute(m).Deserialize();
         }
 
+        /// <summary>
+        /// Execute the request and deserialize the content.
+        /// </summary>
+        /// <typeparam name="T">The Type of content</typeparam>
+        /// <param name="m">The request.</param>
+        /// <returns>A <see cref="ResponseWithContent{T}"/> or null if there was an error
+        /// in executing the message.</returns>
         public ResponseWithContentBody<T> ExecuteAndDeserializeWithContent<T>(Request m)
         {
             var response = this.ExecuteInternal(m);
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+            {
+                return null;
+            }
+
             return new ResponseWithContent<T>(response).DeserializeWithContent();
         }
 
