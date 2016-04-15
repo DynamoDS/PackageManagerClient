@@ -84,6 +84,7 @@
     <Compile Include="Responses\Responses.cs" />
     <Compile Include="Utility\PackageUtilities.cs" />
     <Compile Include="Utility\Utilities.cs" />
+    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -97,9 +98,11 @@
   </Target>
   -->
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Release"></Exec>
+    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Release">
+    </Exec>
   </Target>
   <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Debug"></Exec>
+    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Debug">
+    </Exec>
   </Target>
 </Project>
