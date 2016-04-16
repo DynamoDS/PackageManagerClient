@@ -10,11 +10,20 @@ using Newtonsoft.Json.Linq;
 
 namespace Greg
 {
+    /// <summary>
+    /// The Whitelist class contains static methods for updating the whitelist,
+    /// and determining whether assemblies are located in white-listed packages.
+    /// </summary>
     public static class Whitelist
     {
 
         private static string whitelistPackageDirectory;
         private static IEnumerable<AssemblyName> whiteListedAssemblyNames = new List<AssemblyName>();
+
+        public static IEnumerable<AssemblyName> WhiteListedAssemblyNames
+        {
+            get { return whiteListedAssemblyNames;}
+        } 
 
         /// <summary>
         /// The directory in which white-listed packages are stored.
@@ -44,6 +53,20 @@ namespace Greg
 
             whiteListedAssemblyNames = null;
             whiteListedAssemblyNames = GetWhitelistedAssemblyNames(gregClient);
+        }
+
+        /// <summary>
+        /// Is the provided assembly included in a whitelisted packaged?
+        /// </summary>
+        /// <param name="existingAssemblyName">An <seealso cref="AssemblyName"/> object representing the existing assembly.</param>
+        /// <param name="whiteListedAssemblies">A collection of <seealso cref="AssemblyName"/> objects.</param>
+        /// <returns>True, if a white-listed package contains this assembly, false if no
+        /// white-listed packages contains this assembly, or the 'node_libraries' key is not
+        /// found in the package.json.</returns>
+        public static bool IsAssemblyInWhitelistedPackage(AssemblyName existingAssemblyName, IEnumerable<AssemblyName> whiteListedAssemblies)
+        {
+            // Match against the full name of the assembly, including the version, culture, etc.
+            return whiteListedAssemblies.Any(n => n.FullName == existingAssemblyName.FullName);
         }
 
         /// <summary>
@@ -138,6 +161,5 @@ namespace Greg
             // convert values to AssemblyName
             return assemblyNames;
         }
-
     }
 }
