@@ -78,7 +78,7 @@ namespace Greg
         /// </summary>
         /// <param name="whitelistPackageDirectory">The directory containing the white listed packages.</param>
         /// <returns></returns>
-        internal static IEnumerable<AssemblyName> GetWhiteListedAssemblyNames(string whitelistPackageDirectory)
+        public static IEnumerable<AssemblyName> GetWhiteListedAssemblyNames(string whitelistPackageDirectory)
         {
             var assemblyNames = new List<AssemblyName>();
 
