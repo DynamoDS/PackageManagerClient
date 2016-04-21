@@ -22,5 +22,5 @@ This repo is the package manager client for the Dynamo Package Manager.  You can
 
 #### Steps to build The Package Manager Client solution:
 
-1. Build `The Package Manager Client\src\GregClient.sln` solution
+1. Build `The PackageManagerClient\src\GregClient.sln` solution
 
