@@ -1,8 +1,8 @@
-#GRegClient 
+#Package Manager Client
 
-GRegClient is a client for the GReg package manager written in C#.  You can find the source code for GReg [here](https://github.com/pboyer/GReg/).  GRegClient is designed to cover all of the capabilities of GReg.  
+This repo is the package manager client for the Dynamo Package Manager.  You can find the source code for the Dynamo Package Manager [here](https://github.com/pboyer/GReg/).  Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.  
 
-#### GRegClient can do the following for you:
+#### The Package Manager Client can do the following for you:
 
 * properly format, compress, and upload a package to the server
 * properly format, compress, and upload a new package version to the server
@@ -15,15 +15,12 @@ GRegClient is a client for the GReg package manager written in C#.  You can find
 * manage maintainers of a package
 * manage authentication
 
-#### GRegClient doesn't do this for you:
+#### The Package Manager Client doesn't do this for you:
 
 * magically find all of the dependencies your package has (that's up to you)
 * provide Autodesk 360 login credentials
 
-#### Steps to build GRegClientNET solution:
+#### Steps to build The Package Manager Client solution:
 
-1. Navigate to `GRegClientNET\third_party\RestSharp` folder
-2. Build `RestSharp.sln` solution (both `Debug` and `Release` configurations)
-3. Build `GRegClientNET\src\GregClient.sln` solution
+1. Build `The Package Manager Client\src\GregClient.sln` solution
 
-Note: Step 1 and 2 are only done once after cloning the repo for the first time
