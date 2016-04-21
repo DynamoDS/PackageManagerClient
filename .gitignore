@@ -154,6 +154,8 @@ publish/
 # NuGet v3's project.json files produces more ignoreable files
 *.nuget.props
 *.nuget.targets
+**/NuGet/lib/**
+**/NuGet/content/**
 
 # Microsoft Azure Build Output
 csx/
