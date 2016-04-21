@@ -94,6 +94,6 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\NuGet\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir)</PostBuildEvent>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
