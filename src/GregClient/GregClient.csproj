@@ -93,12 +93,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Release">
-    </Exec>
-  </Target>
-  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Debug">
-    </Exec>
-  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\NuGet\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
