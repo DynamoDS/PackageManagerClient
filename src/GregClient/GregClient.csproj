@@ -48,10 +48,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthProviders\BasicProvider.cs" />
@@ -84,6 +80,7 @@
     <Compile Include="Responses\Responses.cs" />
     <Compile Include="Utility\PackageUtilities.cs" />
     <Compile Include="Utility\Utilities.cs" />
+    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -96,10 +93,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Release"></Exec>
-  </Target>
-  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Debug'">
-    <Exec Command="nuget pack GregClient.csproj -Prop Configuration=Debug"></Exec>
-  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>

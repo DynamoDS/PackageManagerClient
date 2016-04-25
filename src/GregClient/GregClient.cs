@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
@@ -64,7 +63,6 @@ namespace Greg
 
             return new ResponseWithContent<T>(response).DeserializeWithContent();
         }
-
     }
 }
 
