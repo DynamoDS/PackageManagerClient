@@ -16,6 +16,10 @@ if(!(Test-Path -Path $nuget\content\controllers)){
     New-Item -ItemType directory -Path $nuget\content\controllers
 }
 
+if(!(Test-Path -Path $nuget\tools)){
+    New-Item -ItemType directory -Path $nuget\tools
+}
+
 copy $out\Greg.dll $nuget\lib\net45\
 
 $dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$out\Greg.dll").FileVersion
