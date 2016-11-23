@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PackageManagerClient.Requests
 {
-    public class PackageManagerRequest: CefRequest
+    public class PackageManagerRequest: PMRequest
     {
         public PackageManagerRequest(string path, RestSharp.Method httpMethod, bool fileRequest = false, string fileToUpload = ""): base(fileRequest, fileToUpload)
         {

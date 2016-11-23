@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace PackageManagerClient
 {
-    public class CefResponse
+    public class PackageManagerResponse
     {
-        internal CefResponse(IRestResponse response)
+        internal PackageManagerResponse(IRestResponse response)
         {
             InternalRestReponse = response;
         }
 
-        public CefResponseBody Deserialize()
+        public PackageManagerResponseBody Deserialize()
         {
             try
             {
-                //return jsonDeserializer.Deserialize<CefResponseBody>(InternalRestReponse);
-                return JsonConvert.DeserializeObject<CefResponseBody>(InternalRestReponse.Content);
+                //return jsonDeserializer.Deserialize<PackageManagerResponseBody>(InternalRestReponse);
+                return JsonConvert.DeserializeObject<PackageManagerResponseBody>(InternalRestReponse.Content);
             }
             catch
             {
@@ -31,27 +31,27 @@ namespace PackageManagerClient
         public IRestResponse InternalRestReponse { get; set; }
     }
 
-    public class CefResponseBody
+    public class PackageManagerResponseBody
     {
         public Boolean success { get; set; }
         public string message { get; set; }
     }
 
-    public class CefResponseWithContentBody
+    public class PMResponseWithContentBody
     {
         public Boolean success { get; set; }
         public string message { get; set; }
         public dynamic content { get; set; }
     }
 
-    public class ResponseWithContent : CefResponse
+    public class ResponseWithContent : PackageManagerResponse
     {
         public ResponseWithContent(IRestResponse response) : base(response)
         {
 
         }
 
-        public CefResponseWithContentBody DeserializeWithContent()
+        public PMResponseWithContentBody DeserializeWithContent()
         {
             var settings = new JsonSerializerSettings
             {
@@ -64,7 +64,7 @@ namespace PackageManagerClient
                 }
             };
 
-            return new CefResponseWithContentBody()
+            return new PMResponseWithContentBody()
             {
                 message = InternalRestReponse.StatusDescription,
                 content = JsonConvert.DeserializeObject<dynamic>(InternalRestReponse.Content),

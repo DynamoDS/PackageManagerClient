@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace PackageManagerClient.Requests
 {
-    public abstract class CefRequest
+    public abstract class PMRequest
     {
         public readonly bool fileRequest;
         internal string fileToUpload;
-        public CefRequest()
+        public PMRequest()
         {
             this.ForceAuthentication = false;
         }
 
-        public CefRequest(bool fileRequest, string fileToUpload)
+        public PMRequest(bool fileRequest, string fileToUpload)
         {
             this.ForceAuthentication = false;
             this.fileRequest = fileRequest;

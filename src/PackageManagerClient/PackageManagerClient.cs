@@ -13,7 +13,7 @@ namespace PackageManagerClient
     /// <summary>
     /// REST Client for calling ACF REST API's
     /// </summary>
-    public class ACGClientForCEF : IPackageManagerClient
+    public class PackageManagerClient : IPackageManagerClient
     {
         private readonly RestClient _client;
         private readonly RestClient _fileClient;
@@ -26,14 +26,14 @@ namespace PackageManagerClient
             get { return _authProvider; }
         }
 
-        public ACGClientForCEF(IAuthProvider provider, string packageManagerUrl, string fileStorageUrl)
+        public PackageManagerClient(IAuthProvider provider, string packageManagerUrl, string fileStorageUrl)
         {
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
             _fileClient = new RestClient(fileStorageUrl);
         }
 
-        private IRestResponse ExecuteInternal(CefRequest m)
+        private IRestResponse ExecuteInternal(PMRequest m)
         {
             var req = new RestRequest(m.Path, m.HttpMethod);
 
@@ -58,20 +58,20 @@ namespace PackageManagerClient
             m.AddHeader("X-AFC", "DY1ON1");
         }
 
-        public CefResponse Execute(CefRequest m)
+        public PackageManagerResponse Execute(PMRequest m)
         {
-            var res = new CefResponse(ExecuteInternal(m));
+            var res = new PackageManagerResponse(ExecuteInternal(m));
             return res;
         }
 
-        public CefResponseBody ExecuteAndDeserialize(CefRequest m)
+        public PackageManagerResponseBody ExecuteAndDeserialize(PMRequest m)
         {
             var res = Execute(m).Deserialize();
             res.success = true;
             return res;
         }
 
-        public CefResponseWithContentBody ExecuteAndDeserializeWithContent<dynamic>(CefRequest m)
+        public PMResponseWithContentBody ExecuteAndDeserializeWithContent<dynamic>(PMRequest m)
         {
             var response = this.ExecuteInternal(m);
             var res = new ResponseWithContent(response).DeserializeWithContent();

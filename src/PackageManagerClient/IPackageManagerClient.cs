@@ -13,8 +13,8 @@ namespace PackageManagerClient
         IAuthProvider AuthProvider { get; }
         string BaseUrl { get; }
 
-        CefResponse Execute(CefRequest m);
-        CefResponseBody ExecuteAndDeserialize(CefRequest m);
-        CefResponseWithContentBody ExecuteAndDeserializeWithContent<dynamic>(CefRequest m);
+        PackageManagerResponse Execute(PMRequest m);
+        PackageManagerResponseBody ExecuteAndDeserialize(PMRequest m);
+        PMResponseWithContentBody ExecuteAndDeserializeWithContent<dynamic>(PMRequest m);
     }
 }
