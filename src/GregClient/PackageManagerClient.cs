@@ -18,6 +18,7 @@ namespace Greg
     /// </summary>
     public class PackageManagerClient : IGregClient
     {
+        private const string AFC_CODE = "DY1ON1";
         private readonly RestClient _client;
         private readonly RestClient _fileClient;
 
@@ -36,6 +37,13 @@ namespace Greg
             _fileClient = new RestClient(fileStorageUrl);
         }
 
+        /// <summary>
+        /// For GET request we need to pass AFC(Affiliation Code) in request header.
+        /// For all other request and Member requests we need to pass additional X-Session in request header. 
+        /// If reuest is for upload file _flieClient is used, as URL for ACG API and File Upload server are different.
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         private IRestResponse ExecuteInternal(Request m)
         {
             var req = new RestRequest(m.Path, m.HttpMethod);
@@ -54,17 +62,31 @@ namespace Greg
                 return _client.Execute(req);
         }
 
+        /// <summary>
+        /// Add request headers for GET requests. No need to go through AuthProvider
+        /// </summary>
+        /// <param name="m"></param>
         public void SignRequest(RestRequest m)
         {
             m.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            m.AddHeader("X-AFC", "DY1ON1");
+            m.AddHeader("X-AFC", AFC_CODE);
         }
 
+        /// <summary>
+        /// Execute the REST request
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public Response Execute(Request m)
         {
             return new Response(ExecuteInternal(m));
         }
 
+        /// <summary>
+        /// Execute and deserialize the request
+        /// </summary>
+        /// <param name="m"></param>
+        /// <returns></returns>
         public ResponseBody ExecuteAndDeserialize(Request m)
         {
             return Execute(m).Deserialize();
@@ -89,6 +111,11 @@ namespace Greg
             };
         }
 
+        /// <summary>
+        /// Get the file stream from response and save locally.
+        /// </summary>
+        /// <param name="gregResponse"></param>
+        /// <returns></returns>
         public string GetFileFromResponse(Response gregResponse)
         {
             var response = gregResponse.InternalRestReponse;
