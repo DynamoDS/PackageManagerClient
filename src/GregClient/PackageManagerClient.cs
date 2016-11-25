@@ -46,6 +46,9 @@ namespace Greg
         /// <returns></returns>
         private IRestResponse ExecuteInternal(PackageManagerRequest m)
         {
+            if (m == null)
+                throw new Exception("Request object is not instance of type PackageManagerRequest.");
+
             var req = new RestRequest(m.Path, m.HttpMethod);
 
             m.Build(ref req);
@@ -82,9 +85,6 @@ namespace Greg
         /// <returns></returns>
         public Response Execute(Request m)
         {
-            if (!(m is PackageManagerRequest))
-                throw new Exception("Request object is not instance of PackageManagerRequest");
-
             return new Response(ExecuteInternal((PackageManagerRequest)m));
         }
 
