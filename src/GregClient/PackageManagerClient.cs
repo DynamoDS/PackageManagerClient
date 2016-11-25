@@ -44,11 +44,8 @@ namespace Greg
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
-        private IRestResponse ExecuteInternal(Request m)
+        private IRestResponse ExecuteInternal(PackageManagerRequest m)
         {
-            if(!(m is PackageManagerRequest))
-                throw new Exception("Request object is not an instance of PackageManagerRequest.");
-
             var req = new RestRequest(m.Path, m.HttpMethod);
 
             m.Build(ref req);
@@ -62,7 +59,7 @@ namespace Greg
             else
                 AuthProvider.SignRequest(ref req, _client);
 
-            if (((PackageManagerRequest)(m)).fileRequest)
+            if (m.fileRequest)
                 return _fileClient.Execute(req);
             else
                 return _client.Execute(req);
@@ -85,7 +82,10 @@ namespace Greg
         /// <returns></returns>
         public Response Execute(Request m)
         {
-            return new Response(ExecuteInternal(m));
+            if (!(m is PackageManagerRequest))
+                throw new Exception("Request object is not instance of PackageManagerRequest");
+
+            return new Response(ExecuteInternal((PackageManagerRequest)m));
         }
 
         /// <summary>
