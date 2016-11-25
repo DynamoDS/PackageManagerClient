@@ -19,7 +19,9 @@ namespace Greg
     public class PackageManagerClient : IGregClient
     {
         private const string AFC_CODE = "DY1ON1";
+        //Client for ACG REST API
         private readonly RestClient _client;
+        //Client for file upload, the server address for file upload is different than ACG API
         private readonly RestClient _fileClient;
 
         public string BaseUrl { get { return _client.BaseUrl.ToString(); } }
@@ -38,19 +40,23 @@ namespace Greg
         }
 
         /// <summary>
-        /// For GET request we need to pass AFC(Affiliation Code) in request header.
-        /// For all other request and Member requests we need to pass additional X-Session in request header. 
-        /// If reuest is for upload file _flieClient is used, as URL for ACG API and File Upload server are different.
+        /// Execute the REST request
         /// </summary>
         /// <param name="m"></param>
         /// <returns></returns>
         private IRestResponse ExecuteInternal(Request m)
         {
+            if(!(m is PackageManagerRequest))
+                throw new Exception("Request object is not an instance of PackageManagerRequest.");
+
             var req = new RestRequest(m.Path, m.HttpMethod);
 
             m.Build(ref req);
 
-
+            /// For GET request we need to pass AFC(Affiliation Code) in request header.
+            /// For all other request and Member requests we need to pass additional X-Session in request header. 
+            /// X-Session header should be added from AuthProvider.SignRequest (ACG Auth Provider which is part of ACG login implementation) method.
+            /// If request is for upload file _flieClient is used, as URL for ACG API and File Upload server are different.
             if (m.HttpMethod == Method.GET && !m.Path.Contains("members"))
                 SignRequest(req);
             else
