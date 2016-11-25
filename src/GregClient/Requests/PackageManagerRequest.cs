@@ -22,12 +22,6 @@ namespace Greg.Requests
             this.fileToUpload = fileToUpload;
         }
 
-        public PackageManagerRequest(string path, RestSharp.Method httpMethod)
-        {
-            _path = path;
-            _httpMethod = httpMethod;
-        }
-
         private string _path;
         public override string Path
         {
