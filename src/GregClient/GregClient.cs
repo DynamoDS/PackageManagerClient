@@ -19,8 +19,10 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
+
         }
 
         private IRestResponse ExecuteInternal(Request m)
