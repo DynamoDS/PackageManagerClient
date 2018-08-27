@@ -19,6 +19,10 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
+            // added to enable TLS1.2 compatability - this is required as we target .net 4.5.
+            // TODO can be removed when we upgrade to .net4.7
+            // documented here: https://medium.com/@kyle.gagnet/your-net-code-could-stop-working-in-june-afb35fbf29ca
+
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
