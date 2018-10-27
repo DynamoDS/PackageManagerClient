@@ -167,7 +167,7 @@ namespace Greg.Utility
         /// </summary>
         /// <param name="zipFilePath"></param>
         /// <returns></returns>
-        public static void UnZip(string zipFilePath, string destinationDirectoryName)
+        public static void UnZip(string zipFilePath, string unzipDirectory)
         {
             using (var source = System.IO.Compression.ZipFile.Open(zipFilePath, System.IO.Compression.ZipArchiveMode.Read))
             {
@@ -177,11 +177,11 @@ namespace Greg.Utility
                 {
                     throw new IOException("Could not open archive at " + zipFilePath);
                 }
-                if (destinationDirectoryName == null)
+                if (unzipDirectory == null)
                 {
                     throw new ArgumentNullException("destinationDirectoryName");
                 }
-                DirectoryInfo directoryInfo = Directory.CreateDirectory(destinationDirectoryName);
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(unzipDirectory);
                 string fullName = directoryInfo.FullName;
                 foreach (System.IO.Compression.ZipArchiveEntry entry in source.Entries)
                 {
