@@ -9,11 +9,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The Dynamo Package Manager .Net Client.</description>
     <releaseNotes>The Dynamo Package Manager .Net Client.</releaseNotes>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2018</copyright>
     <tags>dynamo package greg</tags>
     <dependencies>
         <dependency id="RestSharp" version="105.2.3" />
-        <dependency id="Unofficial.Ionic.Zip" version="1.9.1.8" />
         <dependency id="Newtonsoft.Json" version="8.0.3" />
     </dependencies>
   </metadata>

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using Ionic.Zip;
+using System.IO.Compression;
+
 
 namespace Greg.Utility
 {
@@ -105,16 +106,12 @@ namespace Greg.Utility
         {
             var zipPath = GetTempZipPath();
 
-            using (var zip = new ZipFile())
+            using (var zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
             {
                 foreach (var filename in filePaths)
                 {
-                    ZipEntry e = zip.AddFile(filename, "/");
-                    e.Comment = "Added by GregClient.";
+                    ZipFileExtensions.CreateEntryFromFile(zip, filename, filename);
                 }
-
-                zip.Comment = String.Format("This zip archive was created by GregClient.");
-                zip.Save(zipPath);
             }
 
             return zipPath;
@@ -128,17 +125,7 @@ namespace Greg.Utility
         /// <throws>FileNotFoundException, ZipException</throws>
         public static string Zip(string directory)
         {
-            var zipPath = GetTempZipPath();
-
-            using (var zip = new ZipFile())
-            {
-                ZipEntry e = zip.AddDirectory(directory, "/");
-                e.Comment = "Added by GregClient.";
-                zip.Comment = String.Format("This zip archive was created by GregClient.");
-                zip.Save(zipPath);
-            }
-
-            return zipPath;
+            return Zip(Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories));
         }
 
 
@@ -167,13 +154,43 @@ namespace Greg.Utility
         /// </summary>
         /// <param name="zipFilePath"></param>
         /// <returns></returns>
-        public static void UnZip(string zipFilePath, string unzipDirectory)
+        public static void UnZip(string zipFilePath, string destinationDirectoryName)
         {
-            using (var zip = ZipFile.Read(zipFilePath))
+            using (var source = ZipFile.Open(zipFilePath, ZipArchiveMode.Read))
             {
-                zip.ExtractAll(unzipDirectory);
+                // Implementation from System.IO.Compression.ZipFileExtensions.ExtractToDirectory
+                // with modifications to not fail on malformed zips created by Ionic.Zip
+                if (source == null)
+                {
+                    throw new IOException("Could not open archive at " + zipFilePath);
+                }
+                if (destinationDirectoryName == null)
+                {
+                    throw new ArgumentNullException("destinationDirectoryName");
+                }
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(destinationDirectoryName);
+                string fullName = directoryInfo.FullName;
+                foreach (ZipArchiveEntry entry in source.Entries)
+                {
+                    string fullPath = Path.GetFullPath(Path.Combine(fullName, entry.FullName));
+                    if (!fullPath.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // entry.FullName begins with .. or / and would expand to a path outside 
+                        // the extraction directory, so skip it. This is likely caused by the
+                        // dummy empty files added by Ionic.Zip to support archive comments.
+                        continue;
+                    }
+                    if (Path.GetFileName(fullPath).Length == 0)
+                    {
+                        Directory.CreateDirectory(fullPath);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+                        entry.ExtractToFile(fullPath, false);
+                    }
+                }
             }
         }
-
     }
 }
