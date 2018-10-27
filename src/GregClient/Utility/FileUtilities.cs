@@ -169,11 +169,41 @@ namespace Greg.Utility
         /// <returns></returns>
         public static void UnZip(string zipFilePath, string unzipDirectory)
         {
-            using (var zip = ZipFile.Read(zipFilePath))
+            using (var source = System.IO.Compression.ZipFile.Open(zipFilePath, System.IO.Compression.ZipArchiveMode.Read))
             {
-                zip.ExtractAll(unzipDirectory);
+                // Implementation from System.IO.Compression.ZipFileExtensions.ExtractToDirectory
+                // with modifications to not fail on malformed zips created by Ionic.Zip
+                if (source == null)
+                {
+                    throw new IOException("Could not open archive at " + zipFilePath);
+                }
+                if (unzipDirectory == null)
+                {
+                    throw new ArgumentNullException("destinationDirectoryName");
+                }
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(unzipDirectory);
+                string fullName = directoryInfo.FullName;
+                foreach (System.IO.Compression.ZipArchiveEntry entry in source.Entries)
+                {
+                    string fullPath = Path.GetFullPath(Path.Combine(fullName, entry.FullName));
+                    if (!fullPath.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // entry.FullName begins with .. or / and would expand to a path outside 
+                        // the extraction directory, so skip it. This is likely caused by the
+                        // dummy empty files added by Ionic.Zip to support archive comments.
+                        continue;
+                    }
+                    if (Path.GetFileName(fullPath).Length == 0)
+                    {
+                        Directory.CreateDirectory(fullPath);
+                    }
+                    else
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
+                        System.IO.Compression.ZipFileExtensions.ExtractToFile(entry, fullPath, false);
+                    }
+                }
             }
         }
-
     }
 }
