@@ -23,10 +23,16 @@ namespace Greg
             // TODO can be removed when we upgrade to .net4.7
             // documented here: https://medium.com/@kyle.gagnet/your-net-code-could-stop-working-in-june-afb35fbf29ca
 
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+            //https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
+            // if the current OS is windows 7 or lower
+            // set TLS to 1.2.
+            // else do nothing and let the OS decide the version of TLS to support. (.net 4.7 required)
+            if (System.Environment.OSVersion.Version.Major <= 6 && System.Environment.OSVersion.Version.Minor <= 1)
+            {
+                ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+            }
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
-
         }
 
         private IRestResponse ExecuteInternal(Request m)
