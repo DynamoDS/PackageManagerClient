@@ -153,10 +153,12 @@ namespace Greg.Utility
         /// Given a path to a zip and a destination directory.
         /// </summary>
         /// <param name="zipFilePath"></param>
+        /// <param name="unzipDirectory"></param>
         /// <returns></returns>
-        public static void UnZip(string zipFilePath, string destinationDirectoryName)
+        public static void UnZip(string zipFilePath, string unzipDirectory)
         {
             using (var source = ZipFile.Open(zipFilePath, ZipArchiveMode.Read))
+
             {
                 // Implementation from System.IO.Compression.ZipFileExtensions.ExtractToDirectory
                 // with modifications to not fail on malformed zips created by Ionic.Zip
@@ -164,11 +166,11 @@ namespace Greg.Utility
                 {
                     throw new IOException("Could not open archive at " + zipFilePath);
                 }
-                if (destinationDirectoryName == null)
+                if (unzipDirectory == null)
                 {
-                    throw new ArgumentNullException("destinationDirectoryName");
+                    throw new ArgumentNullException("unzipDirectory");
                 }
-                DirectoryInfo directoryInfo = Directory.CreateDirectory(destinationDirectoryName);
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(unzipDirectory);
                 string fullName = directoryInfo.FullName;
                 foreach (ZipArchiveEntry entry in source.Entries)
                 {
