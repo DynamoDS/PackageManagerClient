@@ -99,18 +99,16 @@ namespace Greg.Utility
         /// <summary>
         /// Make a zip file from a collection of files
         /// </summary>
-        /// <param name="paths">A list of filepaths</param>
-        /// <returns>False if the process fails, true otherwise</returns>
-        /// <throws>FileNotFoundException, ZipException</throws>
+        /// <param name="filePaths">A list of filepaths</param>
         public static string Zip(IEnumerable<string> filePaths)
         {
             var zipPath = GetTempZipPath();
 
             using (var zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
             {
-                foreach (var filename in filePaths)
-                {
-                    ZipFileExtensions.CreateEntryFromFile(zip, filename, filename);
+                foreach (var filePath in filePaths)
+                {   
+                    zip.CreateEntryFromFile(filePath, filePath);
                 }
             }
 
@@ -120,14 +118,13 @@ namespace Greg.Utility
         /// <summary>
         /// Make a zip file from a collection of files
         /// </summary>
-        /// <param name="paths">A list of filepaths</param>
-        /// <returns>False if the process fails, true otherwise</returns>
-        /// <throws>FileNotFoundException, ZipException</throws>
+        /// <param name="directory">A directory - should be the package root path</param>
         public static string Zip(string directory)
         {
-            return Zip(Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories));
+            var zipPath = GetTempZipPath();
+            ZipFile.CreateFromDirectory(directory, zipPath);
+            return zipPath;
         }
-
 
         /// <summary>
         /// Given a path to a zip, extracts it and returns the 
