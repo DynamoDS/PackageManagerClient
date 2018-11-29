@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
-using Ionic.Zip;
+using System.IO.Compression;
+
 
 namespace Greg.Utility
 {
@@ -98,23 +99,17 @@ namespace Greg.Utility
         /// <summary>
         /// Make a zip file from a collection of files
         /// </summary>
-        /// <param name="paths">A list of filepaths</param>
-        /// <returns>False if the process fails, true otherwise</returns>
-        /// <throws>FileNotFoundException, ZipException</throws>
+        /// <param name="filePaths">A list of filepaths</param>
         public static string Zip(IEnumerable<string> filePaths)
         {
             var zipPath = GetTempZipPath();
 
-            using (var zip = new ZipFile())
+            using (var zip = ZipFile.Open(zipPath, ZipArchiveMode.Create))
             {
-                foreach (var filename in filePaths)
-                {
-                    ZipEntry e = zip.AddFile(filename, "/");
-                    e.Comment = "Added by GregClient.";
+                foreach (var filePath in filePaths)
+                {   
+                    zip.CreateEntryFromFile(filePath, filePath);
                 }
-
-                zip.Comment = String.Format("This zip archive was created by GregClient.");
-                zip.Save(zipPath);
             }
 
             return zipPath;
@@ -123,24 +118,13 @@ namespace Greg.Utility
         /// <summary>
         /// Make a zip file from a collection of files
         /// </summary>
-        /// <param name="paths">A list of filepaths</param>
-        /// <returns>False if the process fails, true otherwise</returns>
-        /// <throws>FileNotFoundException, ZipException</throws>
+        /// <param name="directory">A directory - should be the package root path</param>
         public static string Zip(string directory)
         {
             var zipPath = GetTempZipPath();
-
-            using (var zip = new ZipFile())
-            {
-                ZipEntry e = zip.AddDirectory(directory, "/");
-                e.Comment = "Added by GregClient.";
-                zip.Comment = String.Format("This zip archive was created by GregClient.");
-                zip.Save(zipPath);
-            }
-
+            ZipFile.CreateFromDirectory(directory, zipPath);
             return zipPath;
         }
-
 
         /// <summary>
         /// Given a path to a zip, extracts it and returns the 
@@ -166,10 +150,12 @@ namespace Greg.Utility
         /// Given a path to a zip and a destination directory.
         /// </summary>
         /// <param name="zipFilePath"></param>
+        /// <param name="unzipDirectory"></param>
         /// <returns></returns>
         public static void UnZip(string zipFilePath, string unzipDirectory)
         {
-            using (var source = System.IO.Compression.ZipFile.Open(zipFilePath, System.IO.Compression.ZipArchiveMode.Read))
+            using (var source = ZipFile.Open(zipFilePath, ZipArchiveMode.Read))
+
             {
                 // Implementation from System.IO.Compression.ZipFileExtensions.ExtractToDirectory
                 // with modifications to not fail on malformed zips created by Ionic.Zip
@@ -179,11 +165,11 @@ namespace Greg.Utility
                 }
                 if (unzipDirectory == null)
                 {
-                    throw new ArgumentNullException("destinationDirectoryName");
+                    throw new ArgumentNullException("unzipDirectory");
                 }
                 DirectoryInfo directoryInfo = Directory.CreateDirectory(unzipDirectory);
                 string fullName = directoryInfo.FullName;
-                foreach (System.IO.Compression.ZipArchiveEntry entry in source.Entries)
+                foreach (ZipArchiveEntry entry in source.Entries)
                 {
                     string fullPath = Path.GetFullPath(Path.Combine(fullName, entry.FullName));
                     if (!fullPath.StartsWith(fullName, StringComparison.OrdinalIgnoreCase))
@@ -200,7 +186,7 @@ namespace Greg.Utility
                     else
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-                        System.IO.Compression.ZipFileExtensions.ExtractToFile(entry, fullPath, false);
+                        entry.ExtractToFile(fullPath, false);
                     }
                 }
             }
