@@ -19,11 +19,9 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
-            // added to enable TLS1.2 compatability - this is required as we target .net 4.5.
-            // TODO can be removed when we upgrade to .net4.7
-            // documented here: https://medium.com/@kyle.gagnet/your-net-code-could-stop-working-in-june-afb35fbf29ca
+           
 
-            //https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
+            // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
             // else do nothing and let the OS decide the version of TLS to support. (.net 4.7 required)
