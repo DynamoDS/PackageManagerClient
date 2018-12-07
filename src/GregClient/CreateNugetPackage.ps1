@@ -3,8 +3,8 @@
 [string]$out=$(throw "-out is required")
 )
 
-if(!(Test-Path -Path $nuget\lib\net45\)){
-    New-Item -ItemType directory -Path $nuget\lib\net45\
+if(!(Test-Path -Path $nuget\lib\net47\)){
+    New-Item -ItemType directory -Path $nuget\lib\net47\
 }
 
 
@@ -20,7 +20,7 @@ if(!(Test-Path -Path $nuget\tools)){
     New-Item -ItemType directory -Path $nuget\tools
 }
 
-copy $out\Greg.dll $nuget\lib\net45\
+copy $out\Greg.dll $nuget\lib\net47\
 
 $dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$out\Greg.dll").FileVersion
 
