@@ -31,3 +31,6 @@ The Package Manager Client is available from NuGet [here](https://www.nuget.org/
 - The NuGet package is built with an `Install1.ps` script which sets `Copy Local=False` for the package's assemblies. If this is not the desired behavior, you will have to override the `Copy Local` setting in your Visual Studio project.
 
 
+___
+
+The Dynamo Package Manager and the Dynamo Package Manager Client both comply with the [Autodesk Privacy Policy](https://www.autodesk.com/company/legal-notices-trademarks/privacy-statement).
