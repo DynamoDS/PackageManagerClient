@@ -1,6 +1,6 @@
 # Dynamo Package Manager Client
 
-This repo is the package manager client for the Dynamo Package Manager.  You can find the source code for the Dynamo Package Manager [here](https://github.com/pboyer/GReg/).  Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.  
+This repo is the package manager client for the Dynamo Package Manager.  Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.  
 
 #### The Package Manager Client can do the following for you:
 
