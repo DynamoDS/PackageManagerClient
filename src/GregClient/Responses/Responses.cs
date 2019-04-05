@@ -18,7 +18,8 @@ namespace Greg.Responses
             try
             {
                 //return jsonDeserializer.Deserialize<ResponseBody>(InternalRestReponse);
-                return JsonConvert.DeserializeObject<ResponseBody>(InternalRestReponse.Content);
+                var resp = JsonConvert.DeserializeObject<ResponseBody>(InternalRestReponse.Content);
+                return resp;
             }
             catch
             {
