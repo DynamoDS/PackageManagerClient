@@ -41,7 +41,7 @@ namespace Greg
             if (m.RequiresAuthorization)
             {
                 var reqToSign = new RestRequest(req.Resource, req.Method);
-                var authParams = m.GetParamsForAuth(ref req);
+                var authParams = m.GetParamsToSign(ref req);
                 foreach (var par in authParams)
                 {
                     reqToSign.AddParameter(par);

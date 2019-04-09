@@ -33,6 +33,11 @@ namespace Greg.Requests
             get { return Method.PUT; }
         }
 
+        internal override IList<Parameter> GetParamsToSign(ref RestRequest request)
+        {
+            return new List<Parameter>();// Nothig to sign yet.
+        }
+
         internal override void Build(ref RestRequest request)
         {
             // zip up and get hash for zip

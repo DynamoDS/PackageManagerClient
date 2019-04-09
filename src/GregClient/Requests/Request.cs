@@ -28,7 +28,12 @@ namespace Greg.Requests
         public RequestBody RequestBody { get; set; }
 
         public bool ForceAuthentication { get; set; }
-        
+
+        internal virtual IList<Parameter> GetParamsToSign(ref RestRequest request)
+        {
+            return request.Parameters;// By default send all params to sign.
+        }
+
         internal abstract void Build(ref RestRequest request);
     }
 }
