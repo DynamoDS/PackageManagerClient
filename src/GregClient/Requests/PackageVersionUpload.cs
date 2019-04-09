@@ -8,16 +8,20 @@ namespace Greg.Requests
 {
     public class PackageVersionUpload : JsonRequest
     {
-        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, IEnumerable<string> files )
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, IEnumerable<string> files)
         {
             this.Files = files;
             this.RequestBody = requestBody;
         }
 
-        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, string zipFile )
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, string zipFile)
         {
             this.ZipFile = zipFile;
             this.RequestBody = requestBody;
+        }
+
+        public RequestBody getReqBody() {
+            return this.RequestBody;
         }
 
         public IEnumerable<string> Files { get; set; }
@@ -44,8 +48,8 @@ namespace Greg.Requests
 
             ((PackageVersionUploadRequestBody)this.RequestBody).file_hash = Convert.ToBase64String(zipHash);
 
-            // pass pkg_header to the request body. Do not pass as param to header (some params can be large and thus exceed the header size limits on certain servers).
-            request.AddObject(new { pkg_header = this.RequestBody.AsJson() });
+            // pass pkg_header as parameter
+            request.AddParameter("pkg_header", this.RequestBody.AsJson());
 
             // add files
             var fs = File.OpenRead(ZipFile);

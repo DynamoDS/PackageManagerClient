@@ -40,7 +40,15 @@ namespace Greg
 
             if (m.RequiresAuthorization)
             {
-                AuthProvider.SignRequest(ref req, _client);
+                var reqToSign = new RestRequest(req.Resource, req.Method);
+                var authParams = m.GetParamsForAuth(ref req);
+                foreach (var par in authParams)
+                {
+                    reqToSign.AddParameter(par);
+                }
+
+                AuthProvider.SignRequest(ref reqToSign, _client);
+                req.Resource = reqToSign.Resource;
             }
             return _client.Execute(req);
         }
