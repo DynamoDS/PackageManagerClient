@@ -20,10 +20,6 @@ namespace Greg.Requests
             this.RequestBody = requestBody;
         }
 
-        public RequestBody getReqBody() {
-            return this.RequestBody;
-        }
-
         public IEnumerable<string> Files { get; set; }
         public string ZipFile { get; set; }
 
