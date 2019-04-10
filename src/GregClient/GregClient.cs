@@ -40,6 +40,9 @@ namespace Greg
 
             if (m.RequiresAuthorization)
             {
+                // Issue: auth api was adding body params to the query string.
+                // Details: https://jira.autodesk.com/browse/DYN-1795
+                // Build a subset of the original request, with only specific parameters that we need to authenticate.
                 var reqToSign = new RestRequest(req.Resource, req.Method);
                 var authParams = m.GetParamsToSign(ref req);
                 foreach (var par in authParams)
@@ -47,6 +50,7 @@ namespace Greg
                     reqToSign.AddParameter(par);
                 }
 
+                // All reqToSign.Parameters will be added in the reqToSign.Resource.
                 AuthProvider.SignRequest(ref reqToSign, _client);
                 req.Resource = reqToSign.Resource;
             }
