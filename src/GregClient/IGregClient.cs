@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using RestSharp;
 using Greg.Requests;
 using Greg.Responses;
 
@@ -11,6 +8,8 @@ namespace Greg
     {
         IAuthProvider AuthProvider { get; }
         string BaseUrl { get; }
+
+        RestRequest BuildRestRequest(Request m);
 
         Response Execute(Request m);
         ResponseBody ExecuteAndDeserialize(Request m);

@@ -19,7 +19,6 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
-           
 
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
@@ -33,7 +32,7 @@ namespace Greg
             _client = new RestClient(packageManagerUrl);
         }
 
-        private IRestResponse ExecuteInternal(Request m)
+        private RestRequest BuildRestRequest(Request m)
         {
             var req = new RestRequest(m.Path, m.HttpMethod);
             m.Build(ref req);
@@ -54,6 +53,12 @@ namespace Greg
                 AuthProvider.SignRequest(ref reqToSign, _client);
                 req.Resource = reqToSign.Resource;
             }
+            return req;
+        }
+
+        private IRestResponse ExecuteInternal(Request m)
+        {
+            var req = buildRestRequest(m);
             return _client.Execute(req);
         }
 
