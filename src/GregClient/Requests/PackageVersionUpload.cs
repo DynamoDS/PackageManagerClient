@@ -8,13 +8,13 @@ namespace Greg.Requests
 {
     public class PackageVersionUpload : JsonRequest
     {
-        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, IEnumerable<string> files )
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, IEnumerable<string> files)
         {
             this.Files = files;
             this.RequestBody = requestBody;
         }
 
-        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, string zipFile )
+        public PackageVersionUpload(PackageVersionUploadRequestBody requestBody, string zipFile)
         {
             this.ZipFile = zipFile;
             this.RequestBody = requestBody;
@@ -31,6 +31,11 @@ namespace Greg.Requests
         public override Method HttpMethod
         {
             get { return Method.PUT; }
+        }
+
+        internal override IList<Parameter> GetParamsToSign(ref RestRequest request)
+        {
+            return new List<Parameter>();// Nothing to sign yet.
         }
 
         internal override void Build(ref RestRequest request)
