@@ -55,7 +55,7 @@ namespace Greg
                 req.Resource = reqToSign.Resource;
             }
             var restResp = _client.Execute(req);
-            logResponse(restResp);
+            LogResponse(restResp);
             return restResp;
         }
 
@@ -88,7 +88,7 @@ namespace Greg
             return new ResponseWithContent<T>(response).DeserializeWithContent();
         }
 
-        private void logResponse(IRestResponse restResp)
+        private void LogResponse(IRestResponse restResp)
         {
             var enableDebugLogs = Environment.GetEnvironmentVariable("DEBUG_LOGS_DYNAMO_GREG");
             if (restResp == null || !Convert.ToBoolean(enableDebugLogs))
