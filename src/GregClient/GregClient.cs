@@ -90,22 +90,24 @@ namespace Greg
 
         private void logResponse(IRestResponse restResp)
         {
-            if (restResp == null)
+            var enableDebugLogs = Environment.GetEnvironmentVariable("DEBUG_LOGS_DYNAMO_GREG");
+            if (restResp == null || !Convert.ToBoolean(enableDebugLogs))
             {
                 return;
             }
             try
             {
-                var logDirPath = Path.Combine(Path.GetTempPath(), "GregLog");
+                var logDirPath = Path.Combine(Path.GetTempPath(), "GregLogs");
                 if (!Directory.Exists(logDirPath))
                 {
                     Directory.CreateDirectory(logDirPath);
                 }
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, Guid.NewGuid().ToString() + ".txt")))
+                string ts = DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss");
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, ts + ".txt")))
                 {
                     var logObj = new
                     {
-                        timeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"),
+                        timeStamp = ts,
                         respContent = restResp.Content,
                         statusCode = restResp.StatusCode,
                         statusDesc = restResp.StatusDescription,
