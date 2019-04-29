@@ -2,6 +2,8 @@
 using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
+using System;
+using System.IO;
 
 namespace Greg
 {
@@ -19,8 +21,6 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
-           
-
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
@@ -54,7 +54,9 @@ namespace Greg
                 AuthProvider.SignRequest(ref reqToSign, _client);
                 req.Resource = reqToSign.Resource;
             }
-            return _client.Execute(req);
+            var restResp = _client.Execute(req);
+            logResponse(restResp);
+            return restResp;
         }
 
         public Response Execute(Request m)
@@ -84,6 +86,40 @@ namespace Greg
             }
 
             return new ResponseWithContent<T>(response).DeserializeWithContent();
+        }
+
+        private void logResponse(IRestResponse restResp)
+        {
+            if (restResp == null)
+            {
+                return;
+            }
+            try
+            {
+                var logDirPath = Path.Combine(Path.GetTempPath(), "GregLog");
+                if (!Directory.Exists(logDirPath))
+                {
+                    Directory.CreateDirectory(logDirPath);
+                }
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, Guid.NewGuid().ToString() + ".txt")))
+                {
+                    var logObj = new
+                    {
+                        timeStamp = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss"),
+                        respContent = restResp.Content,
+                        statusCode = restResp.StatusCode,
+                        statusDesc = restResp.StatusDescription,
+                        responseStatus = restResp.ResponseStatus,
+                        errMsg = restResp.ErrorMessage,
+                        errException = restResp.ErrorException
+
+                    };
+                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logObj));
+                }
+            }
+            finally
+            {
+            }
         }
     }
 }
