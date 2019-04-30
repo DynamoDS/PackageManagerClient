@@ -90,13 +90,14 @@ namespace Greg
 
         private void LogResponse(IRestResponse restResp)
         {
-            var enableDebugLogs = Environment.GetEnvironmentVariable("DEBUG_LOGS_DYNAMO_GREG");
-            if (restResp == null || !Convert.ToBoolean(enableDebugLogs))
-            {
-                return;
-            }
             try
             {
+                var enableDebugLogs = Environment.GetEnvironmentVariable("DEBUG_LOGS_DYNAMO_GREG");
+                if (restResp == null || !Convert.ToBoolean(enableDebugLogs))
+                {
+                    return;
+                }
+
                 var logDirPath = Path.Combine(Path.GetTempPath(), "GregLogs");
                 if (!Directory.Exists(logDirPath))
                 {
