@@ -52,6 +52,7 @@
     <Compile Include="AuthProviders\LoginState.cs" />
     <Compile Include="IGregClient.cs" />
     <Compile Include="PackageManagerClient.cs" />
+    <Compile Include="Properties\globalVersionInfo.cs" />
     <Compile Include="Requests\BanPackage.cs" />
     <Compile Include="Requests\Deprecate.cs" />
     <Compile Include="Requests\Downvote.cs" />
