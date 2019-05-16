@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("GregClient_net45")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Greg")]
+[assembly: AssemblyDescription("The Dynamo Package Manager .NET client.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("GregClient_net45")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("Autodesk, Inc.")]
+[assembly: AssemblyProduct("Greg")]
+[assembly: AssemblyCopyright("Copyright © Autodesk, Inc. 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
