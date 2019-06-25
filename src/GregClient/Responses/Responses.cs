@@ -95,6 +95,8 @@ namespace Greg.Responses
 
         public List<Dependency> direct_dependency_ids { get; set; }
 
+        public IEnumerable<string> host_dependencies { get; set; }
+
         public string change_log { get; set; }
 
         public string version { get; set; }

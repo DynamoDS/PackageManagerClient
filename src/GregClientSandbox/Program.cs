@@ -40,9 +40,21 @@ namespace GregClientSandbox
             var keywords = new List<string>() {"neat", "ok"};
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
                             new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", 
-                            false, new List<String>());
+                            false, new List<String>(), new List<String>());
 
             var files = new List<string>() {"../test/pedro.dyf", "../test/RootNode.dyf"};
+            var request = new PackageVersionUpload(nv, files);
+            Console.WriteLine(request.RequestBody.AsJson());
+        }
+
+        private static void UploadDynamoPackageWithHostDependencyTest()
+        {
+            var keywords = new List<string>() { "Civil" };
+            var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
+                            new List<PackageDependency>() { new PackageDependency("Ram", "0.1.0"), new PackageDependency("Ian", "0.1.0") }, "", "",
+                            false, new List<String>(), new List<String>() { "Civil3D" });
+
+            var files = new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" };
             var request = new PackageVersionUpload(nv, files);
             Console.WriteLine(request.RequestBody.AsJson());
         }
@@ -51,7 +63,7 @@ namespace GregClientSandbox
         {
             var keywords = new List<string>() { "neat", "ok" };
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group", 
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>() );
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>(), new List<String>());
 
             var files = new List<string>() {"../../../../test/pedro.dyf", "../../../../test/RootNode.dyf"};
 
