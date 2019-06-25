@@ -164,6 +164,8 @@ namespace Greg.Responses
 
         public List<Dependency> used_by { get; set; }
 
+        public List<string> host_dependencies { get; set; }
+
         public int num_dependents { get; set; }
 
         public string description { get; set; }
