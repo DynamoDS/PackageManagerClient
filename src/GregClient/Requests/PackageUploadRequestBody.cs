@@ -9,7 +9,7 @@ namespace Greg.Requests
             string contents, string engine, string engineVersion,
             string metadata, string group, IEnumerable<PackageDependency> dependencies,
             string siteUrl, string repositoryUrl, bool containsBinaries, 
-            IEnumerable<string> nodeLibraryNames )
+            IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies)
         {
             this.name = name;
             this.version = version;
@@ -25,6 +25,7 @@ namespace Greg.Requests
             this.repository_url = repositoryUrl;
             this.contains_binaries = containsBinaries;
             this.node_libraries = nodeLibraryNames;
+            this.host_dependencies = hostDependencies;
 
             this.license = license;
         }

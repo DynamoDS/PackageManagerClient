@@ -95,6 +95,8 @@ namespace Greg.Responses
 
         public List<Dependency> direct_dependency_ids { get; set; }
 
+        public IEnumerable<string> host_dependencies { get; set; }
+
         public string change_log { get; set; }
 
         public string version { get; set; }
@@ -161,6 +163,8 @@ namespace Greg.Responses
         public string license { get; set; }
 
         public List<Dependency> used_by { get; set; }
+
+        public List<string> host_dependencies { get; set; }
 
         public int num_dependents { get; set; }
 
