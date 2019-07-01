@@ -7,9 +7,9 @@ using RestSharp;
 namespace Greg.Requests
 {
 	/// <summary>
-    /// Hosts request. Returns a fixed list of all supported host applications.
+	/// Hosts request. Returns a fixed list of all supported host applications.
 	/// Ex. ["Revit", "Autocad", ...]
-    /// </summary>
+	/// </summary>
     public class Hosts : Request
     {
         public Hosts()
