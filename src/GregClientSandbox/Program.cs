@@ -145,9 +145,17 @@ namespace GregClientSandbox
                 Console.WriteLine(lib);
             }
         }
+
+        private static void ListHostsTest()
+        {
+            var hosts = new Hosts();
+            var hostsResponse = pmc.ExecuteAndDeserializeWithContent<List<String>>(hosts);
+            Console.WriteLine(hostsResponse.content);
+        }
         
         static void Main(string[] args)
         {
+            //ListHostsTest();
             //DownloadPackageByIdTest();
             //DownloadAllPackagesTest();
             GetWhitelistTest();

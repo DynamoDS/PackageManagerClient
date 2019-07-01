@@ -56,6 +56,7 @@
     <Compile Include="Requests\BanPackage.cs" />
     <Compile Include="Requests\Deprecate.cs" />
     <Compile Include="Requests\Downvote.cs" />
+    <Compile Include="Requests\Hosts.cs" />
     <Compile Include="Requests\PackageManagerRequest.cs" />
     <Compile Include="Requests\PackageReferenceRequest.cs" />
     <Compile Include="Requests\PackageUploadRequestBody.cs" />
