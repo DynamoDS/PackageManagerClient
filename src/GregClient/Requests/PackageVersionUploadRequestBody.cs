@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Greg.Requests
 {
@@ -7,6 +8,42 @@ namespace Greg.Requests
         internal PackageVersionUploadRequestBody()
         {
 
+        }
+
+
+        /// <summary>
+        /// Constructor which can be used to set hostDependencies
+        /// </summary>
+        /// <param name="name">Package name</param>
+        /// <param name="version">Package version</param>
+        /// <param name="description">Package description</param>
+        /// <param name="keywords">Package keywords for quick identification</param>
+        /// <param name="contents">Package content description</param>
+        /// <param name="engine">Package engine name, usually is set to Dynamo</param>
+        /// <param name="engineVersion">Package engine version, usually is set to use Dynamo version</param>
+        /// <param name="metadata"></param>
+        /// <param name="group"></param>
+        /// <param name="dependencies">Package dependencies</param>
+        /// <param name="siteUrl"></param>
+        /// <param name="repositoryUrl"></param>
+        /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
+        /// <param name="nodeLibraryNames"></param>
+        /// <param name="hostDependencies"> external programs this package depends on.</param>
+        public PackageVersionUploadRequestBody(string name, string version, string description,
+          IEnumerable<string> keywords,
+          string contents, string engine, string engineVersion,
+          string metadata, string group, IEnumerable<PackageDependency> dependencies,
+          string siteUrl, string repositoryUrl, bool containsBinaries,
+          IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies) :
+
+          this(name, version, description,
+              keywords,
+              contents, engine, engineVersion,
+              metadata, group, dependencies,
+              siteUrl, repositoryUrl, containsBinaries,
+              nodeLibraryNames)
+        {
+            this.host_dependencies = hostDependencies;
         }
 
         /// <summary>
@@ -26,12 +63,12 @@ namespace Greg.Requests
         /// <param name="repositoryUrl"></param>
         /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
         /// <param name="nodeLibraryNames"></param>
-        /// <param name="hostDependencies">Package host dependencies</param>
+        [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
         public PackageVersionUploadRequestBody(string name, string version, string description,
             IEnumerable<string> keywords, string contents, string engine, string engineVersion,
             string metadata, string group, IEnumerable<PackageDependency> dependencies,
             string siteUrl, string repositoryUrl, bool containsBinaries,
-            IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies)
+            IEnumerable<string> nodeLibraryNames)
         {
             this.name = name;
             this.version = version;
@@ -47,7 +84,6 @@ namespace Greg.Requests
             this.repository_url = repositoryUrl;
             this.contains_binaries = containsBinaries;
             this.node_libraries = nodeLibraryNames;
-            this.host_dependencies = hostDependencies;
         }
 
         public string file_hash { get; set; }
