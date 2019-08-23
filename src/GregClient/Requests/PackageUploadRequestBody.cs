@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 
 namespace Greg.Requests
 {
     public class PackageUploadRequestBody : PackageVersionUploadRequestBody
     {
+
         //!!!! it is important to keep this in mind:
         //https://stackoverflow.com/questions/33107789/json-net-deserialization-constructor-vs-property-rules
 
@@ -17,6 +17,7 @@ namespace Greg.Requests
         {
 
         }
+
         public PackageUploadRequestBody(string name, string version, string description,
             IEnumerable<string> keywords, string license,
             string contents, string engine, string engineVersion,
