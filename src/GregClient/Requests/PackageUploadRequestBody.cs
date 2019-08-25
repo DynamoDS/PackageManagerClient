@@ -5,6 +5,19 @@ namespace Greg.Requests
 {
     public class PackageUploadRequestBody : PackageVersionUploadRequestBody
     {
+
+        //!!!! it is important to keep this in mind:
+        //https://stackoverflow.com/questions/33107789/json-net-deserialization-constructor-vs-property-rules
+
+        /// <summary>
+        /// Default constructor - should only be used for deserialization with json.net.
+        /// json.net will construct an empty object and fill it with properties with matching names.
+        /// </summary>
+        public PackageUploadRequestBody()
+        {
+
+        }
+
         public PackageUploadRequestBody(string name, string version, string description,
             IEnumerable<string> keywords, string license,
             string contents, string engine, string engineVersion,
