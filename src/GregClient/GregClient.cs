@@ -21,6 +21,10 @@ namespace Greg
 
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
+
+#if LT_NET47
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
+#else
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
@@ -29,6 +33,7 @@ namespace Greg
             {
                 ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             }
+#endif
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
         }
