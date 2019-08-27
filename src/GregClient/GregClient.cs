@@ -118,15 +118,15 @@ namespace Greg
                 {
                     var logRespObj = new
                     {
-                        timeStamp = ts,
+                        requestResource = restResp.Request.Resource,
                         respContent = restResp.Content,
                         statusCode = restResp.StatusCode,
                         statusDesc = restResp.StatusDescription,
                         headers = restResp.Headers,
                         responseStatus = restResp.ResponseStatus,
                         errMsg = restResp.ErrorMessage,
-                        errException = restResp.ErrorException
-
+                        errException = restResp.ErrorException,
+                        logtimeStamp = ts
                     };
                     outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
                 }
