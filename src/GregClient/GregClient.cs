@@ -3,6 +3,7 @@ using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
 using System;
+using System.Configuration;
 using System.IO;
 
 namespace Greg
@@ -97,35 +98,40 @@ namespace Greg
         {
             try
             {
-                var enableDebugLogs = Environment.GetEnvironmentVariable("DEBUG_LOGS_DYNAMO_GREG");
-                if (restResp == null || !Convert.ToBoolean(enableDebugLogs))
+                var enableDebugLogsKey = "EnableDebugLogs";
+
+                var path = GetType().Assembly.Location;
+                var config = ConfigurationManager.OpenExeConfiguration(path);
+                var enableDebugLogs = config.AppSettings.Settings[enableDebugLogsKey];
+                if (restResp == null || !Convert.ToBoolean(enableDebugLogs.Value))
                 {
                     return;
                 }
 
-                var logDirPath = Path.Combine(Path.GetTempPath(), "GregLogs");
+                var logDirPath = Path.Combine(Path.GetTempPath(), "DynamoClientLogs");
                 if (!Directory.Exists(logDirPath))
                 {
                     Directory.CreateDirectory(logDirPath);
                 }
                 string ts = DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss");
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, ts + ".txt")))
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, "DynamoClientLog " + ts + ".txt")))
                 {
-                    var logObj = new
+                    var logRespObj = new
                     {
                         timeStamp = ts,
                         respContent = restResp.Content,
                         statusCode = restResp.StatusCode,
                         statusDesc = restResp.StatusDescription,
+                        headers = restResp.Headers,
                         responseStatus = restResp.ResponseStatus,
                         errMsg = restResp.ErrorMessage,
                         errException = restResp.ErrorException
 
                     };
-                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logObj));
+                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
                 }
             }
-            finally
+            catch
             {
             }
         }
