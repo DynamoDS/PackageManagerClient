@@ -5,13 +5,76 @@ using RestSharp;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
 
 namespace Greg
 {
+    public static class DebugLogger 
+    {
+        private static readonly bool enabled = false;
+
+        // Static constructor is called at most one time, before any
+        // instance constructor is invoked or member is accessed.
+        static DebugLogger()
+        {
+            try
+            {
+                var enableDebugLogsKey = "EnableDebugLogs";
+
+                var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                var enableDebugLogsSetting = config.AppSettings.Settings[enableDebugLogsKey];
+                if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting.Value))
+                {
+                    enabled = true;
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        public static void LogResponse(IRestResponse restResp)
+        {
+            try
+            {
+                if (!enabled)
+                {
+                    return;
+                }
+
+                var logDirPath = Path.Combine(Path.GetTempPath(), "DynamoClientLogs");
+                if (!Directory.Exists(logDirPath))
+                {
+                    Directory.CreateDirectory(logDirPath);
+                }
+                string ts = DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss");
+                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, "DynamoClientLog " + ts + ".txt")))
+                {
+                    var logRespObj = new
+                    {
+                        requestResource = restResp.Request.Resource,
+                        respContent = restResp.Content,
+                        statusCode = restResp.StatusCode,
+                        statusDesc = restResp.StatusDescription,
+                        headers = restResp.Headers,
+                        responseStatus = restResp.ResponseStatus,
+                        errMsg = restResp.ErrorMessage,
+                        errException = restResp.ErrorException,
+                        logtimeStamp = ts
+                    };
+                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
+                }
+            }
+            catch
+            {
+            }
+        }
+    }
+
     public class GregClient : IGregClient
     {
         private readonly RestClient _client;
-
+   
         public string BaseUrl { get { return _client.BaseUrl.ToString(); } }
 
         public readonly IAuthProvider _authProvider;
@@ -61,7 +124,7 @@ namespace Greg
                 req.Resource = reqToSign.Resource;
             }
             var restResp = _client.Execute(req);
-            LogResponse(restResp);
+            DebugLogger.LogResponse(restResp);
             return restResp;
         }
 
@@ -92,48 +155,6 @@ namespace Greg
             }
 
             return new ResponseWithContent<T>(response).DeserializeWithContent();
-        }
-
-        private void LogResponse(IRestResponse restResp)
-        {
-            try
-            {
-                var enableDebugLogsKey = "EnableDebugLogs";
-
-                var path = GetType().Assembly.Location;
-                var config = ConfigurationManager.OpenExeConfiguration(path);
-                var enableDebugLogs = config.AppSettings.Settings[enableDebugLogsKey];
-                if (restResp == null || !Convert.ToBoolean(enableDebugLogs.Value))
-                {
-                    return;
-                }
-
-                var logDirPath = Path.Combine(Path.GetTempPath(), "DynamoClientLogs");
-                if (!Directory.Exists(logDirPath))
-                {
-                    Directory.CreateDirectory(logDirPath);
-                }
-                string ts = DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss");
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, "DynamoClientLog " + ts + ".txt")))
-                {
-                    var logRespObj = new
-                    {
-                        requestResource = restResp.Request.Resource,
-                        respContent = restResp.Content,
-                        statusCode = restResp.StatusCode,
-                        statusDesc = restResp.StatusDescription,
-                        headers = restResp.Headers,
-                        responseStatus = restResp.ResponseStatus,
-                        errMsg = restResp.ErrorMessage,
-                        errException = restResp.ErrorException,
-                        logtimeStamp = ts
-                    };
-                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
-                }
-            }
-            catch
-            {
-            }
         }
     }
 }
