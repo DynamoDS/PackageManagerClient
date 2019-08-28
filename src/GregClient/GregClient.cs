@@ -36,13 +36,13 @@ namespace Greg
 
         public static void LogResponse(IRestResponse restResp)
         {
+            if (!enabled)
+            {
+                return;
+            }
+
             try
             {
-                if (!enabled)
-                {
-                    return;
-                }
-
                 var logDirPath = Path.Combine(Path.GetTempPath(), "DynamoClientLogs");
                 if (!Directory.Exists(logDirPath))
                 {
