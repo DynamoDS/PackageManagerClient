@@ -21,7 +21,8 @@ namespace Greg
             {
                 var enableDebugLogsKey = "EnableDebugLogs";
 
-                var config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+                var dllPath = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
+                var config = ConfigurationManager.OpenExeConfiguration(dllPath);
                 var enableDebugLogsSetting = config.AppSettings.Settings[enableDebugLogsKey];
                 if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting.Value))
                 {
