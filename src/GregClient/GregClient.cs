@@ -57,7 +57,9 @@ namespace Greg
                 AuthProvider.SignRequest(ref reqToSign, _client);
                 req.Resource = reqToSign.Resource;
             }
-            return _client.Execute(req);
+            var restResp = _client.Execute(req);
+            Utility.DebugLogger.LogResponse(restResp);
+            return restResp;
         }
 
         public Response Execute(Request m)
