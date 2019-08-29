@@ -2,76 +2,9 @@
 using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
-using System;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
 
 namespace Greg
 {
-    public static class DebugLogger 
-    {
-        private static readonly bool enabled = false;
-
-        // Static constructor is called at most one time, before any
-        // instance constructor is invoked or member is accessed.
-        static DebugLogger()
-        {
-            try
-            {
-                var enableDebugLogsKey = "EnableDebugLogs";
-
-                var dllPath = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
-                var config = ConfigurationManager.OpenExeConfiguration(dllPath);
-                var enableDebugLogsSetting = config.AppSettings.Settings[enableDebugLogsKey];
-                if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting.Value))
-                {
-                    enabled = true;
-                }
-            }
-            catch
-            {
-            }
-        }
-
-        public static void LogResponse(IRestResponse restResp)
-        {
-            if (!enabled)
-            {
-                return;
-            }
-
-            try
-            {
-                var logDirPath = Path.Combine(Path.GetTempPath(), "DynamoClientLogs");
-                if (!Directory.Exists(logDirPath))
-                {
-                    Directory.CreateDirectory(logDirPath);
-                }
-                string ts = DateTime.Now.ToString("MM-dd-yyyy HH-mm-ss");
-                using (StreamWriter outputFile = new StreamWriter(Path.Combine(logDirPath, "DynamoClientLog " + ts + ".txt")))
-                {
-                    var logRespObj = new
-                    {
-                        requestResource = restResp.Request.Resource,
-                        respContent = restResp.Content,
-                        statusCode = restResp.StatusCode,
-                        statusDesc = restResp.StatusDescription,
-                        headers = restResp.Headers,
-                        responseStatus = restResp.ResponseStatus,
-                        errMsg = restResp.ErrorMessage,
-                        errException = restResp.ErrorException,
-                        logtimeStamp = ts
-                    };
-                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
-                }
-            }
-            catch
-            {
-            }
-        }
-    }
-
     public class GregClient : IGregClient
     {
         private readonly RestClient _client;
@@ -125,7 +58,7 @@ namespace Greg
                 req.Resource = reqToSign.Resource;
             }
             var restResp = _client.Execute(req);
-            DebugLogger.LogResponse(restResp);
+            Utility.DebugLogger.LogResponse(restResp);
             return restResp;
         }
 
