@@ -9,6 +9,24 @@ using System.Text;
 
 namespace Greg.Utility
 {
+    public static class AppSettingMgr
+    {
+        public static KeyValueConfigurationElement GetItem(String key)
+        {
+            try
+            {
+                var dllPath = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
+                var config = ConfigurationManager.OpenExeConfiguration(dllPath);
+                var enableDebugLogsSetting = config.AppSettings.Settings[key];
+                return enableDebugLogsSetting;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+    }
+
     public static class DebugLogger
     {
         private static readonly bool enabled = false;
@@ -19,11 +37,7 @@ namespace Greg.Utility
         {
             try
             {
-                var enableDebugLogsKey = "EnableDebugLogs";
-
-                var dllPath = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
-                var config = ConfigurationManager.OpenExeConfiguration(dllPath);
-                var enableDebugLogsSetting = config.AppSettings.Settings[enableDebugLogsKey];
+                var enableDebugLogsSetting = AppSettingMgr.GetItem("EnableDebugLogs");
                 if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting.Value))
                 {
                     enabled = true;

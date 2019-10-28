@@ -43,6 +43,8 @@ namespace Greg.Requests
 
         internal override void Build(ref RestRequest request)
         {
+            InitReqParams(ref request);
+
             // zip up and get hash for zip
             if (Files != null)
                 ZipFile = FileUtilities.Zip(Files);
