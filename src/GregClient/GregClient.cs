@@ -2,6 +2,7 @@
 using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
+using System;
 
 namespace Greg
 {
@@ -57,6 +58,27 @@ namespace Greg
                 AuthProvider.SignRequest(ref reqToSign, _client);
                 req.Resource = reqToSign.Resource;
             }
+
+            try
+            {
+                // Allow users to override the default Timeout setting in RestRequests
+                var timeoutSetting = Utility.AppSettingMgr.GetItem("Timeout");
+                if (timeoutSetting != null)
+                {
+                    // Timeout App Settings is in seconds.
+                    // RestRequest.Timeout is in milliseconds.
+                    var userVal = Convert.ToInt32(timeoutSetting.Value);
+                    // Sanity check.
+                    if (userVal >= 0 && userVal < 86400/*24 hours*/)
+                    {
+                        req.Timeout = Convert.ToInt32(timeoutSetting.Value) * 1000;// get milliseconds
+                    }
+                }
+            }
+            catch
+            {
+            }
+
             var restResp = _client.Execute(req);
             Utility.DebugLogger.LogResponse(restResp);
             return restResp;
