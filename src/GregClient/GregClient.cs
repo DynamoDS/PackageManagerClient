@@ -67,7 +67,12 @@ namespace Greg
                 {
                     // Timeout App Settings is in seconds.
                     // RestRequest.Timeout is in milliseconds.
-                    req.Timeout = Convert.ToInt32(timeoutSetting.Value) * 1000;// get milliseconds
+                    var userVal = Convert.ToInt32(timeoutSetting.Value);
+                    // Sanity check.
+                    if (userVal >= 0 && userVal < 86400/*24 hours*/)
+                    {
+                        req.Timeout = Convert.ToInt32(timeoutSetting.Value) * 1000;// get milliseconds
+                    }
                 }
             }
             catch
