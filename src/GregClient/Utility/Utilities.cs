@@ -20,8 +20,10 @@ namespace Greg.Utility
                 var enableDebugLogsSetting = config.AppSettings.Settings[key];
                 return enableDebugLogsSetting;
             }
-            catch
+            catch(Exception ex)
             {
+                Console.WriteLine("The referenced configuration item, {0}, could not be retrieved", key);
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
