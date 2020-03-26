@@ -80,6 +80,9 @@
     <Compile Include="..\GregClient\Requests\Downvote.cs">
       <Link>Requests\Downvote.cs</Link>
     </Compile>
+    <Compile Include="..\GregClient\Requests\GetMaintainers.cs">
+      <Link>Requests\GetMaintainers.cs</Link>
+    </Compile>
     <Compile Include="..\GregClient\Requests\HeaderCollectionDownload.cs">
       <Link>Requests\HeaderCollectionDownload.cs</Link>
     </Compile>
