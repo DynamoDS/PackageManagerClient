@@ -2,6 +2,9 @@
 
 namespace Greg.Requests
 {
+    /// <summary>
+    /// Request for getting a specific package version.
+    /// </summary>
     public class HeaderVersionDownload : PackageReferenceRequest
     {
         private string _versionId;
