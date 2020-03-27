@@ -2,6 +2,9 @@
 
 namespace Greg.Requests
 {
+    /// <summary>
+    /// Request for getting maintainers of a specific package.
+    /// </summary>
     public class GetMaintainers : PackageReferenceRequest
     {
 
