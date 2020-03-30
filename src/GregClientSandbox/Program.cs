@@ -7,6 +7,7 @@ using Greg.Responses;
 using Greg.Utility;
 using Greg.AuthProviders;
 using RestSharp;
+using RestSharp.Serializers;
 
 namespace GregClientSandbox
 {
@@ -159,12 +160,21 @@ namespace GregClientSandbox
             var hostsResponse = pmc.ExecuteAndDeserializeWithContent<List<String>>(hosts);
             Console.WriteLine(hostsResponse.content);
         }
+
+        private static void GetPackageVersionHeaderTest()
+        {
+            var req = new HeaderVersionDownload("dynamo", "get package version test", "0.1.1");
+            var res = pmc.ExecuteAndDeserializeWithContent<PackageVersion>(req);
+            var serializer = new JsonSerializer();
+            Console.WriteLine(serializer.Serialize(res.content));
+        }
         
         static void Main(string[] args)
         {
             //ListHostsTest();
             //DownloadPackageByIdTest();
             //DownloadAllPackagesTest();
+            //GetPackageVersionHeaderTest();
             GetWhitelistTest();
             Console.Read();
         }

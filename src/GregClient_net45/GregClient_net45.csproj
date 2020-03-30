@@ -59,6 +59,9 @@
     <Compile Include="..\GregClient\AuthProviders\LoginState.cs">
       <Link>AuthProviders\LoginState.cs</Link>
     </Compile>
+    <Compile Include="..\GregClient\Converters\DependencyConverter.cs">
+      <Link>Converters\DependencyConverter.cs</Link>
+    </Compile>
     <Compile Include="..\GregClient\GregClient.cs">
       <Link>GregClient.cs</Link>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="..\GregClient\Requests\HeaderDownload.cs">
       <Link>Requests\HeaderDownload.cs</Link>
+    </Compile>
+    <Compile Include="..\GregClient\Requests\HeaderVersionDownload.cs">
+      <Link>Requests\HeaderVersionDownload.cs</Link>
     </Compile>
     <Compile Include="..\GregClient\Requests\JSONRequest.cs">
       <Link>Requests\JSONRequest.cs</Link>
