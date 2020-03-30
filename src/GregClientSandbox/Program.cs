@@ -107,6 +107,13 @@ namespace GregClientSandbox
             Console.WriteLine(pkgResponse.content);
         }
 
+        private static void DownloadDynamoPackageMaintainersByEngineAndNameTest()
+        {
+            var nv = new GetMaintainers("dynamo", "Third .NET Package");
+            var pkgResponse = pmc.ExecuteAndDeserializeWithContent<PackageHeader>(nv);
+            Console.WriteLine(pkgResponse.content);
+        }
+
         private static void SearchWithQueryTest()
         {
             var nv = new Search("*ython");
