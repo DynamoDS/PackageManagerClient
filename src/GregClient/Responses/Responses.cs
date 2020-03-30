@@ -2,15 +2,43 @@
 using System.Collections.Generic;
 using RestSharp;
 using Newtonsoft.Json;
+using Greg.Converters;
 
 namespace Greg.Responses
 {
 
     public class Response
     {
+        private static JsonSerializerSettings settings;
+
         internal Response(IRestResponse response)
         {
             InternalRestReponse = response;
+        }
+
+        public static JsonSerializerSettings Settings
+        {
+            get
+            {
+                if (settings == null)
+                {
+                    settings = new JsonSerializerSettings
+                    {
+                        Error = (sender, args) =>
+                        {
+                            if (System.Diagnostics.Debugger.IsAttached)
+                            {
+                                System.Diagnostics.Debugger.Break();
+                            }
+                        },
+                        Converters = new List<JsonConverter>()
+                        {
+                            new DependencyConverter()
+                        }
+                    };
+                }
+                return settings;
+            }
         }
 
         public ResponseBody Deserialize()
@@ -18,7 +46,7 @@ namespace Greg.Responses
             try
             {
                 //return jsonDeserializer.Deserialize<ResponseBody>(InternalRestReponse);
-                return JsonConvert.DeserializeObject<ResponseBody>(InternalRestReponse.Content);
+                return JsonConvert.DeserializeObject<ResponseBody>(InternalRestReponse.Content, Settings);
             }
             catch
             {
@@ -38,17 +66,7 @@ namespace Greg.Responses
 
         public ResponseWithContentBody<T> DeserializeWithContent()
         {
-            var settings = new JsonSerializerSettings
-            {
-                Error = (sender, args) =>
-                {
-                    if (System.Diagnostics.Debugger.IsAttached)
-                    {
-                        System.Diagnostics.Debugger.Break();
-                    }
-                }
-            };
-            return JsonConvert.DeserializeObject<ResponseWithContentBody<T>>(InternalRestReponse.Content, settings);
+            return JsonConvert.DeserializeObject<ResponseWithContentBody<T>>(InternalRestReponse.Content, Settings);
             //return jsonDeserializer.Deserialize<ResponseWithContentBody<T>>(InternalRestReponse);
         }
     }
