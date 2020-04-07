@@ -79,11 +79,19 @@ namespace Greg.Utility
             return hashValue;
         }
 
+        /// <summary>
+        /// Gets the full path of the user temporary folder
+        /// </summary>
+        /// <returns>String with the full path of the user temporary folder</returns>
         public static string GetTempFolder()
         {
             return Path.GetDirectoryName(Path.GetTempPath());
         }
 
+        /// <summary>
+        /// Generates a full path under the temporary folder
+        /// </summary>
+        /// <returns>String with the full path</returns>
         public static string GetTempZipPath()
         {
             var tempFolder = GetTempFolder();
@@ -98,6 +106,10 @@ namespace Greg.Utility
             return tempZipPath;
         }
 
+        /// <summary>
+        /// Generates a full output path under the temporary folder
+        /// </summary>
+        /// <returns>String with the full path</returns>
         public static string GetTempZipOutputPath()
         {
             var tempFolder = GetTempFolder();
