@@ -87,13 +87,29 @@ namespace Greg.Utility
         public static string GetTempZipPath()
         {
             var tempFolder = GetTempFolder();
-            return Path.Combine(tempFolder, "gregPkg" + DateTime.Now.Millisecond.ToString() + ".zip");
+            string tempZipPath = Path.Combine(tempFolder, String.Format("gregPkg{0}.zip", DateTime.Now.Millisecond.ToString());
+            int range = 1;
+
+            while (File.Exists(tempZipPath))
+            {
+                tempZipPath = Path.Combine(tempFolder, String.Format("gregPkg{0}{1}.zip", DateTime.Now.Millisecond.ToString(), range++));
+            }
+
+            return tempZipPath;
         }
 
         public static string GetTempZipOutputPath()
         {
             var tempFolder = GetTempFolder();
-            return Path.Combine(tempFolder, "gregPkgOutput" + DateTime.Now.Millisecond.ToString());
+            string tempZipOutputPath = Path.Combine(tempFolder, String.Format("gregPkgOutput{0}.zip", DateTime.Now.Millisecond.ToString());
+            int range = 1;
+
+            while (File.Exists(tempZipOutputPath))
+            {
+                tempZipOutputPath = Path.Combine(tempFolder, String.Format("gregPkgOutput{0}{1}.zip", DateTime.Now.Millisecond.ToString(), range++));
+            }
+
+            return tempZipOutputPath;
         }
 
         /// <summary>
