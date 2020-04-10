@@ -79,21 +79,48 @@ namespace Greg.Utility
             return hashValue;
         }
 
+        /// <summary>
+        /// Gets the full path of the user temporary folder
+        /// </summary>
+        /// <returns>String with the full path of the user temporary folder</returns>
         public static string GetTempFolder()
         {
             return Path.GetDirectoryName(Path.GetTempPath());
         }
 
+        /// <summary>
+        /// Generates a full path under the temporary folder with the prefix 'gregPkg'
+        /// </summary>
+        /// <returns>String with the full path</returns>
         public static string GetTempZipPath()
         {
-            var tempFolder = GetTempFolder();
-            return Path.Combine(tempFolder, "gregPkg" + DateTime.Now.Millisecond.ToString() + ".zip");
+            string tempZipPath = GetZipPath("gregPkg"); 
+
+            return tempZipPath;
         }
 
+        /// <summary>
+        /// Generates a full output path under the temporary folder with the prefix 'gregPkgOutput'
+        /// </summary>
+        /// <returns>String with the full path</returns>
         public static string GetTempZipOutputPath()
         {
+            string tempZipOutputPath = GetZipPath("gregPkgOutput");
+
+            return tempZipOutputPath;
+        }
+
+        /// <summary>
+        /// Generates a full path under the temporary folder of a zip file with a format like this prefix[GUID].zip
+        /// </summary>
+        /// <param name="prefixFileName">Prefix of the file</param>
+        /// <returns>String with the full path</returns>
+        private static string GetZipPath(string prefixFileName)
+        {
             var tempFolder = GetTempFolder();
-            return Path.Combine(tempFolder, "gregPkgOutput" + DateTime.Now.Millisecond.ToString());
+            string zipPath = Path.Combine(tempFolder, String.Format("{0}{1}.zip", prefixFileName, Guid.NewGuid().ToString()));
+            
+            return zipPath;
         }
 
         /// <summary>
