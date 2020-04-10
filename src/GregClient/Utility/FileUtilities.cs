@@ -119,12 +119,7 @@ namespace Greg.Utility
         {
             var tempFolder = GetTempFolder();
             string zipPath = Path.Combine(tempFolder, String.Format("{0}{1}.zip", prefixFileName, Guid.NewGuid().ToString()));
-
-            while (File.Exists(zipPath))
-            {
-                zipPath = Path.Combine(tempFolder, String.Format("{0}{1}.zip", prefixFileName, Guid.NewGuid().ToString()));
-            }
-
+            
             return zipPath;
         }
 
