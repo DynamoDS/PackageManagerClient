@@ -1,3 +1,4 @@
+![PackageManagerClient-VS2019Build](https://github.com/DynamoDS/PackageManagerClient/workflows/PackageManagerClient-VS2019Build/badge.svg)
 # Dynamo Package Manager Client
 
 This repo is the package manager client for the Dynamo Package Manager.  Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.  
@@ -27,6 +28,7 @@ This repo is the package manager client for the Dynamo Package Manager.  Package
 #### Nuget
 The Package Manager Client is available from NuGet [here](https://www.nuget.org/packages/Greg/). 
 ##### Building the Package
+- Make sure you have Nuget version 4.9.0 or later.
 - The Package Manager Client NuGet package is built automatically when the solution is built. The resulting `.nupkg`, located in `<solution>\src\GregClient\NuGet\` can then be uploaded to nuget.org.
 - The NuGet package is built with an `Install1.ps` script which sets `Copy Local=False` for the package's assemblies. If this is not the desired behavior, you will have to override the `Copy Local` setting in your Visual Studio project.
 
