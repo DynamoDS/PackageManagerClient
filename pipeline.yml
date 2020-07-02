@@ -1,0 +1,52 @@
+version: 0.1.1
+env:
+  - JENKINS_NODE_WIN: "Dynamo_Win_003"
+  - SLACK_QUANTUM_BUILD_CHANNEL : "#dynamo-jenkinsbuild"
+  - SLACK_QUANTUM_BUILD_CREDENTIAL_ID : "slack-notify-token"
+  - DOCKER_WORKSPACE : "c:\\Greg"
+  - COMMON_TOOLS_DIR : "cicdscripts\\tools"
+  - NUGETTOOL : "Nuget\\nuget.exe"
+  - DOCKER_CONTAINER : "buildContainer"
+  
+check_changelog_updated_on_pr: false
+pipeline_os: "Windows"
+force_slack_notification : true
+language: csharp
+
+build:
+  -
+    setup_proj_deps : true
+    scripts:
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\SetupHost.ps1"
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\BuildSolution.ps1"
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostBuild.ps1"
+
+soc2:
+  white_source:    
+    skip: false
+    fail_on_audit_failure: true
+    team: Dynamo
+    project_name: "Dynamo Package Manager .Net Client"
+    user_emails:
+      - michael.kirschner@autodesk.com
+      - aparajit.pratap@autodesk.com
+      - alfredo.pozo@autodesk.com
+      - siddhartha.mangarole@autodesk.com
+      - aaron.tang@autodesk.com
+      - greg.marr@autodesk.com
+      - ashish.aggarwal@autodesk.com
+      - ashish.ganta@autodesk.com
+      - martin.misol@autodesk.com
+      - roberto.tellez@autodesk.com
+      - astul.betizagasti@autodesk.com
+      - bruno.yorda@autodesk.com
+    third_party_lib_paths:
+      - "third_party"
+      - "src/packages"
+      - "%COMMON_TOOLS_DIR%"
+
+deployment:
+    -
+        type: customized
+        scripts:
+            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\CreateNugetPackage.ps1"
