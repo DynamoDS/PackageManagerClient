@@ -11,7 +11,11 @@ $dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPat
 
 try {
 
-    & "$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" pack -basePath $assemblyPath -version $dllVersion -OutputDirectory $nuspecPath $nuspecPath\GregClient.nuspec
+	& "$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" pack -basePath $assemblyPath -version $dllVersion -OutputDirectory $nuspecPath $nuspecPath\GregClient.nuspec
+
+	$nupkgFile = Get-ChildItem $nuspecPath\*.nupkg -Depth 1
+
+	& "$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" push $nupkgFile.FullName -ApiKey $env:APIKEY -Source nuget.org
 }
 catch {	
 	Write-Host $error[0]

@@ -13,6 +13,13 @@ pipeline_os: "Windows"
 force_slack_notification : true
 language: csharp
 
+jenkins_creds:
+    -
+      type: secretText
+      credentialsId: dynamovisualprogramming_nuget_api_key
+      secretText: APIKEY
+
+
 build:
   -
     setup_proj_deps : true
@@ -49,4 +56,4 @@ deployment:
     -
         type: customized
         scripts:
-            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\CreateNugetPackage.ps1"
+            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ProcessNugetPackage.ps1"
