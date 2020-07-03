@@ -23,6 +23,9 @@ try {
     # Creating the container
     docker run -m 8GB -d -t --mount type=bind,source=$env:WORKSPACE,target=$env:DOCKER_WORKSPACE --name $env:DOCKER_CONTAINER $dockerImage
 
+    # Restore Nuget packages Greg solution
+    docker exec $env:DOCKER_CONTAINER $env:DOCKER_WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL restore $env:DOCKER_WORKSPACE\src\GregClient.sln
+    
     # Build Greg solution
     docker exec $env:DOCKER_CONTAINER msbuild -restore $env:DOCKER_WORKSPACE\src\GregClient.sln
 
