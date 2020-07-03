@@ -27,6 +27,6 @@
   <files>
     <file src="net45\Greg.dll" target="lib\net45" />
     <file src="Greg.dll" target="lib\net48" />
-    <file src="..\..\src\GregClient\Nuget\images\logo_square_32x32.png" target="content\images\logo.png" />
+    <file src="..\..\nuspec\images\logo_square_32x32.png" target="content\images\logo.png" />
   </files>
 </package>
