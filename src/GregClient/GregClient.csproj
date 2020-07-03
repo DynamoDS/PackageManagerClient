@@ -98,7 +98,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir) -nugetPath $(SolutionDir)packages\Nuget.CommandLine*\tools\Nuget.exe</PostBuildEvent>
-  </PropertyGroup>
 </Project>
