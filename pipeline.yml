@@ -34,19 +34,7 @@ soc2:
     fail_on_audit_failure: true
     team: Dynamo
     project_name: "Dynamo Package Manager .Net Client"
-    user_emails:
-      - michael.kirschner@autodesk.com
-      - aparajit.pratap@autodesk.com
-      - alfredo.pozo@autodesk.com
-      - siddhartha.mangarole@autodesk.com
-      - aaron.tang@autodesk.com
-      - greg.marr@autodesk.com
-      - ashish.aggarwal@autodesk.com
-      - ashish.ganta@autodesk.com
-      - martin.misol@autodesk.com
-      - roberto.tellez@autodesk.com
-      - astul.betizagasti@autodesk.com
-      - bruno.yorda@autodesk.com
+    hidden_email_list: 	dynamo_ws_access
     third_party_lib_paths:
       - "third_party"
       - "src/packages"
