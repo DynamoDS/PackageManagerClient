@@ -23,12 +23,34 @@ This repo is the package manager client for the Dynamo Package Manager.  Package
 
 #### Steps to build The Package Manager Client solution:
 
-1. Build `The PackageManagerClient\src\GregClient.sln` solution
+- From Visual Studio IDE:
+
+    Build `The PackageManagerClient\src\GregClient.sln` solution
+
+- From command line:
+
+    ```bat
+    nuget restore src\GregClient.sln
+    msbuild src\GregClient.sln
+    ```
 
 #### Nuget
 The Package Manager Client is available from NuGet [here](https://www.nuget.org/packages/Greg/). 
-##### Building the Package
+
+#### Manual Build of the NugetPackage
 - Make sure you have Nuget version 4.9.0 or later.
+>**Important Note:** Please avoid to publish a locally built package
+
+##### Steps:
+
+1. Build the solution
+2. On the repository directory, execute the following PowerShell script with the following parameters
+   ```bat
+   pwsh -ExecutionPolicy ByPass -File ".\nuspec\ManualBuildPackage.ps1 [REPOSITORY_PATH] [NUGET_EXE_PATH] [OUTPUT_PATH]"
+   ```
+   - **REPOSITORY_PATH** Absolute path of the repository (e.g. c:\Workspace)
+   - **NUGET_EXE_PATH** Full path of the Nuget CLI executable (e.g. C:\Tools\nuget.exe)
+   - **OUTPUT_PATH** Output path of the nuget package generated (e.g. c:\Workspace\output)
 
 ___
 
