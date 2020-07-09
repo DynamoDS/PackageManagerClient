@@ -25,8 +25,7 @@ build:
     setup_proj_deps : true
     scripts:
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\SetupHost.ps1"
-      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\BuildSolution.ps1"
-      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostBuild.ps1"
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\BuildSolution.ps1"      
 
 soc2:
   white_source:    
@@ -44,4 +43,5 @@ deployment:
     -
         type: customized
         scripts:
-            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ProcessNugetPackage.ps1"
+            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ExecuteContainerDeploy.ps1"
+            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostDeploy.ps1"

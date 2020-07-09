@@ -4,7 +4,7 @@ Purpose: To build Greg inside a windows docker container
 #>
 $ErrorActionPreference = "Stop"
 
-$errorMessage = "The build was not successful check for errors"
+$errorMessage = "The build was not successful, check for errors"
 $dockerImage = "artifactory.dev.adskengineer.net/docker-local-v2/dynamo/desktop/buildtools/2019:1.0.2"
 
 #Clear Nuget Cache	
@@ -35,7 +35,7 @@ try {
 }
 catch {
     if($error[0].Exception.Message -eq $errorMessage){
-        Invoke-Expression -Command "$env:WORKSPACE\cicdscripts\PostBuild.ps1"
+        Invoke-Expression -Command "$env:WORKSPACE\cicdscripts\PostDeploy.ps1"
     }
     else {
         Invoke-Expression -Command "$env:WORKSPACE\cicdscripts\RestartDockerDesktop.ps1"

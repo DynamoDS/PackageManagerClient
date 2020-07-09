@@ -1,21 +1,34 @@
 ﻿<#
 Date: 07/02/2020
-Purpose: To create the Greg nuget package
+Purpose: To create and publish the Greg nuget package
 #>
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory)]
+    [string]
+    $Workspace,
+    [Parameter(Mandatory)]
+    [string]
+	$NugetPath,
+	[Parameter(Mandatory)]
+    [string]
+    $ApiKey
+)
+
 $ErrorActionPreference = "Stop"
 
-$assemblyPath = "$env:WORKSPACE\bin\Debug"
-$nuspecPath = "$env:WORKSPACE\nuspec"
+$assemblyPath = "$Workspace\bin\Debug"
+$nuspecPath = "$Workspace\nuspec"
 
 $dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\Greg.dll").FileVersion
 
 try {
 
-	& "$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" pack -basePath $assemblyPath -version $dllVersion -OutputDirectory $nuspecPath $nuspecPath\GregClient.nuspec
+	& "$NugetPath" pack -basePath $assemblyPath -version $dllVersion -OutputDirectory $nuspecPath $nuspecPath\GregClient.nuspec
 
 	$nupkgFile = Get-ChildItem $nuspecPath\*.nupkg -Depth 1
 
-	& "$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" push $nupkgFile.FullName -ApiKey $env:APIKEY -Source nuget.org
+	& "$NugetPath" push $nupkgFile.FullName -ApiKey $ApiKey -Source nuget.org
 }
 catch {	
 	Write-Host $error[0]
