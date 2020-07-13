@@ -32,7 +32,7 @@ soc2:
     skip: false
     fail_on_audit_failure: true
     team: Dynamo
-    project_name: "Dynamo Package Manager .Net Client"
+    project_name: "DynamoPackageManagerNetClient"
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
       - "third_party"
