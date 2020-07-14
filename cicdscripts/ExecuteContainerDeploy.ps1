@@ -5,7 +5,7 @@ Purpose: To build Greg inside a windows docker container
 $ErrorActionPreference = "Stop"
 
 try {
-    docker exec $env:DOCKER_CONTAINER pwsh -command "$env:DOCKER_WORKSPACE\cicdscripts\ProcessNugetPackage.ps1" -Workspace $env:DOCKER_WORKSPACE -NugetPath $env:DOCKER_WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL -ApiKey $env:APIKEY
+    docker exec $env:DOCKER_CONTAINER powershell -command "$env:DOCKER_WORKSPACE\cicdscripts\ProcessNugetPackage.ps1" -Workspace $env:DOCKER_WORKSPACE -NugetPath $env:DOCKER_WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL -ApiKey $env:APIKEY
 
     if($LASTEXITCODE -ne 0) {
 		throw "Package/Publish of the nuget package failed"
