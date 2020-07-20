@@ -140,9 +140,6 @@
     <Compile Include="..\GregClient\Requests\ValidateAuth.cs">
       <Link>Requests\ValidateAuth.cs</Link>
     </Compile>
-    <Compile Include="..\GregClient\Requests\WhitelistHeaderCollectionDownload.cs">
-      <Link>Requests\WhitelistHeaderCollectionDownload.cs</Link>
-    </Compile>
     <Compile Include="..\GregClient\Responses\Responses.cs">
       <Link>Responses\Responses.cs</Link>
     </Compile>
@@ -154,9 +151,6 @@
     </Compile>
     <Compile Include="..\GregClient\Utility\Utilities.cs">
       <Link>Utility\Utilities.cs</Link>
-    </Compile>
-    <Compile Include="..\GregClient\Whitelist.cs">
-      <Link>Whitelist.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
