@@ -70,7 +70,6 @@
     <Compile Include="Requests\TermsOfUse.cs" />
     <Compile Include="Requests\Undeprecate.cs" />
     <Compile Include="Requests\Upvote.cs" />
-    <Compile Include="Requests\WhitelistHeaderCollectionDownload.cs" />
     <Compile Include="Utility\FileUtilities.cs" />
     <Compile Include="Requests\HeaderCollectionDownload.cs" />
     <Compile Include="Requests\HeaderDownload.cs" />
@@ -84,7 +83,6 @@
     <Compile Include="Responses\Responses.cs" />
     <Compile Include="Utility\PackageUtilities.cs" />
     <Compile Include="Utility\Utilities.cs" />
-    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
