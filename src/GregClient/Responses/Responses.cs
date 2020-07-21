@@ -192,5 +192,7 @@ namespace Greg.Responses
 
         public List<string> keywords { get; set; }
 
+        public bool white_list { get; set; }
+
     }
 }

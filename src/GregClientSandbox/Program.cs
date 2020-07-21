@@ -128,6 +128,32 @@ namespace GregClientSandbox
             Console.WriteLine(pkgResponse.message);
         }
 
+        private static void GetWhitelistTest()
+        {
+            var nv = WhitelistHeaderCollectionDownload.All();
+            var pkgResponse = pmc.ExecuteAndDeserializeWithContent<List<PackageHeader>>(nv);
+
+            if (pkgResponse == null)
+            {
+                Console.WriteLine("There was an error with the whitelist request.");
+                return;
+            }
+
+            if (pkgResponse.content == null)
+            {
+                Console.WriteLine("The package response content was null.");
+                return;
+            }
+
+            Console.WriteLine(pkgResponse.message);
+
+            var libs = pkgResponse.content.SelectMany(p => p.versions.Last().node_libraries).Distinct();
+            foreach (var lib in libs)
+            {
+                Console.WriteLine(lib);
+            }
+        }
+
         private static void ListHostsTest()
         {
             var hosts = new Hosts();
@@ -149,6 +175,7 @@ namespace GregClientSandbox
             //DownloadPackageByIdTest();
             //DownloadAllPackagesTest();
             //GetPackageVersionHeaderTest();
+            GetWhitelistTest();
             Console.Read();
         }
     }
