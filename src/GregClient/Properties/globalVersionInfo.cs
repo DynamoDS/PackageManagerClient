@@ -3,4 +3,4 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 
-[assembly: AssemblyVersion("2.*.*")]
+[assembly: AssemblyVersion("1.3.*")]
