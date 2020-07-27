@@ -45,3 +45,6 @@ deployment:
         scripts:
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ExecuteContainerDeploy.ps1"
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostDeploy.ps1"
+
+schedule:
+  cron_schedule: "once_a_month"
