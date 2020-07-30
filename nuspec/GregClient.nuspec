@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Greg</id>
+    <version>1.0.0</version>
+    <title>Dynamo Package Manager .Net Client</title>
+    <authors>Autodesk</authors>
+    <owners>Autodesk</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Dynamo Package Manager .Net Client.</description>
+    <releaseNotes>The Dynamo Package Manager .Net Client.</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <license type="expression">MIT</license>
+    <icon>content\images\logo.png</icon>
+    <tags>dynamo package greg</tags>
+    <dependencies>
+      <group>
+        <dependency id="RestSharp" version="105.2.3" />
+        <dependency id="Newtonsoft.Json" version="8.0.3" />
+      </group>
+      <group targetFramework=".NETFramework4.5">
+      </group>
+      <group targetFramework=".NETFramework4.8">
+      </group>
+    </dependencies>	
+  </metadata>
+  <files>
+    <file src="net45\Greg.dll" target="lib\net45" />
+    <file src="Greg.dll" target="lib\net48" />
+    <file src="..\..\nuspec\images\logo_square_32x32.png" target="content\images\logo.png" />
+  </files>
+</package>

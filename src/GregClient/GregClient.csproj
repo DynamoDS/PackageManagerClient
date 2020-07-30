@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -35,8 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
@@ -71,7 +70,6 @@
     <Compile Include="Requests\TermsOfUse.cs" />
     <Compile Include="Requests\Undeprecate.cs" />
     <Compile Include="Requests\Upvote.cs" />
-    <Compile Include="Requests\WhitelistHeaderCollectionDownload.cs" />
     <Compile Include="Utility\FileUtilities.cs" />
     <Compile Include="Requests\HeaderCollectionDownload.cs" />
     <Compile Include="Requests\HeaderDownload.cs" />
@@ -85,7 +83,6 @@
     <Compile Include="Responses\Responses.cs" />
     <Compile Include="Utility\PackageUtilities.cs" />
     <Compile Include="Utility\Utilities.cs" />
-    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -99,7 +96,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <PropertyGroup>
-    <PostBuildEvent>powershell.exe -ExecutionPolicy ByPass -File $(SolutionDir)GregClient\CreateNuGetPackage.ps1 -nuget $(SolutionDir)GregClient\Nuget -out $(OutDir)</PostBuildEvent>
-  </PropertyGroup>
 </Project>
