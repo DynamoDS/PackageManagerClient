@@ -113,6 +113,10 @@ namespace Greg.Responses
 
         public List<Dependency> direct_dependency_ids { get; set; }
 
+        public List<string> python_module_versions { get; set; }
+
+        public List<Dependency> python_module_names { get; set; }
+
         public IEnumerable<string> host_dependencies { get; set; }
 
         public string change_log { get; set; }
@@ -122,6 +126,10 @@ namespace Greg.Responses
         public bool contains_binaries { get; set; }
 
         public List<string> node_libraries { get; set; }
+
+        public List<string> python_modules { get; set; }
+
+        public List<string> python_modules_versions { get; set; }
     }
 
     public class User

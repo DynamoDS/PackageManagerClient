@@ -94,6 +94,7 @@ namespace Greg.Requests
         public string group { get; set; }
         public IEnumerable<string> keywords { get; set; }
         public IEnumerable<PackageDependency> dependencies { get; set; }
+        public IEnumerable<PackageDependency> python_modules { get; set; }
         public IEnumerable<string> host_dependencies { get; set; }
         public string contents { get; set; }
         public string engine_version { get; set; }
