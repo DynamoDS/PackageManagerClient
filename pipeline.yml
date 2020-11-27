@@ -13,6 +13,9 @@ pipeline_os: "Windows"
 force_slack_notification : true
 language: csharp
 
+schedule:
+  cron_schedule: "once_a_month"
+
 jenkins_creds:
     -
       type: secretText
@@ -32,7 +35,7 @@ soc2:
     skip: false
     fail_on_audit_failure: true
     team: Dynamo
-    project_name: "DynamoPackageManagerNetClient"
+    project_name: "PackageManagerClient"
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
       - "third_party"
@@ -45,6 +48,3 @@ deployment:
         scripts:
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ExecuteContainerDeploy.ps1"
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostDeploy.ps1"
-
-schedule:
-  cron_schedule: "once_a_month"
