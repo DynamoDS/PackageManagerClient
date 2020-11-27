@@ -5,7 +5,7 @@ Purpose: To build Greg inside a windows docker container
 $ErrorActionPreference = "Stop"
 
 $errorMessage = "The build was not successful, check for errors"
-$dockerImage = "artifactory.dev.adskengineer.net/docker-local-v2/dynamo/desktop/buildtools/2019:1.0.2"
+$dockerImage = "artifactory.dev.adskengineer.net/docker-local-v2/dynamo/desktop/buildtools/2019:1.0.4"
 
 #Clear Nuget Cache	
 &"$env:WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL" locals all -clear
