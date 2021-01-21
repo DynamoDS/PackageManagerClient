@@ -3,6 +3,7 @@ env:
   - JENKINS_NODE_WIN: "Dynamo_Win_003"
   - SLACK_QUANTUM_BUILD_CHANNEL : "#dynamo-jenkinsbuild"
   - SLACK_QUANTUM_BUILD_CREDENTIAL_ID : "slack-notify-token"
+  - MAIL_QUANTUM_BUILD_RECIPIENT : "dynamo.dev@autodesk.com"
   - DOCKER_WORKSPACE : "c:\\Greg"
   - COMMON_TOOLS_DIR : "cicdscripts\\tools"
   - NUGETTOOL : "Nuget\\nuget.exe"
