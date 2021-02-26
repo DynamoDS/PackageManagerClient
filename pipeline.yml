@@ -23,7 +23,6 @@ jenkins_creds:
       credentialsId: dynamovisualprogramming_nuget_api_key
       secretText: APIKEY
 
-
 build:
   -
     setup_proj_deps : true
@@ -32,11 +31,7 @@ build:
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\BuildSolution.ps1"      
 
 soc2:
-  white_source:    
-    skip: false
-    fail_on_audit_failure: true
-    team: Dynamo
-    project_name: "PackageManagerClient"
+  harmony:
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
       - "third_party"
