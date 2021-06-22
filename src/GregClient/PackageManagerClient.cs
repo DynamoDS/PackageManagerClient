@@ -1,15 +1,11 @@
-﻿using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.IO;
 using Greg.Requests;
 using Greg.Responses;
-using System.Net;
-using System.IO;
 using Greg.Utility;
 using Newtonsoft.Json;
+using RestSharp;
+using RestSharp.Authenticators;
 
 namespace Greg
 {
@@ -35,7 +31,10 @@ namespace Greg
         public PackageManagerClient(IAuthProvider provider, string packageManagerUrl, string fileStorageUrl)
         {
             _authProvider = provider;
-            _client = new RestClient(packageManagerUrl);
+            _client = new RestClient(packageManagerUrl)
+            {
+                Authenticator = new RestSharp.Authenticators.NtlmAuthenticator()
+            };
             _fileClient = new RestClient(fileStorageUrl);
         }
 
