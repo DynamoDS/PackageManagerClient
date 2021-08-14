@@ -8,6 +8,7 @@ env:
   - COMMON_TOOLS_DIR : "cicdscripts\\tools"
   - NUGETTOOL : "Nuget\\nuget.exe"
   - DOCKER_CONTAINER : "buildContainer"
+  - HARMONY_REPO : "DynamoDS/PackageManagerClient"
   
 check_changelog_updated_on_pr: false
 pipeline_os: "Windows"
@@ -33,6 +34,7 @@ build:
 soc2:
   harmony:
     hidden_email_list: dynamo_ws_access
+    repository: env.HARMONY_REPO
     third_party_lib_paths:
       - "third_party"
       - "src/packages"
