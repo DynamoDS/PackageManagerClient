@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Greg;
 using Greg.Requests;
 using Greg.Responses;
 using Greg.Utility;
 using Greg.AuthProviders;
 using RestSharp;
-using RestSharp.Serializers;
+using RestSharp.Serialization.Json;
 
 namespace GregClientSandbox
 {

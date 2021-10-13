@@ -1,8 +1,8 @@
-﻿using System.Net;
-using Greg.Requests;
+﻿using Greg.Requests;
 using Greg.Responses;
 using RestSharp;
 using System;
+using System.Net;
 
 namespace Greg
 {
