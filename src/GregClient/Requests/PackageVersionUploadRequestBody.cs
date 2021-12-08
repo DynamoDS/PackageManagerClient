@@ -28,13 +28,16 @@ namespace Greg.Requests
         /// <param name="repositoryUrl"></param>
         /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
         /// <param name="nodeLibraryNames"></param>
-        /// <param name="hostDependencies"> external programs this package depends on.</param>
+        /// <param name="hostDependencies"> external programs this package depends on.</param
+        /// <param name="copyright_holder">Copyright Holder's name</param>
+        /// <param name="copyright_year">Year the copyright was put into effect.</param>
         public PackageVersionUploadRequestBody(string name, string version, string description,
           IEnumerable<string> keywords,
           string contents, string engine, string engineVersion,
           string metadata, string group, IEnumerable<PackageDependency> dependencies,
           string siteUrl, string repositoryUrl, bool containsBinaries,
-          IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies) :
+          IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
+          string copyright_holder, string copyright_year) :
 
           this(name, version, description,
               keywords,
@@ -44,6 +47,8 @@ namespace Greg.Requests
               nodeLibraryNames)
         {
             this.host_dependencies = hostDependencies;
+            this.copyright_holder = copyright_holder;
+            this.copyright_year = copyright_year;
         }
 
         /// <summary>
@@ -103,5 +108,7 @@ namespace Greg.Requests
         public string repository_url { get; set; }
         public bool contains_binaries { get; set; }
         public IEnumerable<string> node_libraries { get; set; }
+        public string copyright_holder { get; set; }
+        public string copyright_year { get; set; }
     }
 }

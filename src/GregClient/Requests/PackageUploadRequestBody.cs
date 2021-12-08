@@ -23,7 +23,8 @@ namespace Greg.Requests
             string contents, string engine, string engineVersion,
             string metadata, string group, IEnumerable<PackageDependency> dependencies,
             string siteUrl, string repositoryUrl, bool containsBinaries, 
-            IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies):
+            IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
+            string copyright_holder, string copyright_year) :
 
             this(name,version,description,
                 keywords,license,
@@ -33,6 +34,8 @@ namespace Greg.Requests
                 nodeLibraryNames)
         {
             this.host_dependencies = hostDependencies;
+            this.copyright_holder = copyright_holder;
+            this.copyright_year = copyright_year;
         }
 
         [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
