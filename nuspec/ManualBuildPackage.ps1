@@ -12,11 +12,13 @@ param (
     $NugetPath,
     [Parameter(Mandatory)]
     [string]
-    $OutputPackage
+    $OutputPackage,
+    [string]
+    $Configuration = 'Debug'
 )
 $ErrorActionPreference = "Stop"
 
-$assemblyPath = "$RepositoryPath\bin\Debug"
+$assemblyPath = "$RepositoryPath\bin\$Configuration"
 $nuspecPath = "$RepositoryPath\nuspec"
 
 $dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\Greg.dll").FileVersion
