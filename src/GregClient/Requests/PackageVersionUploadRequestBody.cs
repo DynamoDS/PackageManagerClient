@@ -69,7 +69,7 @@ namespace Greg.Requests
         /// <param name="repositoryUrl"></param>
         /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
         /// <param name="nodeLibraryNames"></param>
-        /// <param name="hostDependencies"> external programs this package depends on.</param
+        /// <param name="hostDependencies"> external programs this package depends on.</param>
         [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
         public PackageVersionUploadRequestBody(string name, string version, string description,
           IEnumerable<string> keywords,

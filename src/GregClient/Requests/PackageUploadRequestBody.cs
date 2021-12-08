@@ -54,6 +54,8 @@ namespace Greg.Requests
                 nodeLibraryNames)
         {
             this.host_dependencies = hostDependencies;
+            this.copyright_holder = copyright_holder;
+            this.copyright_year = copyright_year;
         }
 
         [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
