@@ -5,7 +5,6 @@ using Greg.Responses;
 using Greg.Utility;
 using Newtonsoft.Json;
 using RestSharp;
-using RestSharp.Authenticators;
 
 namespace Greg
 {
