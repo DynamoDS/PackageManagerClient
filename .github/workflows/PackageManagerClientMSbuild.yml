@@ -3,7 +3,7 @@ name: PackageManagerClient-VS2019Build
 on: [push]
 jobs:
  build:
-  runs-on: windows-latest
+  runs-on: windows-2019
   steps:
     - name: Checkout PackageManagerClient Repo
       uses: actions/checkout@v2
