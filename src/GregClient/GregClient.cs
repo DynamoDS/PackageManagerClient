@@ -22,7 +22,7 @@ namespace Greg
         {
 
 #if LT_NET47
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 #else
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
