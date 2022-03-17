@@ -27,7 +27,7 @@ try {
     docker exec $env:DOCKER_CONTAINER $env:DOCKER_WORKSPACE\$env:COMMON_TOOLS_DIR\$env:NUGETTOOL restore $env:DOCKER_WORKSPACE\src\GregClient.sln
     
     # Build Greg solution
-    docker exec $env:DOCKER_CONTAINER msbuild -restore $env:DOCKER_WORKSPACE\src\GregClient.sln
+    docker exec $env:DOCKER_CONTAINER msbuild -restore $env:DOCKER_WORKSPACE\src\GregClient.sln /property:Configuration=Release
 
     if($LASTEXITCODE -ne 0) {
         throw $errorMessage

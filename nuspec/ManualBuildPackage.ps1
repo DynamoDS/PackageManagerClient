@@ -21,7 +21,7 @@ $ErrorActionPreference = "Stop"
 $assemblyPath = "$RepositoryPath\bin\$Configuration"
 $nuspecPath = "$RepositoryPath\nuspec"
 
-$dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\net4.8\Greg.dll").FileVersion
+$dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\net48\Greg.dll").FileVersion
 
 try {
 
