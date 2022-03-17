@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworks>netstandard2.0;net452;net48</TargetFrameworks>
+    <TargetFrameworks>net452;net48;net50</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

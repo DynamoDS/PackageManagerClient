@@ -72,16 +72,16 @@ namespace Greg
             try
             {
                 // Allow users to override the default Timeout setting in RestRequests
-                var timeoutSetting = Utility.AppSettingMgr.GetItem("Timeout");
+                var timeoutSetting = Utility.AppSettingMgr.GetConfigItem("Timeout");
                 if (timeoutSetting != null)
                 {
                     // Timeout App Settings is in seconds.
                     // RestRequest.Timeout is in milliseconds.
-                    var userVal = Convert.ToInt32(timeoutSetting.Value);
+                    var userVal = Convert.ToInt32(timeoutSetting);
                     // Sanity check.
                     if (userVal >= 0 && userVal < 86400/*24 hours*/)
                     {
-                        req.Timeout = Convert.ToInt32(timeoutSetting.Value) * 1000;// get milliseconds
+                        req.Timeout = Convert.ToInt32(timeoutSetting) * 1000;// get milliseconds
                     }
                 }
             }
