@@ -1,7 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <PackageId>Greg</PackageId>
+    <Authors></Authors>
+    <Company>Autodesk</Company>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{644207B4-7E7F-474A-952E-3453960D8A01}</ProjectGuid>
@@ -9,11 +12,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworks>net452;net48;net50</TargetFrameworks>
+    <TargetFrameworks>net452;net48;net5.0</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	  <Deterministic>false</Deterministic>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackageIcon>logo_square_32x32.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,8 +45,18 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web" />
   </ItemGroup>
+  <ItemGroup Label="Common package dependencies">
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\nuspec\images\logo_square_32x32.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
   <ItemGroup Label="Compile time reference assemblies">
-    <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" Condition="'$(TargetFramework)' == 'net50'" >
+    <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" Condition="'$(TargetFramework)' == 'net5.0'">
       <IncludeAssets>all</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -53,9 +68,5 @@
       <IncludeAssets>all</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup Label="Common package dependencies">
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
 </Project>
