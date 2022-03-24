@@ -56,17 +56,6 @@
     </None>
   </ItemGroup>
   <ItemGroup Label="Compile time reference assemblies">
-    <PackageReference Include="Microsoft.NETCore.App" Version="2.2.8" Condition="'$(TargetFramework)' == 'net5.0'">
-      <IncludeAssets>all</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net48" Version="1.0.2" Condition="'$(TargetFramework)' == 'net48'">
-      <IncludeAssets>all</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net452" Version="1.0.2" Condition="'$(TargetFramework)' == 'net452'">
-      <IncludeAssets>all</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
 </Project>
