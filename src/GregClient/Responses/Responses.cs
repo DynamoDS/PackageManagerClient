@@ -126,6 +126,10 @@ namespace Greg.Responses
         public string name { get; set; }
 
         public string id { get; set; }
+
+        public string copyright_holder { get; set; }
+
+        public string copyright_year { get; set; }
     }
 
     public class User
