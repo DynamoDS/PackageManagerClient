@@ -17,16 +17,14 @@ param (
 
 $ErrorActionPreference = "Stop"
 
-$assemblyPath = "$Workspace\bin\Debug"
+$assemblyPath = "$Workspace\bin\Release"
 $nuspecPath = "$Workspace\nuspec"
 
-$dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\Greg.dll").FileVersion
+$dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\net48\Greg.dll").FileVersion
 
 try {
 
-	& "$NugetPath" pack -basePath $assemblyPath -version $dllVersion -OutputDirectory $nuspecPath $nuspecPath\GregClient.nuspec
-
-	$nupkgFile = Get-ChildItem $nuspecPath\*.nupkg -Depth 1
+	$nupkgFile = Get-ChildItem $assemblyPath\*.nupkg -Depth 1
 
 	& "$NugetPath" push $nupkgFile.FullName -ApiKey $ApiKey -Source nuget.org
 }

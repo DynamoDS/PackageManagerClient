@@ -1,8 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <PackageId>Greg</PackageId>
+    <Authors></Authors>
+    <Company>Autodesk</Company>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{644207B4-7E7F-474A-952E-3453960D8A01}</ProjectGuid>
@@ -10,9 +12,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworks>net452;net48;net5.0</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	  <Deterministic>false</Deterministic>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <PackageIcon>logo_square_32x32.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,68 +39,23 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net48'">
     <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AuthProviders\BasicProvider.cs" />
-    <Compile Include="AuthProviders\IAuthProvider.cs" />
-    <Compile Include="AuthProviders\LoginState.cs" />
-    <Compile Include="Converters\DependencyConverter.cs" />
-    <Compile Include="IGregClient.cs" />
-    <Compile Include="PackageManagerClient.cs" />
-    <Compile Include="Properties\globalVersionInfo.cs" />
-    <Compile Include="Requests\BanPackage.cs" />
-    <Compile Include="Requests\Deprecate.cs" />
-    <Compile Include="Requests\Downvote.cs" />
-    <Compile Include="Requests\GetMaintainers.cs" />
-    <Compile Include="Requests\HeaderVersionDownload.cs" />
-    <Compile Include="Requests\Hosts.cs" />
-    <Compile Include="Requests\PackageManagerRequest.cs" />
-    <Compile Include="Requests\PackageReferenceRequest.cs" />
-    <Compile Include="Requests\PackageUploadRequestBody.cs" />
-    <Compile Include="Requests\PackageVersionUploadRequestBody.cs" />
-    <Compile Include="Requests\Search.cs" />
-    <Compile Include="Requests\JSONRequest.cs" />
-    <Compile Include="Requests\PackageDownload.cs" />
-    <Compile Include="Requests\TermsOfUse.cs" />
-    <Compile Include="Requests\Undeprecate.cs" />
-    <Compile Include="Requests\Upvote.cs" />
-    <Compile Include="Utility\FileUtilities.cs" />
-    <Compile Include="Requests\HeaderCollectionDownload.cs" />
-    <Compile Include="Requests\HeaderDownload.cs" />
-    <Compile Include="Requests\RequestBody.cs" />
-    <Compile Include="Requests\Request.cs" />
-    <Compile Include="Requests\PackageUpload.cs" />
-    <Compile Include="GregClient.cs" />
-    <Compile Include="Requests\PackageVersionUpload.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Requests\ValidateAuth.cs" />
-    <Compile Include="Responses\Responses.cs" />
-    <Compile Include="Utility\PackageUtilities.cs" />
-    <Compile Include="Utility\Utilities.cs" />
+  <ItemGroup Label="Common package dependencies">
+    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+    <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="..\..\nuspec\images\logo_square_32x32.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup Label="Compile time reference assemblies">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
+  </ItemGroup>
 </Project>

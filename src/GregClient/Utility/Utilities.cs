@@ -6,27 +6,61 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using System.Xml;
 
 namespace Greg.Utility
 {
     public static class AppSettingMgr
     {
-        public static KeyValueConfigurationElement GetItem(String key)
+
+        internal static object GetConfigItem(String key)
+        {
+            string value = getItem(key);
+            if (value == null) {
+                return null;
+            }
+
+            switch (key)
+            {
+                case "EnableDebugLogs":
+                    return bool.Parse(value);
+                case "Timeout":
+                    return int.Parse(value);
+                default:
+                    return null;
+            };
+        }
+
+        private static string getItem(String key)
         {
             try
             {
-                var dllPath = new Uri(Assembly.GetExecutingAssembly().GetName().CodeBase).LocalPath;
-                var config = ConfigurationManager.OpenExeConfiguration(dllPath);
-                var enableDebugLogsSetting = config.AppSettings.Settings[key];
-                return enableDebugLogsSetting;
+                XmlDocument doc = new XmlDocument();
+                doc.Load("app.config");
+                if (doc != null)
+                {
+                    XmlNode node = doc.SelectSingleNode("//appSettings");
+
+                    XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
+                    return value.Attributes["value"].Value;
+                }
+                return null;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("The referenced configuration item, {0}, could not be retrieved", key);
                 Console.WriteLine(ex.Message);
                 return null;
             }
         }
+#if NET5_0_OR_GREATER
+#else
+        [Obsolete]
+        public static KeyValueConfigurationElement GetItem(String key)
+        {
+            return new KeyValueConfigurationElement(key, getItem(key));
+        }
+#endif
     }
 
     public static class DebugLogger
@@ -39,8 +73,8 @@ namespace Greg.Utility
         {
             try
             {
-                var enableDebugLogsSetting = AppSettingMgr.GetItem("EnableDebugLogs");
-                if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting.Value))
+                var enableDebugLogsSetting = AppSettingMgr.GetConfigItem("EnableDebugLogs");
+                if (enableDebugLogsSetting != null && Convert.ToBoolean(enableDebugLogsSetting))
                 {
                     enabled = true;
                 }
