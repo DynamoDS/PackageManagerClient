@@ -20,6 +20,7 @@
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);ReadPackageVersionFromOutputAssembly</GenerateNuspecDependsOn>
 	  <PackageIcon>logo_square_32x32.png</PackageIcon>
+	  <Description>The Dynamo Package Manager .Net Client.</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
