@@ -64,7 +64,9 @@
       <IncludeAssets>none</IncludeAssets>
     </ProjectReference>
   </ItemGroup>
-  
+  <ItemGroup Label="Compile time reference assemblies">
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
+  </ItemGroup>
   <Target Name="ReadPackageVersionFromOutputAssemblySingleTfm" Returns="@(PackAssembly)" Condition="'$(IsCrossTargetingBuild)' != 'true'">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="PackAssembly" />
