@@ -53,8 +53,7 @@ namespace Greg.Utility
                 return null;
             }
         }
-#if NET5_0_OR_GREATER
-#else
+#if NETFRAMEWORK
         [Obsolete]
         public static KeyValueConfigurationElement GetItem(String key)
         {
