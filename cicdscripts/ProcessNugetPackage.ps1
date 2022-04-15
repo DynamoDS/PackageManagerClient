@@ -18,9 +18,6 @@ param (
 $ErrorActionPreference = "Stop"
 
 $assemblyPath = "$Workspace\bin\Release"
-$nuspecPath = "$Workspace\nuspec"
-
-$dllVersion = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$assemblyPath\net48\Greg.dll").FileVersion
 
 try {
 
