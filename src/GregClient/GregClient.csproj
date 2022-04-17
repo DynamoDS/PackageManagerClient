@@ -42,13 +42,16 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net48'">
+    <PackageReference Include="Newtonsoft.Json" Version="8.0.3" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Web" />
   </ItemGroup>
-  <ItemGroup Label="Common package dependencies">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'">
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
+  </ItemGroup>
+  <ItemGroup Label="Common package dependencies">
     <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
   <ItemGroup>
