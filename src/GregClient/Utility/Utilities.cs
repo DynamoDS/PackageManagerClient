@@ -36,7 +36,7 @@ namespace Greg.Utility
             try
             {
                 XmlDocument doc = new XmlDocument();
-                doc.Load("app.config");
+                doc.Load($"{typeof(AppSettingMgr).Assembly.Location}.config");
                 if (doc != null)
                 {
                     XmlNode node = doc.SelectSingleNode("//appSettings");
