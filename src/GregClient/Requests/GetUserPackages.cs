@@ -2,6 +2,9 @@
 
 namespace Greg.Requests
 {
+    /// <summary>
+    /// Request for getting latest versions of all packages published by the current user.
+    /// </summary>
     public class GetUserPackages : PackageReferenceRequest
     {
         private readonly Method httpMethod = Method.GET;
