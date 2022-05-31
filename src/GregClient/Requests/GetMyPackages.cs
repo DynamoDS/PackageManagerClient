@@ -5,7 +5,7 @@ namespace Greg.Requests
     /// <summary>
     /// Request for getting latest versions of all packages published by the current user.
     /// </summary>
-    public class GetUserPackages : PackageReferenceRequest
+    public class GetMyPackages : PackageReferenceRequest
     {
         private readonly Method httpMethod = Method.GET;
 
@@ -13,7 +13,7 @@ namespace Greg.Requests
         /// GET request for fetching latest versions of all packages published by the current user.
         /// Authentication is required to identify user.
         /// </summary>
-        public GetUserPackages()
+        public GetMyPackages()
         {
             this.ForceAuthentication = true;
 
