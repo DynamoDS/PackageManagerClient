@@ -130,6 +130,10 @@ namespace Greg.Responses
         public string copyright_holder { get; set; }
 
         public string copyright_year { get; set; }
+
+        public string scan_status { get; set; }
+
+        public string latest_version_update { get; set; }        
     }
 
     public class User
@@ -200,5 +204,17 @@ namespace Greg.Responses
 
         public List<string> keywords { get; set; }
 
+    }
+    public class UserPackages
+    {
+        public string username { get; set; }
+
+        public string _id { get; set; }
+
+        public DateTime last_updated_package_date { get; set; }
+
+        public PackageVersion last_updated_package { get; set; }
+
+        public List<PackageVersion> maintains { get; set; }
     }
 }
