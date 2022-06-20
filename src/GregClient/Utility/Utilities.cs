@@ -75,8 +75,9 @@ namespace Greg.Utility
 
             try
             {
-                XmlNode node = debugDoc.SelectSingleNode("//appSettings");
-                if (node != null)
+                XmlDocument doc = new XmlDocument();
+                doc.Load($"{typeof(AppSettingMgr).Assembly.Location}.config");
+                if (doc != null)
                 {
                     XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
                     if (value != null)
