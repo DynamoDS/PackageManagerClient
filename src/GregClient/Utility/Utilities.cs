@@ -12,7 +12,31 @@ namespace Greg.Utility
 {
     public static class AppSettingMgr
     {
+        private static XmlDocument debugDoc;
 
+        static AppSettingMgr()
+        {
+            string configPath = $"{typeof(AppSettingMgr).Assembly.Location}.config";
+
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                debugDoc = new XmlDocument();
+                debugDoc.Load(configPath);
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("The referenced configuration file, {0}, could not be loaded", configPath);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns null if the requested key was not found.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         internal static object GetConfigItem(String key)
         {
             string value = getItem(key);
@@ -20,29 +44,40 @@ namespace Greg.Utility
                 return null;
             }
 
-            switch (key)
+            try
             {
-                case "EnableDebugLogs":
-                    return bool.Parse(value);
-                case "Timeout":
-                    return int.Parse(value);
-                default:
-                    return null;
-            };
+                switch (key)
+                {
+                    case "EnableDebugLogs":
+                        return bool.Parse(value);
+                    case "Timeout":
+                        return int.Parse(value);
+                    default:
+                        return null;
+                };
+            }
+            catch
+            {
+                return null;
+            }
         }
 
+        /// <summary>
+        /// Reads the requested filed from the debug configuration document.
+        /// Returns null if the requested key does not exist.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         private static string getItem(String key)
         {
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load($"{typeof(AppSettingMgr).Assembly.Location}.config");
-                if (doc != null)
+                if (debugDoc != null)
                 {
-                    XmlNode node = doc.SelectSingleNode("//appSettings");
+                    XmlNode node = debugDoc.SelectSingleNode("//appSettings");
 
                     XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
-                    return value.Attributes["value"].Value;
+                    return value != null ? value.Attributes["value"].Value : null;
                 }
                 return null;
             }
