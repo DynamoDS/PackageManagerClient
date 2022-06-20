@@ -70,23 +70,27 @@ namespace Greg.Utility
         /// <returns></returns>
         private static string getItem(String key)
         {
+            if (debugDoc == null)
+                return null;
+
             try
             {
-                if (debugDoc != null)
+                XmlNode node = debugDoc.SelectSingleNode("//appSettings");
+                if (node != null)
                 {
-                    XmlNode node = debugDoc.SelectSingleNode("//appSettings");
-
                     XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
-                    return value != null ? value.Attributes["value"].Value : null;
+                    if (value != null)
+                    {
+                        return value.Attributes["value"].Value;
+                    }
                 }
-                return null;
             }
             catch (Exception ex)
             {
                 Console.WriteLine("The referenced configuration item, {0}, could not be retrieved", key);
                 Console.WriteLine(ex.Message);
-                return null;
             }
+            return null;
         }
 #if NETFRAMEWORK
         [Obsolete]
