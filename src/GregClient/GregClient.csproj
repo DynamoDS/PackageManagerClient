@@ -55,6 +55,12 @@
     <PackageReference Include="RestSharp" Version="106.12.0" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\CHANGELOG.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="..\..\nuspec\images\logo_square_32x32.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
