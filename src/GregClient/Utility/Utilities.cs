@@ -12,7 +12,31 @@ namespace Greg.Utility
 {
     public static class AppSettingMgr
     {
+        private static XmlDocument debugDoc;
 
+        static AppSettingMgr()
+        {
+            string configPath = $"{typeof(AppSettingMgr).Assembly.Location}.config";
+
+            if (!File.Exists(configPath)) return;
+
+            try
+            {
+                debugDoc = new XmlDocument();
+                debugDoc.Load(configPath);
+            }
+            catch(Exception ex) 
+            {
+                Console.WriteLine("The referenced configuration file, {0}, could not be loaded", configPath);
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Returns null if the requested key was not found.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         internal static object GetConfigItem(String key)
         {
             string value = getItem(key);
@@ -20,38 +44,53 @@ namespace Greg.Utility
                 return null;
             }
 
-            switch (key)
-            {
-                case "EnableDebugLogs":
-                    return bool.Parse(value);
-                case "Timeout":
-                    return int.Parse(value);
-                default:
-                    return null;
-            };
-        }
-
-        private static string getItem(String key)
-        {
             try
             {
-                XmlDocument doc = new XmlDocument();
-                doc.Load($"{typeof(AppSettingMgr).Assembly.Location}.config");
-                if (doc != null)
+                switch (key)
                 {
-                    XmlNode node = doc.SelectSingleNode("//appSettings");
-
-                    XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
-                    return value.Attributes["value"].Value;
-                }
+                    case "EnableDebugLogs":
+                        return bool.Parse(value);
+                    case "Timeout":
+                        return int.Parse(value);
+                    default:
+                        return null;
+                };
+            }
+            catch
+            {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Reads the requested filed from the debug configuration document.
+        /// Returns null if the requested key does not exist.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        private static string getItem(String key)
+        {
+            if (debugDoc == null)
+                return null;
+
+            try
+            {
+                XmlNode node = debugDoc.SelectSingleNode("//appSettings");
+                if (node != null)
+                {
+                    XmlElement value = (XmlElement)node.SelectSingleNode(string.Format("//add[@key='{0}']", key));
+                    if (value != null)
+                    {
+                        return value.Attributes["value"].Value;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("The referenced configuration item, {0}, could not be retrieved", key);
                 Console.WriteLine(ex.Message);
-                return null;
             }
+            return null;
         }
 #if NETFRAMEWORK
         [Obsolete]
