@@ -1,9 +1,9 @@
 # Build PackageManager Client using latest VS and DotNET
-name: PackageManagerClient-VS2019Build
+name: PackageManagerClient-VS2022Build
 on: [push]
 jobs:
  build:
-  runs-on: windows-2019
+  runs-on: windows-2022
   steps:
     - name: Checkout PackageManagerClient Repo
       uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
     - name: Build PackageManagerClient with MSBuild
       run: |
         echo "***Continue with the build, Good luck developer!***"
-        cd "C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Current\Bin\"
+        cd "C:\Program Files (x86)\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin\amd64"
            .\MSBuild.exe $Env:GITHUB_WORKSPACE\PackageManagerClient\src\GregClient.sln
     # look for PackageManagerClient
     - name: Navigate to PackageManagerClient Folder
