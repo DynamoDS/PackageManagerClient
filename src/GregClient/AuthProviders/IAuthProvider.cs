@@ -36,4 +36,11 @@ namespace Greg
         /// <param name="client"></param>
         new void SignRequest(ref RestRequest m, RestClient client);
     }
+    /// <summary>
+    /// Implement this interface to provide direct access to the current bearer token. 
+    /// </summary>
+    public interface IOAuth2AccessTokenProvider
+    {
+        string GetAccessToken();
+    }
 }
