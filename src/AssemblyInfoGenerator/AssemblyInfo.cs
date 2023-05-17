@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Resources;
 using System.Runtime.InteropServices;
@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Greg")]
 [assembly: AssemblyTitle("Greg")]
 [assembly: AssemblyDescription("The Dynamo Package Manager .NET client.")]
-[assembly: AssemblyCopyright("Copyright © Autodesk, Inc 2022")]
+[assembly: AssemblyCopyright("Copyright � Autodesk, Inc 2022")]
 [assembly: AssemblyTrademark("")]
 
 // Make it easy to distinguish Debug and Release (i.e. Retail) builds;
@@ -36,7 +36,7 @@ using System.Runtime.InteropServices;
 // to distinguish one build from another. AssemblyFileVersion is specified
 // in AssemblyVersionInfo.cs so that it can be easily incremented by the
 // automated build process.
-[assembly: AssemblyVersion("2.4.0.4747")]
+[assembly: AssemblyVersion("2.4.0.5007")]
 
 
 // By default, the "Product version" shown in the file properties window is
@@ -55,4 +55,4 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("2.4.0.4747")]
+[assembly: AssemblyFileVersion("2.4.0.5007")]
