@@ -36,7 +36,7 @@ soc2:
     repository: env.HARMONY_REPO
     third_party_lib_paths:
       - "third_party"
-      - "bin/release"
+      - "bin\\release"
 
 deployment:
     -
