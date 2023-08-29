@@ -10,7 +10,7 @@ This repo is the package manager client for the Dynamo Package Manager.  Package
 * download a specific package header
 * download a specific package body
 * determine server connectivity
-* upvote or downvote a package
+* upvote or downvote a package, collect user votes
 * search across packages
 * deprecate a package
 * manage maintainers of a package
