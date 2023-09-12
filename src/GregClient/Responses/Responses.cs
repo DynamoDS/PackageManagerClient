@@ -217,4 +217,12 @@ namespace Greg.Responses
 
         public List<PackageVersion> maintains { get; set; }
     }
+    public class UserVotes
+    {
+        public string username { get; set; }
+
+        public string _id { get; set; }
+
+        public List<string> has_upvoted { get; set; }
+    }
 }
