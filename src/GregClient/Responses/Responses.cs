@@ -217,12 +217,19 @@ namespace Greg.Responses
 
         public List<PackageVersion> maintains { get; set; }
     }
+    /// <summary>
+    /// Used to handle response from /user/votes route
+    /// to fetch all packages the current user has upvoted
+    /// </summary>
     public class UserVotes
     {
         public string username { get; set; }
 
         public string _id { get; set; }
 
+        /// <summary>
+        /// List of package ids that the current user has upvoted
+        /// </summary>
         public List<string> has_upvoted { get; set; }
     }
 }
