@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using RestSharp;
 using System.IO;
+using System.Net.Http;
 
 namespace Greg.Requests
 {
     public class PackageManagerRequest : Request
     {
-        private Method _httpMethod;
+        private HttpMethod _httpMethod;
         public readonly bool fileRequest;
         internal string fileToUpload;
 
-        public PackageManagerRequest(string path, RestSharp.Method httpMethod, bool fileRequest = false, string fileToUpload = "") : base()
+        public PackageManagerRequest(string path, HttpMethod httpMethod, bool fileRequest = false, string fileToUpload = "") : base()
         {
             _path = path;
             _httpMethod = httpMethod;
@@ -31,7 +30,7 @@ namespace Greg.Requests
             }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
             get { return _httpMethod; }
         }

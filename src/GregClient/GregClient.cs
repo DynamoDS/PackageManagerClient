@@ -1,5 +1,6 @@
 ﻿using Greg.Requests;
 using Greg.Responses;
+using Greg.Utility;
 using RestSharp;
 using System;
 using System.Net;
@@ -10,7 +11,7 @@ namespace Greg
     {
         private readonly RestClient _client;
 
-        public string BaseUrl { get { return _client.BaseUrl.ToString(); } }
+        public string BaseUrl { get { return _client.Options.BaseUrl.ToString(); } }
 
         public readonly IAuthProvider _authProvider;
         public IAuthProvider AuthProvider
@@ -21,9 +22,7 @@ namespace Greg
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
 
-#if LT_NET47
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
-#else
+
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
@@ -32,14 +31,14 @@ namespace Greg
             {
                 ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             }
-#endif
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
         }
 
-        private IRestResponse ExecuteInternal(Request m)
+        private RestResponse ExecuteInternal(Request m)
         {
-            var req = new RestRequest(m.Path, m.HttpMethod);
+
+            var req = new RestRequest(m.Path, m.HttpMethod.ToRestSharpHTTPMethod());
             m.Build(ref req);
 
             if (m.RequiresAuthorization)

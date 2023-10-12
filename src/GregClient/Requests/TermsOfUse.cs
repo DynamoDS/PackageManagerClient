@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using RestSharp;
 
@@ -8,14 +9,14 @@ namespace Greg.Requests
 {
     public class TermsOfUse : Request
     {
-        private readonly Method httpMethod = Method.GET;
+        private readonly HttpMethod httpMethod = System.Net.Http.HttpMethod.Get;
 
         public TermsOfUse(bool queryAcceptanceStatus)
         {
             // both endpoints require authentication by the user
             this.ForceAuthentication = true;
 
-            httpMethod = queryAcceptanceStatus ? Method.GET : Method.PUT;
+            httpMethod = queryAcceptanceStatus ? System.Net.Http.HttpMethod.Get: System.Net.Http.HttpMethod.Put;
         }
 
         public override string Path
@@ -23,7 +24,7 @@ namespace Greg.Requests
             get { return "tou"; }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
             get { return httpMethod; }
         }

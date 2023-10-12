@@ -1,41 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using RestSharp;
-using Newtonsoft.Json;
 using Greg.Converters;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Greg.Responses
 {
 
     public class Response
     {
-        private static JsonSerializerSettings settings;
+        private static JsonSerializerOptions settings;
 
-        internal Response(IRestResponse response)
+        internal Response(RestResponse response)
         {
-            InternalRestReponse = response;
+            InternalRestResponse = response;
         }
 
-        public static JsonSerializerSettings Settings
+        public static JsonSerializerOptions Settings
         {
             get
             {
                 if (settings == null)
                 {
-                    settings = new JsonSerializerSettings
-                    {
-                        Error = (sender, args) =>
-                        {
-                            if (System.Diagnostics.Debugger.IsAttached)
-                            {
-                                System.Diagnostics.Debugger.Break();
-                            }
-                        },
-                        Converters = new List<JsonConverter>()
-                        {
-                            new DependencyConverter()
-                        }
-                    };
+                    settings = new JsonSerializerOptions(JsonSerializerDefaults.General);
+                    settings.Converters.Add(new DependencyConverter());
                 }
                 return settings;
             }
@@ -45,8 +34,7 @@ namespace Greg.Responses
         {
             try
             {
-                //return jsonDeserializer.Deserialize<ResponseBody>(InternalRestReponse);
-                return JsonConvert.DeserializeObject<ResponseBody>(InternalRestReponse.Content, Settings);
+                return JsonSerializer.Deserialize<ResponseBody>(InternalRestResponse.Content, Settings);
             }
             catch
             {
@@ -54,20 +42,20 @@ namespace Greg.Responses
             }
         }
 
-        internal IRestResponse InternalRestReponse { get; set; }
+        internal RestSharp.RestResponse InternalRestResponse { get; set; }
     }
 
     public class ResponseWithContent<T> : Response
     {
-        public ResponseWithContent(IRestResponse response) : base(response)
+        //TODO does this need to be public? How to avoid leaking RestSharp types?
+        public ResponseWithContent(RestSharp.RestResponse response) : base(response)
         {
 
         }
 
         public ResponseWithContentBody<T> DeserializeWithContent()
         {
-            return JsonConvert.DeserializeObject<ResponseWithContentBody<T>>(InternalRestReponse.Content, Settings);
-            //return jsonDeserializer.Deserialize<ResponseWithContentBody<T>>(InternalRestReponse);
+            return JsonSerializer.Deserialize<ResponseWithContentBody<T>>(InternalRestResponse.Content, Settings);
         }
     }
 

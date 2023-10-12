@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using System.Net.Http;
 
 namespace Greg.Requests
 {
@@ -7,8 +8,6 @@ namespace Greg.Requests
     /// </summary>
     public class GetMyPackages : PackageReferenceRequest
     {
-        private readonly Method httpMethod = Method.GET;
-
         /// <summary>
         /// GET request for fetching latest versions of all packages published by the current user.
         /// Authentication is required to identify user.
@@ -16,8 +15,6 @@ namespace Greg.Requests
         public GetMyPackages()
         {
             this.ForceAuthentication = true;
-
-            httpMethod = Method.GET;
         }
 
         /// <summary>
@@ -31,9 +28,9 @@ namespace Greg.Requests
         /// <summary>
         /// Http method used to make remote package manager API call.
         /// </summary>
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return httpMethod; }
+            get { return HttpMethod.Get; }
         }
 
         /// <summary>

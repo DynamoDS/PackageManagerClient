@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using System.Net.Http;
 
 namespace Greg.Requests
 {
@@ -7,8 +8,6 @@ namespace Greg.Requests
     /// </summary>
     public class GetUserVotes : PackageReferenceRequest
     {
-        private readonly Method httpMethod = Method.GET;
-
         /// <summary>
         /// GET request for fetching all votes by the current user.
         /// Authentication is required to identify user.
@@ -16,8 +15,6 @@ namespace Greg.Requests
         public GetUserVotes()
         {
             this.ForceAuthentication = true;
-
-            httpMethod = Method.GET;
         }
         /// <summary>
         /// Path used to call remote package manager API endpoint.
@@ -30,9 +27,9 @@ namespace Greg.Requests
         /// <summary>
         /// Http method used to make remote package manager API call.
         /// </summary>
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return httpMethod; }
+            get { return HttpMethod.Get; }
         }
 
         /// <summary>

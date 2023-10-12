@@ -22,9 +22,9 @@ namespace GregClientSandbox
         /// A GregClient specifying the local host. The alternate IP provided is for 
         /// production Reach. 
         /// </summary>
-        private static GregClient pmc = new GregClient(provider, "http://107.20.146.184/");
+        //private static GregClient pmc = new GregClient(provider, "http://107.20.146.184/");
         //private static GregClient pmc = new GregClient(provider, "http://localhost:8080/");
-        //private static GregClient pmc = new GregClient(provider, "http://dynamopackages.com/");
+        private static GregClient pmc = new GregClient(provider, "http://dynamopackages.com/");
 
         private static string DownloadPackageByIdTest()
         {
@@ -147,7 +147,7 @@ namespace GregClientSandbox
             //ListHostsTest();
             //DownloadPackageByIdTest();
             //DownloadAllPackagesTest();
-            //GetPackageVersionHeaderTest();
+            GetPackageVersionHeaderTest();
             Console.Read();
         }
     }

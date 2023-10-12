@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
+using System.Net.Http;
 using RestSharp;
 
 namespace Greg.Requests
@@ -18,9 +16,9 @@ namespace Greg.Requests
             get { return "downvote/" + this._id; }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.PUT; }
+            get { return HttpMethod.Put; }
         }
 
         private readonly string _id;

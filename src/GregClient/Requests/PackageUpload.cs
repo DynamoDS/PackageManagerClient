@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Http;
 using Greg.Utility;
 using RestSharp;
 
@@ -31,9 +32,9 @@ namespace Greg.Requests
             get { return "package"; }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.POST; }
+            get { return HttpMethod.Post; }
         }
 
         internal override IList<Parameter> GetParamsToSign(ref RestRequest request)
@@ -70,8 +71,7 @@ namespace Greg.Requests
                 fs.Close();
             }
 
-            var p = FileParameter.Create("pkg", bytes, ZipFile);
-            request.Files.Add(p);
+            request.AddFile("pkg", bytes, ZipFile);
         }
 
     }

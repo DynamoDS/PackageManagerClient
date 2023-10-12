@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using RestSharp;
 
@@ -36,9 +37,9 @@ namespace Greg.Requests
             }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.PUT; }
+            get { return HttpMethod.Put; }
         }
 
         internal override void Build(ref RestRequest request)

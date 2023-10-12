@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
+using System.Net.Http;
 using Greg.Responses;
 using Greg.Utility;
 using RestSharp;
@@ -27,9 +26,9 @@ namespace Greg.Requests
             get { return _version != null ? "download/" + this._id + "/" + _version : "download/" + this._id; }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.GET; }
+            get { return HttpMethod.Get; }
         }
 
         private readonly string _id;
@@ -42,7 +41,7 @@ namespace Greg.Requests
 
         public static string GetFileFromResponse(Response gregResponse)
         {
-            var response = gregResponse.InternalRestReponse;
+            var response = gregResponse.InternalRestResponse;
            
             if ( !(response.ResponseUri != null && response.ResponseUri.AbsolutePath != null) ) return "";
 
