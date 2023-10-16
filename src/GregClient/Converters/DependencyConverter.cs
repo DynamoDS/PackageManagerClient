@@ -14,7 +14,7 @@ namespace Greg.Converters
     {
         public override Dependency Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {   
-            if (reader.Read() && reader.TokenType == JsonTokenType.String)
+            if (reader.TokenType == JsonTokenType.String)
             {
                 // This is interpreted as the id of the dependency.
                 var dep =new Dependency();
@@ -24,7 +24,8 @@ namespace Greg.Converters
             else
             {
                 // Use the default deserialization behavior.
-                return new Dependency();
+                //do not pass the same options here as this method is called with, that will result in the converter being called again and again.
+                return JsonSerializer.Deserialize<Dependency>(ref reader);
             }
         }
         public override void Write(Utf8JsonWriter writer, Dependency value, JsonSerializerOptions options)
