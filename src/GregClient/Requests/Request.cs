@@ -30,11 +30,6 @@ namespace Greg.Requests
 
         public bool ForceAuthentication { get; set; }
 
-        internal virtual IEnumerable<Parameter> GetParamsToSign(ref RestRequest request)
-        {
-            return request.Parameters;// By default send all params to sign.
-        }
-
         internal abstract void Build(ref RestRequest request);
     }
 }

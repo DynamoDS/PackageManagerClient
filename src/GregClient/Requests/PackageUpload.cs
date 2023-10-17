@@ -37,11 +37,6 @@ namespace Greg.Requests
             get { return HttpMethod.Post; }
         }
 
-        internal override IList<Parameter> GetParamsToSign(ref RestRequest request)
-        {
-            return new List<Parameter>();// Nothing to sign yet.
-        }
-
         internal override void Build(ref RestRequest request)
         {
             InitReqParams(ref request);

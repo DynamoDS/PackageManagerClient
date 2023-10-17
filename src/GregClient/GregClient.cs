@@ -43,28 +43,9 @@ namespace Greg
 
             if (m.RequiresAuthorization)
             {
-                //oauth2 - we don't need to sign/encode any parameters.
-                //Also don't need to create a temp request to avoid adsso putting header/body params
-                //in the query string. Just use original request, and inject access token.
                 if (AuthProvider is IOAuth2AuthProvider)
                 {
                     AuthProvider.SignRequest(ref req, _client);
-                }
-                //oauth1
-                else
-                { // Issue: auth api was adding body params to the query string.
-                  // Details: https://jira.autodesk.com/browse/DYN-1795
-                  // Build a subset of the original request, with only specific parameters that we need to authenticate.
-                  // This means headers added in SignRequest will not exist on the request made to DPM. 
-                    var reqToSign = new RestRequest(req.Resource, req.Method);
-                    var authParams = m.GetParamsToSign(ref req);
-                    foreach (var par in authParams)
-                    {
-                        reqToSign.AddParameter(par);
-                    }
-                    // All reqToSign.Parameters will be added in the reqToSign.Resource.
-                    AuthProvider.SignRequest(ref reqToSign, _client);
-                    req.Resource = reqToSign.Resource;
                 }
             }
 

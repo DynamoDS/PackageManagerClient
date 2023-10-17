@@ -6,7 +6,7 @@ namespace Greg.Requests
     {
         public virtual string AsJson()
         {
-            return JsonSerializer.Serialize(this);
+            return JsonSerializer.Serialize<object>(this);
         }
     }
 
