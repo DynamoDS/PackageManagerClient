@@ -14,7 +14,7 @@ using System.Xml;
 
 namespace Greg.Utility
 {
-    public static class AppSettingMgr
+    internal static class AppSettingMgr
     {
         private static XmlDocument debugDoc;
 
@@ -189,28 +189,9 @@ namespace Greg.Utility
 
 
     
-    public static class RestSharpExtensions
+    internal static class RestSharpExtensions
     {
-        /*
-        public static IDynamoRestRequest ToWrapper(this RestSharp.RestRequest r)
-        {
-
-        }
-
-        public static IDynamoRestResponse ToWrapper (this RestSharp.RestResponse r)
-        {
-            return new IDynamoRestResponse()
-            {
-                Request = r.Request.ToWrapper(),
-                InternalResponse = r,
-                Content = r.Content;
-                
-                
-            }
-        }
-            */
-
-        public static RestSharp.Method ToRestSharpHTTPMethod(this HttpMethod httpMethod)
+        internal static RestSharp.Method ToRestSharpHTTPMethod(this HttpMethod httpMethod)
         {
             switch (httpMethod)
             {
