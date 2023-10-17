@@ -6,10 +6,8 @@ namespace Greg.Requests
     public class PackageVersionUploadRequestBody : RequestBody
     {
 
-        //TODO since we are moving to system.text.json test that this deserialization still works
-        //and that the default constructor is required.
-
-        internal PackageVersionUploadRequestBody()
+        //public parameterless constructor used for system.text.json deserialization.
+        public PackageVersionUploadRequestBody()
         {
 
         }

@@ -23,7 +23,7 @@ namespace Greg.Responses
             {
                 if (settings == null)
                 {
-                    settings = new JsonSerializerOptions(JsonSerializerDefaults.General);
+                    settings = new JsonSerializerOptions(JsonSerializerDefaults.Web);
                     settings.Converters.Add(new DependencyConverter());
                 }
                 return settings;

@@ -5,19 +5,9 @@ namespace Greg.Requests
 {
     public class PackageUploadRequestBody : PackageVersionUploadRequestBody
     {
-        //TODO since we are moving to system.text.json test that this deserialization still works
-        //and that the default constructor is required.
-
-        //!!!! it is important to keep this in mind:
-        //https://stackoverflow.com/questions/33107789/json-net-deserialization-constructor-vs-property-rules
-
-        /// <summary>
-        /// Default constructor - should only be used for deserialization with json.net.
-        /// json.net will construct an empty object and fill it with properties with matching names.
-        /// </summary>
+        //public parameterless constructor used for system.text.json deserialization.
         public PackageUploadRequestBody()
         {
-
         }
 
         public PackageUploadRequestBody(string name, string version, string description,
