@@ -26,6 +26,7 @@ namespace GregClientTests
             Assert.That(res.content.used_by.All(x => x.name is not null));
             Assert.That(res.content.name == "MeshToolkit");
         }
+
         [Test]
         public void GetPackageVersionHeaderTest()
         {
@@ -101,6 +102,7 @@ namespace GregClientTests
 
             var nv = new HeaderDownload("dynamo", "MeshToolkit");
             var pkgResponse = pmc.ExecuteAndDeserializeWithContent<PackageHeader>(nv);
+            Assert.That(pkgResponse.content.name, Is.EqualTo("MeshToolkit"));
             Console.WriteLine(JsonSerializer.Serialize(pkgResponse.content)); // the package
         }
 
@@ -110,7 +112,15 @@ namespace GregClientTests
             GregClient pmc = new GregClient(null, "http://dynamopackages.com/");
             var nv = HeaderCollectionDownload.All();
             var pkgResponse = pmc.ExecuteAndDeserializeWithContent<List<PackageHeader>>(nv);
-            Assert.IsNotEmpty(pkgResponse.content);
+            Assert.That(pkgResponse.content.Count > 2000);
+            Assert.That(pkgResponse.content.All(x => x.banned is false));
+            Assert.That(pkgResponse.content.Any(x => x.num_versions is >1));
+            //seems like package headers don't actually contain the host deps - that makes sense,each version is different.
+            Assert.That(pkgResponse.content.All(x => x.host_dependencies is null));
+            Assert.That(pkgResponse.content.Any(x => x.versions.Last().host_dependencies is not null));
+            Assert.That(pkgResponse.content.Any(x => x.num_dependents is not 0));
+            Assert.That(pkgResponse.content.Any(x=>x.site_url is not null));
+            Assert.That(pkgResponse.content.Any(x => x.repository_url is not null));
         }
         [Test]
         public void DownloadByEngineTest()
