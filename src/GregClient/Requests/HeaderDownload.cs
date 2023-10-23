@@ -1,4 +1,5 @@
 ﻿using RestSharp;
+using System.Net.Http;
 
 namespace Greg.Requests
 {
@@ -34,9 +35,9 @@ namespace Greg.Requests
             }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.GET; }
+            get { return HttpMethod.Get; }
         }
 
         internal override void Build(ref RestRequest request)

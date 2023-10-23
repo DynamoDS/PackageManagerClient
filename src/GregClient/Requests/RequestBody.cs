@@ -1,14 +1,12 @@
-﻿using RestSharp.Serialization.Json;
+﻿using System.Text.Json;
 
 namespace Greg.Requests
 {
     public abstract class RequestBody
     {
-        public static JsonSerializer jsonSerializer = new JsonSerializer();
-
         public virtual string AsJson()
         {
-            return jsonSerializer.Serialize(this);
+            return JsonSerializer.Serialize<object>(this);
         }
     }
 

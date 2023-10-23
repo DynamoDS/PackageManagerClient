@@ -35,7 +35,6 @@ soc2:
     hidden_email_list: dynamo_ws_access
     repository: env.HARMONY_REPO
     third_party_lib_paths:
-      - "third_party"
       - "bin\\release"
 
 deployment:

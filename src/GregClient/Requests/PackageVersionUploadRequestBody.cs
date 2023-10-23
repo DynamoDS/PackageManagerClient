@@ -5,7 +5,9 @@ namespace Greg.Requests
 {
     public class PackageVersionUploadRequestBody : RequestBody
     {
-        internal PackageVersionUploadRequestBody()
+
+        //public parameterless constructor used for system.text.json deserialization.
+        public PackageVersionUploadRequestBody()
         {
 
         }
@@ -37,81 +39,12 @@ namespace Greg.Requests
           string metadata, string group, IEnumerable<PackageDependency> dependencies,
           string siteUrl, string repositoryUrl, bool containsBinaries,
           IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
-          string copyright_holder, string copyright_year) :
+          string copyright_holder, string copyright_year)
 
-          this(name, version, description,
-              keywords,
-              contents, engine, engineVersion,
-              metadata, group, dependencies,
-              siteUrl, repositoryUrl, containsBinaries,
-              nodeLibraryNames)
         {
             this.host_dependencies = hostDependencies;
             this.copyright_holder = copyright_holder;
             this.copyright_year = copyright_year;
-        }
-
-
-        /// <summary>
-        /// Constructor which can be used to set hostDependencies
-        /// </summary>
-        /// <param name="name">Package name</param>
-        /// <param name="version">Package version</param>
-        /// <param name="description">Package description</param>
-        /// <param name="keywords">Package keywords for quick identification</param>
-        /// <param name="contents">Package content description</param>
-        /// <param name="engine">Package engine name, usually is set to Dynamo</param>
-        /// <param name="engineVersion">Package engine version, usually is set to use Dynamo version</param>
-        /// <param name="metadata"></param>
-        /// <param name="group"></param>
-        /// <param name="dependencies">Package dependencies</param>
-        /// <param name="siteUrl"></param>
-        /// <param name="repositoryUrl"></param>
-        /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
-        /// <param name="nodeLibraryNames"></param>
-        /// <param name="hostDependencies"> external programs this package depends on.</param>
-        [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
-        public PackageVersionUploadRequestBody(string name, string version, string description,
-          IEnumerable<string> keywords,
-          string contents, string engine, string engineVersion,
-          string metadata, string group, IEnumerable<PackageDependency> dependencies,
-          string siteUrl, string repositoryUrl, bool containsBinaries,
-          IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies) :
-
-          this(name, version, description,
-              keywords,
-              contents, engine, engineVersion,
-              metadata, group, dependencies,
-              siteUrl, repositoryUrl, containsBinaries,
-              nodeLibraryNames)
-        {
-            this.host_dependencies = hostDependencies;
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="name">Package name</param>
-        /// <param name="version">Package version</param>
-        /// <param name="description">Package description</param>
-        /// <param name="keywords">Package keywords for quick identification</param>
-        /// <param name="contents">Package content description</param>
-        /// <param name="engine">Package engine name, usually is set to Dynamo</param>
-        /// <param name="engineVersion">Package engine version, usually is set to use Dynamo version</param>
-        /// <param name="metadata"></param>
-        /// <param name="group"></param>
-        /// <param name="dependencies">Package dependencies</param>
-        /// <param name="siteUrl"></param>
-        /// <param name="repositoryUrl"></param>
-        /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
-        /// <param name="nodeLibraryNames"></param>
-        [Obsolete("This constructor will be removed in a future release of packageManagerClient.")]
-        public PackageVersionUploadRequestBody(string name, string version, string description,
-            IEnumerable<string> keywords, string contents, string engine, string engineVersion,
-            string metadata, string group, IEnumerable<PackageDependency> dependencies,
-            string siteUrl, string repositoryUrl, bool containsBinaries,
-            IEnumerable<string> nodeLibraryNames)
-        {
             this.name = name;
             this.version = version;
             this.description = description;
@@ -127,6 +60,8 @@ namespace Greg.Requests
             this.contains_binaries = containsBinaries;
             this.node_libraries = nodeLibraryNames;
         }
+
+
 
         public string file_hash { get; set; }
 

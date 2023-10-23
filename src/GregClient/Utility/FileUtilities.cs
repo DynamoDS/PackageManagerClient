@@ -62,7 +62,7 @@ namespace Greg.Utility
         /// <returns></returns>
         public static byte[] GetFileHash(FileInfo fInfo)
         {
-            var mySHA256 = SHA256Managed.Create();
+            var mySHA256 = SHA256.Create();
 
             byte[] hashValue;
 

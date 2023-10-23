@@ -11,6 +11,7 @@ namespace Greg
 
         LoginState LoginState { get; }
         string Username { get; }
+        //TODO ideally would not force the use of restsharp just to set auth.
         /// <summary>
         /// This method should sign the request and params as OAuth1.
         /// OAuth parameters should be added to the query string.
@@ -28,6 +29,8 @@ namespace Greg
     /// </summary>
     public interface IOAuth2AuthProvider : IAuthProvider
     {
+        //TODO ideally would not force the use of restsharp just to set auth.
+
         /// <summary>
         /// This method should add the JWT access token to the Authorization header.
         /// Package manager expects a header in the form: Authorization: Bearer [accesstoken]

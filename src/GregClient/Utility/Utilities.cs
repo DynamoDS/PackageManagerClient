@@ -1,16 +1,20 @@
-﻿using RestSharp;
+﻿
 
 using System;
 using System.Collections;
 using System.Configuration;
 using System.IO;
+using System.Net.Http;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Xml;
 
 namespace Greg.Utility
 {
-    public static class AppSettingMgr
+    internal static class AppSettingMgr
     {
         private static XmlDocument debugDoc;
 
@@ -25,7 +29,7 @@ namespace Greg.Utility
                 debugDoc = new XmlDocument();
                 debugDoc.Load(configPath);
             }
-            catch(Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine("The referenced configuration file, {0}, could not be loaded", configPath);
                 Console.WriteLine(ex.Message);
@@ -92,16 +96,9 @@ namespace Greg.Utility
             }
             return null;
         }
-#if NETFRAMEWORK
-        [Obsolete]
-        public static KeyValueConfigurationElement GetItem(String key)
-        {
-            return new KeyValueConfigurationElement(key, getItem(key));
-        }
-#endif
     }
 
-    public static class DebugLogger
+    internal static class DebugLogger
     {
         private static readonly bool enabled = false;
 
@@ -122,7 +119,7 @@ namespace Greg.Utility
             }
         }
 
-        public static void LogResponse(IRestResponse restResp)
+        static internal void LogResponse(RestSharp.RestResponse restResp)
         {
             if (!enabled)
             {
@@ -151,7 +148,7 @@ namespace Greg.Utility
                         errException = restResp.ErrorException,
                         logtimeStamp = ts
                     };
-                    outputFile.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(logRespObj));
+                    outputFile.WriteLine(JsonSerializer.Serialize(logRespObj));
                 }
             }
             catch
@@ -190,52 +187,34 @@ namespace Greg.Utility
         }
     }
 
-    public class StringValueAttribute : System.Attribute
+
+    
+    internal static class RestSharpExtensions
     {
-
-        private string _value;
-
-        public StringValueAttribute(string value)
+        internal static RestSharp.Method ToRestSharpHTTPMethod(this HttpMethod httpMethod)
         {
-            _value = value;
-        }
-
-        public string Value
-        {
-            get { return _value; }
-        }
-
-    }
-
-    public class StringEnum
-    {
-        private static Hashtable _stringValues = new Hashtable();
- 
-        public static string GetStringValue(Enum value)
-        {
-            string output = null;
-            Type type = value.GetType();
-
-            //Check first in our cached results...
-            if (_stringValues.ContainsKey(value))
-                output = (_stringValues[value] as StringValueAttribute).Value;
-            else
+            switch (httpMethod)
             {
-                //Look for our 'StringValueAttribute' 
-                //in the field's custom attributes
-                FieldInfo fi = type.GetField(value.ToString());
-                StringValueAttribute[] attrs =
-                   fi.GetCustomAttributes(typeof(StringValueAttribute),
-                                           false) as StringValueAttribute[];
-                if (attrs.Length > 0)
-                {
-                    _stringValues.Add(value, attrs[0]);
-                    output = attrs[0].Value;
-                }
+                case HttpMethod m when m == HttpMethod.Post:
+                    return RestSharp.Method.Post;
+                case HttpMethod m when m == HttpMethod.Put:
+                    return RestSharp.Method.Put;
+                case HttpMethod m when m == HttpMethod.Delete:
+                    return RestSharp.Method.Delete;
+                case HttpMethod m when m == HttpMethod.Options:
+                    return RestSharp.Method.Options;
+                case HttpMethod m when m == HttpMethod.Get:
+                    return RestSharp.Method.Get;
+                case HttpMethod m when m == HttpMethod.Head:
+                    return RestSharp.Method.Head;
+                case HttpMethod m when m == HttpMethod.Patch:
+                    return RestSharp.Method.Patch;
+                case HttpMethod m when m == HttpMethod.Trace:
+                default:
+                    throw new ArgumentOutOfRangeException($"no restsharp http method for {httpMethod.Method}");
             }
-
-            return output;
         }
     }
+
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using RestSharp;
 
@@ -17,22 +18,17 @@ namespace Greg.Requests
         {
             get
             {
-                return HttpMethod == Method.POST || HttpMethod == Method.PUT || ForceAuthentication;
+                return HttpMethod == HttpMethod.Post || HttpMethod == HttpMethod.Put || ForceAuthentication;
             }
         }
 
         public abstract string Path { get; }
 
-        public abstract Method HttpMethod { get; }
+        public abstract HttpMethod HttpMethod { get; }
 
         public RequestBody RequestBody { get; set; }
 
         public bool ForceAuthentication { get; set; }
-
-        internal virtual IList<Parameter> GetParamsToSign(ref RestRequest request)
-        {
-            return request.Parameters;// By default send all params to sign.
-        }
 
         internal abstract void Build(ref RestRequest request);
     }

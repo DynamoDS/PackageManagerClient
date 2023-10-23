@@ -1,6 +1,7 @@
 ﻿using Greg.Responses;
-using Newtonsoft.Json;
 using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Greg.Converters
 {
@@ -9,42 +10,26 @@ namespace Greg.Converters
     /// - a string, which is interpreted as the id of the dependency
     /// - an object having the expected properties, which is the default behavior
     /// </summary>
-    public class DependencyConverter : JsonConverter
+    public class DependencyConverter : JsonConverter<Dependency>
     {
-        public override bool CanWrite
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public override bool CanConvert(Type objectType)
-        {
-            return objectType == typeof(Dependency);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            if (reader.ValueType == typeof(string))
+        public override Dependency Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {   
+            if (reader.TokenType == JsonTokenType.String)
             {
                 // This is interpreted as the id of the dependency.
-                Dependency dep = (Dependency)existingValue ?? new Dependency();
-                dep._id = (string)reader.Value;
+                var dep =new Dependency();
+                dep._id = reader.GetString();
                 return dep;
             }
             else
             {
                 // Use the default deserialization behavior.
-                existingValue = existingValue ?? serializer.ContractResolver.ResolveContract(objectType).DefaultCreator();
-                serializer.Populate(reader, existingValue);
-                return existingValue;
+                //do not pass the same options here as this method is called with, that will result in the converter being called again and again.
+                return JsonSerializer.Deserialize<Dependency>(ref reader);
             }
         }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void Write(Utf8JsonWriter writer, Dependency value, JsonSerializerOptions options)
         {
-            // Not needed as CanWrite is false.
             throw new NotImplementedException();
         }
     }

@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using RestSharp;
 
 namespace Greg.Requests
@@ -21,9 +18,9 @@ namespace Greg.Requests
             get { return "hosts"; }
         }
 
-        public override Method HttpMethod
+        public override HttpMethod HttpMethod
         {
-            get { return Method.GET; }
+            get { return HttpMethod.Get; }
         }
 
         internal override void Build(ref RestRequest request)

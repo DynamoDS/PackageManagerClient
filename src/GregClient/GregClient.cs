@@ -1,5 +1,6 @@
 ﻿using Greg.Requests;
 using Greg.Responses;
+using Greg.Utility;
 using RestSharp;
 using System;
 using System.Net;
@@ -9,9 +10,7 @@ namespace Greg
     public class GregClient : IGregClient
     {
         private readonly RestClient _client;
-
-        public string BaseUrl { get { return _client.BaseUrl.ToString(); } }
-
+        public string BaseUrl { get { return _client.Options.BaseUrl.ToString(); } }
         public readonly IAuthProvider _authProvider;
         public IAuthProvider AuthProvider
         {
@@ -21,9 +20,7 @@ namespace Greg
         public GregClient(IAuthProvider provider, string packageManagerUrl)
         {
 
-#if LT_NET47
-            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
-#else
+
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
@@ -32,40 +29,21 @@ namespace Greg
             {
                 ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             }
-#endif
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
         }
 
-        private IRestResponse ExecuteInternal(Request m)
+        private RestResponse ExecuteInternal(Request m)
         {
-            var req = new RestRequest(m.Path, m.HttpMethod);
+
+            var req = new RestRequest(m.Path, m.HttpMethod.ToRestSharpHTTPMethod());
             m.Build(ref req);
 
             if (m.RequiresAuthorization)
             {
-                //oauth2 - we don't need to sign/encode any parameters.
-                //Also don't need to create a temp request to avoid adsso putting header/body params
-                //in the query string. Just use original request, and inject access token.
                 if (AuthProvider is IOAuth2AuthProvider)
                 {
                     AuthProvider.SignRequest(ref req, _client);
-                }
-                //oauth1
-                else
-                { // Issue: auth api was adding body params to the query string.
-                  // Details: https://jira.autodesk.com/browse/DYN-1795
-                  // Build a subset of the original request, with only specific parameters that we need to authenticate.
-                  // This means headers added in SignRequest will not exist on the request made to DPM. 
-                    var reqToSign = new RestRequest(req.Resource, req.Method);
-                    var authParams = m.GetParamsToSign(ref req);
-                    foreach (var par in authParams)
-                    {
-                        reqToSign.AddParameter(par);
-                    }
-                    // All reqToSign.Parameters will be added in the reqToSign.Resource.
-                    AuthProvider.SignRequest(ref reqToSign, _client);
-                    req.Resource = reqToSign.Resource;
                 }
             }
 

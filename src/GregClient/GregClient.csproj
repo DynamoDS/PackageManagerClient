@@ -12,7 +12,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworks>net452;net48;net5.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -41,15 +41,8 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' OR '$(TargetFramework)' == 'net48'">
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.IO.Compression.FileSystem" />
-    <Reference Include="System.Web" />
-  </ItemGroup>
   <ItemGroup Label="Common package dependencies">
-    <PackageReference Include="RestSharp" Version="106.12.0" />
-	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="RestSharp" Version="109.0.1" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\CHANGELOG.md">
@@ -70,9 +63,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>none</IncludeAssets>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup Label="Compile time reference assemblies">
-    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2" PrivateAssets="All" />
   </ItemGroup>
   <Target Name="ReadPackageVersionFromOutputAssemblySingleTfm" Returns="@(PackAssembly)" Condition="'$(IsCrossTargetingBuild)' != 'true'">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
