@@ -1,7 +1,11 @@
-![PackageManagerClient-VS2022Build](https://github.com/DynamoDS/PackageManagerClient/workflows/PackageManagerClient-VS2022Build/badge.svg)
+[![Nuget](https://img.shields.io/nuget/v/Greg?logo=nuget)](https://www.nuget.org/packages/Greg/)
+
+[![PackageManagerClient-VS2022Build](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/PackageManagerClientMSbuild.yml/badge.svg)](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/PackageManagerClientMSbuild.yml) 
+
+
 # Dynamo Package Manager Client
 
-This repo is the package manager client for the Dynamo Package Manager.  Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.  
+This repo is the package manager client for the Dynamo Package Manager. Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.
 
 #### The Package Manager Client can do the following for you:
 
@@ -25,7 +29,7 @@ This repo is the package manager client for the Dynamo Package Manager.  Package
 
 - From Visual Studio IDE:
 
-    Build `The PackageManagerClient\src\GregClient.sln` solution
+    Build the `PackageManagerClient\src\GregClient.sln` solution
 
 - From command line:
 
@@ -33,25 +37,6 @@ This repo is the package manager client for the Dynamo Package Manager.  Package
     nuget restore src\GregClient.sln
     msbuild src\GregClient.sln
     ```
-
-#### Nuget
-The Package Manager Client is available from NuGet [here](https://www.nuget.org/packages/Greg/). 
-
-#### Manual Build of the NugetPackage
-- Make sure you have Nuget version 4.9.0 or later.
->**Important Note:** Please avoid to publish a locally built package
-
-##### Steps:
-
-1. Build the solution
-2. On the repository directory, execute the following PowerShell script with the following parameters
-   ```bat
-   pwsh -ExecutionPolicy ByPass -File ".\nuspec\ManualBuildPackage.ps1 [REPOSITORY_PATH] [NUGET_EXE_PATH] [OUTPUT_PATH]"
-   ```
-   - **REPOSITORY_PATH** Absolute path of the repository (e.g. c:\Workspace)
-   - **NUGET_EXE_PATH** Full path of the Nuget CLI executable (e.g. C:\Tools\nuget.exe)
-   - **OUTPUT_PATH** Output path of the nuget package generated (e.g. c:\Workspace\output)
-
 ___
 
 The Dynamo Package Manager and the Dynamo Package Manager Client both comply with the [Autodesk Privacy Policy](https://www.autodesk.com/company/legal-notices-trademarks/privacy-statement).
