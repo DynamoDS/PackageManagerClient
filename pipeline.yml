@@ -43,3 +43,16 @@ deployment:
         scripts:
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ExecuteContainerDeploy.ps1"
             - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostDeploy.ps1"
+
+ci_test:
+  tests:
+    -
+      scripts:
+        - "dotnet test src/GregClientTests/GregClientTests.csproj --logger:'junit;LogFilePath=testresults\\testresults.xml'"
+
+  test_report_dir: TestResults
+  test_report_pattern:
+    format: "junit"
+    pattern: "*.xml"
+
+    
