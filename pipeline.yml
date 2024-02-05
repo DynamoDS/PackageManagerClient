@@ -15,7 +15,7 @@ force_slack_notification : true
 language: csharp
 
 schedule:
-  cron_schedule: "once_a_month"
+  cron_schedule: "once_a_week"
 
 jenkins_creds:
     -
