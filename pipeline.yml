@@ -1,18 +1,20 @@
 version: 0.1.1
 env:
-  - JENKINS_NODE_WIN: "DynamoDockerWin"
+  - JENKINS_NODE_WIN: "Dynamo_Win_Perf"
   - SLACK_QUANTUM_BUILD_CHANNEL : "#dynamo-jenkinsbuild"
   - SLACK_QUANTUM_BUILD_CREDENTIAL_ID : "slack-notify-token"
   - MAIL_QUANTUM_BUILD_RECIPIENT : "dynamo.dev@autodesk.com"
-  - DOCKER_WORKSPACE : "c:\\Greg"
   - NUGETTOOL : "Nuget\\nuget.exe"
-  - DOCKER_CONTAINER : "buildContainer"
-  - HARMONY_REPO : "DynamoDS/PackageManagerClient"
+  - URL_REPO_TOOLS : "git.autodesk.com/Dynamo/CICDResources.git"
+  - BRANCH_TOOLS : "master"
+
   
 check_changelog_updated_on_pr: true
 pipeline_os: "Windows"
 force_slack_notification : true
 language: csharp
+use_garasign: true
+
 
 schedule:
   cron_schedule: "once_a_week"
@@ -22,28 +24,20 @@ jenkins_creds:
       type: secretText
       credentialsId: dynamovisualprogramming_nuget_api_key
       secretText: APIKEY
+    -
+     type: usernamePassword
+     credentialsId: local-svc_p_ors
+     username: GITADSK_USERNAME 
+     password: GITADSK_PASSWORD
 
 build:
   -
     setup_proj_deps : true
+    solution: src\\GregClient.sln
     scripts:
-      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\SetupHost.ps1"
-      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\BuildSolution.ps1"      
-
-soc2:
-  harmony:
-    hidden_email_list: dynamo_ws_access
-    repository: env.HARMONY_REPO
-    third_party_lib_paths:
-      - "bin\\release"
-
-deployment:
-    -
-        type: customized
-        scripts:
-            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\ExecuteContainerDeploy.ps1"
-            - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PostDeploy.ps1"
-
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\DownloadCICDResources.ps1"
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\SetupHost.ps1"
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\BuildSolution.ps1"
 ci_test:
   tests:
     -
@@ -54,5 +48,27 @@ ci_test:
   test_report_pattern:
     format: "junit"
     pattern: "*.xml"
+
+soc2:
+  harmony:
+    hidden_email_list: dynamo_ws_access
+    third_party_lib_paths:
+      - "bin\\release"
+
+deployment:
+  # since the build generates a package, we can't sign the binary without splitting up build/package gen into two steps.
+  # for now this binary is signed as part of Dynamo core build so signing here is skipped.
+  #-  
+  #    type: sign
+  #    files_to_sign:
+         
+  -
+      type: customized
+      scripts:
+          - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\ExecuteContainerDeploy.ps1 -ReleaseBranches master"
+
+
+
+
 
     
