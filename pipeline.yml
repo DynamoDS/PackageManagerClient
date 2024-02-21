@@ -7,6 +7,8 @@ env:
   - NUGETTOOL : "Nuget\\nuget.exe"
   - URL_REPO_TOOLS : "git.autodesk.com/Dynamo/CICDResources.git"
   - BRANCH_TOOLS : "master"
+  - NUGET_PUBLISH_SOURCE: "https://api.nuget.org/v3/index.json"
+
 
   
 check_changelog_updated_on_pr: true
@@ -37,7 +39,7 @@ build:
     scripts:
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\DownloadCICDResources.ps1"
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\SetupHost.ps1"
-      - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\BuildSolution.ps1"
+      - "msbuild src\\GregClient.sln /p:Configuration=Release"
 ci_test:
   tests:
     -
@@ -53,19 +55,18 @@ soc2:
   harmony:
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
-      - "bin\\release"
+      - "src\\GregClient\\bin\\Release\\net8.0\\"
 
 deployment:
-  # since the build generates a package, we can't sign the binary without splitting up build/package gen into two steps.
-  # for now this binary is signed as part of Dynamo core build so signing here is skipped.
-  #-  
-  #    type: sign
-  #    files_to_sign:
-         
+  
+  -  
+      type: sign
+      files_to_sign:
+        - "src\\GregClient\\bin\\Release\\net8.0\\greg.dll"
   -
       type: customized
       scripts:
-          - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\ExecuteContainerDeploy.ps1 -ReleaseBranches master"
+          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\scripts\\PublishPackage.ps1 -ReleaseBranches master"
 
 
 
