@@ -5,11 +5,13 @@ env:
   - SLACK_QUANTUM_BUILD_CREDENTIAL_ID : "slack-notify-token"
   - MAIL_QUANTUM_BUILD_RECIPIENT : "dynamo.dev@autodesk.com"
   - NUGETTOOL : "Nuget\\nuget.exe"
+  - NUNITTOOL : "NUnit\\NUnit.ConsoleRunner\\tools\\nunit3-console.exe"
   - URL_REPO_TOOLS : "git.autodesk.com/Dynamo/CICDResources.git"
   - BRANCH_TOOLS : "master"
   - NUGET_PUBLISH_SOURCE: "https://api.nuget.org/v3/index.json"
   - COMMON_TOOLS_DIR : "CICDResources_shared"
-
+  - DOTCOVERTOOL : "DotCover\\JetBrains.dotCover.CommandLineTools\\tools\\dotCover.exe"
+  - SONARSCANTOOL : "SonarScannerMsbuild\\dotnet-framework-sonarscanner\\tools\\SonarScanner.MSBuild.exe"
 
   
 check_changelog_updated_on_pr: true
