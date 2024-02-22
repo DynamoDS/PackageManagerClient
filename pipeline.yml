@@ -49,7 +49,7 @@ ci_test:
   tests:
     -
       scripts:
-        - "dotnet test src/GregClientTests/GregClientTests.csproj --logger:'junit;LogFilePath=testresults\\testresults.xml'"
+        - dotnet test src/GregClientTests/GregClientTests.csproj --logger:"junit;LogFilePath=testresults\\testresults.xml"
 
   test_report_dir: TestResults
   test_report_pattern:
