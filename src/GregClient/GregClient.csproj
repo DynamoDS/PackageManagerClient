@@ -16,7 +16,9 @@
     <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);ReadPackageVersionFromOutputAssembly</GenerateNuspecDependsOn>
 	  <PackageIcon>logo_square_32x32.png</PackageIcon>
 	  <Description>The Dynamo Package Manager .Net Client.</Description>
+	  <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
+
   <ItemGroup Label="Common package dependencies">
     <PackageReference Include="RestSharp" Version="108.0.1" />
   </ItemGroup>

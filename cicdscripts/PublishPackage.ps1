@@ -27,7 +27,7 @@ if ($env:BRANCH_NAME -match $reBranch)
 	try {
 
 		#deploy already built package.
-		$assemblyPath = "src\GregClient\bin\release"
+		$assemblyPath = "\bin\release"
 		$nupkgFile = Get-ChildItem $assemblyPath\*.nupkg -Depth 1
 		dotnet nuget push $nupkgFile --api-key $env:API_KEY --source $env:NUGET_PUBLISH_SOURCE
 

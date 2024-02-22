@@ -55,18 +55,18 @@ soc2:
   harmony:
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
-      - "src\\GregClient\\bin\\Release\\net8.0\\"
+      - "bin\\Release\\net8.0\\"
 
 deployment:
   
   -  
       type: sign
       files_to_sign:
-        - "src\\GregClient\\bin\\Release\\net8.0\\greg.dll"
+        - "bin\\Release\\net8.0\\greg.dll"
   -
       type: customized
       scripts:
-          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\scripts\\PublishPackage.ps1 -ReleaseBranches master"
+          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches master"
 
 
 
