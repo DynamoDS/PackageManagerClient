@@ -8,6 +8,7 @@ env:
   - URL_REPO_TOOLS : "git.autodesk.com/Dynamo/CICDResources.git"
   - BRANCH_TOOLS : "master"
   - NUGET_PUBLISH_SOURCE: "https://api.nuget.org/v3/index.json"
+  - COMMON_TOOLS_DIR : "CICDResources_shared"
 
 
   
