@@ -51,7 +51,7 @@ ci_test:
       scripts:
         - dotnet test src/GregClientTests/GregClientTests.csproj --logger:"junit;LogFilePath=testresults\\testresults.xml"
 
-  test_report_dir: GregClientTests\\testresults
+  test_report_dir: src\\GregClientTests\\testresults
   test_report_pattern:
     format: "junit"
     pattern: "*.xml"
