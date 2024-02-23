@@ -23,7 +23,7 @@ jobs:
       - name: Look for PackageManagerClient
         run: |
           Write-Output "***Locating PackageManagerClient!***"
-          if (Test-Path -Path "${{ github.workspace }}\PackageManagerClient\bin\Debug\net6.0\Greg.dll") {
+          if (Test-Path -Path "${{ github.workspace }}\PackageManagerClient\bin\Debug\net8.0\Greg.dll") {
             Write-Output "PackageManagerClient exists!"
           } else {
             Write-Error "PackageManagerClient was not found!"

@@ -1,5 +1,7 @@
+### 3.0.1
+* switch pipeline.yml scripts to use internal shared scripts
 ### version 3.0
-* update RestSharp to 109.0.1, this comes with many API breaking changes, some affecting us, see below:
+* update RestSharp to 108.0.1, this comes with many API breaking changes, some affecting us, see below:
 * removal of basic auth - our API no longer makes sense with RestSharp immutable clients.
 * switch from newtonsoft.json to system.text.json
 * add unit test project
