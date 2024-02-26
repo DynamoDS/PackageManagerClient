@@ -16,7 +16,7 @@ env:
   - NUGET_CONFIG : "Config\\nuget.config"
 
   
-check_changelog_updated_on_pr: true
+check_changelog_updated_on_pr: false
 pipeline_os: "Windows"
 force_slack_notification : true
 language: csharp
