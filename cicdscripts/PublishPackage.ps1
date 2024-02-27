@@ -25,11 +25,12 @@ $reBranch = [regex]$regex
 if ($env:BRANCH_NAME -match $reBranch) 
 {
 	try {
-
 		#deploy already built package.
-		$assemblyPath = "\bin\release"
+		$assemblyPath = "$env:WORKSPACE\bin\release"
 		$nupkgFile = Get-ChildItem $assemblyPath\*.nupkg -Depth 1
-		dotnet nuget push $nupkgFile --api-key $env:API_KEY --source $env:NUGET_PUBLISH_SOURCE
+		Write-Host $env:NUGET_PUBLISH_SOURCE
+		Write-Host $nupkgFile
+		dotnet nuget push $nupkgFile --api-key $env:APIKEY --source $env:NUGET_PUBLISH_SOURCE
 
 		if($LASTEXITCODE -ne 0) {
 			throw "The package-generation process failed"
