@@ -56,11 +56,11 @@ ci_test:
     format: "junit"
     pattern: "*.xml"
 
-soc2:
-  harmony:
-    hidden_email_list: dynamo_ws_access
-    third_party_lib_paths:
-      - bin\\Release\\net8.0\\
+#soc2:
+#  harmony:
+#    hidden_email_list: dynamo_ws_access
+#    third_party_lib_paths:
+#      - bin\\Release\\net8.0\\
 
 deployment:
   
