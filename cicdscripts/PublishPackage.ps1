@@ -31,8 +31,8 @@ if ($env:BRANCH_NAME -match $reBranch)
 		$nupkgFile = Get-ChildItem $assemblyPath\*.nupkg -Depth 1
 		Write-Host $env:NUGET_PUBLISH_SOURCE
 		Write-Host $nupkgFile
-		Write-Host $env:API_KEY
-		dotnet nuget push $nupkgFile --api-key $env:API_KEY --source $env:NUGET_PUBLISH_SOURCE
+		Write-Host $env:APIKEY
+		dotnet nuget push $nupkgFile --api-key $env:APIKEY --source $env:NUGET_PUBLISH_SOURCE
 
 		if($LASTEXITCODE -ne 0) {
 			throw "The package-generation process failed"
