@@ -14,7 +14,7 @@ env:
   - SONARSCANTOOL : "SonarScannerMsbuild\\dotnet-framework-sonarscanner\\tools\\SonarScanner.MSBuild.exe"
   - NUGET_SOURCES : "nuget.org"
   - NUGET_CONFIG : "Config\\nuget.config"
-
+  - RELEASE_BRANCHES: "master,nodocker"
   
 check_changelog_updated_on_pr: false
 pipeline_os: "Windows"
