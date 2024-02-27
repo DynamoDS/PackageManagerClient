@@ -71,7 +71,7 @@ deployment:
   -
       type: customized
       scripts:
-          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches nodocker"
+          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches PR-7"
 
 
 
