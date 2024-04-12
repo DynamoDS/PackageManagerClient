@@ -39,6 +39,7 @@ namespace Greg
         /// <param name="client"></param>
         new void SignRequest(ref RestRequest m, RestClient client);
     }
+
     /// <summary>
     /// Implement this interface to provide direct access to the current bearer token. 
     /// </summary>
@@ -47,9 +48,14 @@ namespace Greg
         string GetAccessToken();
     }
 
-    // Auth Provider Interface to get user account information.
-    public interface IAuthProviderUserAccount
+    /// <summary>
+    /// Implement this interface to get user information.
+    /// </summary>
+    public interface IOAuth2UserIDProvider
     {
+        /// <summary>
+        /// Gets the User ID.
+        /// </summary>
         public string UserId { get; }
     }
 }
