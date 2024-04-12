@@ -46,4 +46,10 @@ namespace Greg
     {
         string GetAccessToken();
     }
+
+    // Auth Provider Interface to get user account information.
+    public interface IAuthProviderUserAccount
+    {
+        public string UserId { get; }
+    }
 }
