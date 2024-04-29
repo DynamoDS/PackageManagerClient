@@ -43,7 +43,7 @@ build:
     scripts:
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\DownloadCICDResources.ps1"
       - "pwsh.exe -ExecutionPolicy ByPass -File .\\%COMMON_TOOLS_DIR%\\scripts\\SetupHost.ps1"
-      - "msbuild src/gregClient.sln --configuration Release"
+      - "msbuild src/gregClient.sln /p:Configuration=Release"
 ci_test:
   tests:
     -
