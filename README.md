@@ -37,6 +37,10 @@ This repo is the package manager client for the Dynamo Package Manager. Package 
     nuget restore src\GregClient.sln
     msbuild src\GregClient.sln
     ```
+
+#### How to increment the assembly version:
+
+Locate the [GregClient.csproj](https://github.com/DynamoDS/PackageManagerClient/blob/master/src/GregClient/GregClient.csproj) and change the `Version` property.
 ___
 
 The Dynamo Package Manager and the Dynamo Package Manager Client both comply with the [Autodesk Privacy Policy](https://www.autodesk.com/company/legal-notices-trademarks/privacy-statement).
