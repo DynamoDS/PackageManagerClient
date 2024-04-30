@@ -1,22 +1,28 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	  <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <PackageId>Greg</PackageId>
     <Authors></Authors>
-    <Company>Autodesk</Company>
+    <Company>Autodesk, Inc</Company>
+    <AssemblyCopyright>Copyright � Autodesk, Inc 2022</AssemblyCopyright>
     <ProjectGuid>{644207B4-7E7F-474A-952E-3453960D8A01}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
     <TargetFrameworks>net8.0</TargetFrameworks>
-	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <GenerateNuspecDependsOn>$(GenerateNuspecDependsOn);ReadPackageVersionFromOutputAssembly</GenerateNuspecDependsOn>
-	  <PackageIcon>logo_square_32x32.png</PackageIcon>
-	  <Description>The Dynamo Package Manager .Net Client.</Description>
-	  <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
+    <TotalDays>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2023,1,1))).get_TotalDays())</TotalDays>
+    <Days>$([MSBuild]::Multiply($(TotalDays), 10))</Days>
+    <Hours>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalHours()), 3))</Hours>
+    <Revision>$([MSBuild]::Add($(Days), $(Hours)).ToString('F0'))</Revision>
+    <Version>1.0.4.$(Revision)</Version>
+    <GeneratedAssemblyInfoFile>$(MSBuildProjectDirectory)/$(AppDesignerFolder)/AssemblyVersionInfo.cs</GeneratedAssemblyInfoFile>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>logo_square_32x32.png</PackageIcon>
+    <Description>The Dynamo Package Manager .Net Client.</Description>
+    <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup Label="Common package dependencies">
@@ -33,35 +39,5 @@
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <Compile Include="..\AssemblyInfoGenerator\AssemblyInfo.cs" Link="Properties\GlobalVersionInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AssemblyInfoGenerator\AssemblyInfoGenerator.csproj">
-      <Private>false</Private>
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>none</IncludeAssets>
-    </ProjectReference>
-  </ItemGroup>
-  <Target Name="ReadPackageVersionFromOutputAssemblySingleTfm" Returns="@(PackAssembly)" Condition="'$(IsCrossTargetingBuild)' != 'true'">
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
-      <Output TaskParameter="Assemblies" ItemName="PackAssembly" />
-    </GetAssemblyIdentity>
-    <PropertyGroup>
-      <PackageVersion>%(PackAssembly.Version)</PackageVersion>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="ReadPackageVersionFromOutputAssemblyMultipleTfms" Condition="'$(IsCrossTargetingBuild)' == 'true'">
-    <PropertyGroup>
-      <FirstTargetFramework>$([System.String]::Copy($(TargetFrameworks)).Split(';').GetValue(0))</FirstTargetFramework>
-    </PropertyGroup>
-    <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="ReadPackageVersionFromOutputAssemblySingleTfm" Properties="TargetFramework=$(FirstTargetFramework)">
-      <Output TaskParameter="TargetOutputs" ItemName="PackAssembly" />
-    </MSBuild>
-    <PropertyGroup>
-      <PackageVersion>%(PackAssembly.Version)</PackageVersion>
-    </PropertyGroup>
-  </Target>
-
-  <Target Name="ReadPackageVersionFromOutputAssembly" DependsOnTargets="Build;ReadPackageVersionFromOutputAssemblySingleTfm;ReadPackageVersionFromOutputAssemblyMultipleTfms" />
 </Project>
