@@ -57,7 +57,7 @@ ci_test:
 
 code_analysis:
   sonarqube:
-    useDotnetSonarScanner: true
+    useDotnetSonarScanner: false
     scanOnAnyBranch: true
     coverage_reports:
       - coverage.xml
