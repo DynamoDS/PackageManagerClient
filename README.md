@@ -34,8 +34,7 @@ This repo is the package manager client for the Dynamo Package Manager. Package 
 - From command line:
 
     ```bat
-    nuget restore src\GregClient.sln
-    msbuild src\GregClient.sln
+    dotnet build --configuration Release src/GregClient.sln
     ```
 
 #### How to increment the assembly version:
