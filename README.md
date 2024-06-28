@@ -1,9 +1,8 @@
+# Dynamo Package Manager Client
+
 [![Nuget](https://img.shields.io/nuget/v/Greg?logo=nuget)](https://www.nuget.org/packages/Greg/)
 
-[![PackageManagerClient-VS2022Build](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/PackageManagerClientMSbuild.yml/badge.svg)](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/PackageManagerClientMSbuild.yml) 
-
-
-# Dynamo Package Manager Client
+[![Build](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/build.yml/badge.svg)](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/build.yml)
 
 This repo is the package manager client for the Dynamo Package Manager. Package Manager Client is designed to cover all of the capabilities of the Dynamo Package Manager.
 
@@ -27,11 +26,11 @@ This repo is the package manager client for the Dynamo Package Manager. Package 
 
 #### Steps to build The Package Manager Client solution:
 
-- From Visual Studio IDE:
+* From Visual Studio IDE:
 
     Build the `PackageManagerClient\src\GregClient.sln` solution
 
-- From command line:
+* From command line:
 
     ```bat
     dotnet build --configuration Release src/GregClient.sln
