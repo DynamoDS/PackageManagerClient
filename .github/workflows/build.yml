@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  build:
+    name: Build PackageManagerClient
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+        with:
+          repository: ${{ github.repository }}
+          path: PackageManagerClient
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@4d6c8fcf3c8f7a60068d26b594648e99df24cee3 # v4.0.0
+        with:
+          dotnet-version: '8.0.x'
+      - name: Build
+        run: |
+          dotnet build --configuration Release PackageManagerClient\src\GregClient.sln
+      - name: Look for PackageManagerClient
+        run: |
+          if (Test-Path -Path "${{ github.workspace }}\PackageManagerClient\bin\Release\net8.0\Greg.dll") {
+            Write-Output "PackageManagerClient exists!"
+          } else {
+            Write-Error "PackageManagerClient was not found!"
+          }
+      - name: Test
+        run: |
+          dotnet test --no-build --configuration Release ${{ github.workspace }}\PackageManagerClient\src\GregClient.sln --logger "trx;LogFileName=results.trx" --results-directory ${{ github.workspace }}\PackageManagerClient\TestResults
+      - name: Upload test artifact
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: TestResults
+          path: ${{ github.workspace }}\PackageManagerClient\TestResults
+          retention-days: 1

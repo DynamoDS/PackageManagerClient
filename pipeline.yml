@@ -1,17 +1,16 @@
 version: 0.1.1
 env:
   - JENKINS_NODE_WIN: "DynamoWinBuild"
-  - SLACK_QUANTUM_BUILD_CHANNEL : "#dynamo-jenkinsbuild"
-  - SLACK_QUANTUM_BUILD_CREDENTIAL_ID : "slack-notify-token"
-  - MAIL_QUANTUM_BUILD_RECIPIENT : "dynamo.dev@autodesk.com"
+  - SLACK_QUANTUM_BUILD_CHANNEL: "#dynamo-jenkinsbuild"
+  - SLACK_QUANTUM_BUILD_CREDENTIAL_ID: "slack-notify-token"
+  - MAIL_QUANTUM_BUILD_RECIPIENT: "dynamo.dev@autodesk.com"
   - NUGET_PUBLISH_SOURCE: "https://api.nuget.org/v3/index.json"
-  
+
 check_changelog_updated_on_pr: false
 pipeline_os: "Windows"
-force_slack_notification : true
+force_slack_notification: true
 language: csharp
 use_garasign: true
-
 
 schedule:
   cron_schedule: "once_a_week"
@@ -24,12 +23,12 @@ jenkins_creds:
     -
      type: usernamePassword
      credentialsId: local-svc_p_ors
-     username: GITADSK_USERNAME 
+     username: GITADSK_USERNAME
      password: GITADSK_PASSWORD
 
 build:
   -
-    setup_proj_deps : true
+    setup_proj_deps: true
     solution: src\\GregClient.sln
     scripts:
       - "dotnet build --configuration Release src/GregClient.sln"
@@ -58,18 +57,11 @@ soc2:
       - bin\Release\net8.0
 
 deployment:
-  
-  -  
+  -
       type: sign
       files_to_sign:
         - "bin\\Release\\net8.0\\greg.dll"
   -
       type: customized
       scripts:
-          - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches master"
-
-
-
-
-
-    
+        - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches master"
