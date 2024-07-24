@@ -5,14 +5,11 @@ namespace Greg.Requests
 {
     public class PackageUploadRequestBody : PackageVersionUploadRequestBody
     {
-        public string license { get; set; }
-
         //public parameterless constructor used for system.text.json deserialization.
         public PackageUploadRequestBody()
         {
         }
 
-        [Obsolete("This constructor will be removed in a future release of PackageManagerClient.")]
         public PackageUploadRequestBody(string name, string version, string description,
         IEnumerable<string> keywords, string license,
         string contents, string engine, string engineVersion,
@@ -43,33 +40,9 @@ namespace Greg.Requests
             this.license = license;
         }
 
-        public PackageUploadRequestBody(string name, string version, string description,
-        IEnumerable<string> keywords, string license,
-        string contents, string engine, string engineVersion,
-        string metadata, string group, IEnumerable<PackageDependency> dependencies,
-        string siteUrl, string repositoryUrl, bool containsBinaries,
-        IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
-        string copyright_holder, string copyright_year, string size)
-        {
-            this.name = name;
-            this.version = version;
-            this.description = description;
-            this.keywords = keywords;
-            this.dependencies = dependencies;
-            this.contents = contents;
-            this.engine = engine;
-            this.group = group;
-            this.engine_version = engineVersion;
-            this.engine_metadata = metadata;
-            this.site_url = siteUrl;
-            this.repository_url = repositoryUrl;
-            this.contains_binaries = containsBinaries;
-            this.node_libraries = nodeLibraryNames;
-            this.license = license;
-            this.host_dependencies = hostDependencies;
-            this.copyright_holder = copyright_holder;
-            this.copyright_year = copyright_year;
-            this.size = size;
-        }
+
+
+
+        public string license { get; set; }
     }
 }
