@@ -16,7 +16,7 @@
     <Days>$([MSBuild]::Multiply($(TotalDays), 10))</Days>
     <Hours>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalHours()), 3))</Hours>
     <Revision>$([MSBuild]::Add($(Days), $(Hours)).ToString('F0'))</Revision>
-    <Version>3.0.2.$(Revision)</Version>
+    <Version>3.0.3.$(Revision)</Version>
     <GeneratedAssemblyInfoFile>$(MSBuildProjectDirectory)/$(AppDesignerFolder)/AssemblyVersionInfo.cs</GeneratedAssemblyInfoFile>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
