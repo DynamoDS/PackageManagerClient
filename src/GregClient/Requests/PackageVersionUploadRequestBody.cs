@@ -12,6 +12,55 @@ namespace Greg.Requests
 
         }
 
+        /// <summary>
+        /// Constructor which can be used to set hostDependencies
+        /// </summary>
+        /// <param name="name">Package name</param>
+        /// <param name="version">Package version</param>
+        /// <param name="description">Package description</param>
+        /// <param name="keywords">Package keywords for quick identification</param>
+        /// <param name="contents">Package content description</param>
+        /// <param name="engine">Package engine name, usually is set to Dynamo</param>
+        /// <param name="engineVersion">Package engine version, usually is set to use Dynamo version</param>
+        /// <param name="metadata"></param>
+        /// <param name="group"></param>
+        /// <param name="dependencies">Package dependencies</param>
+        /// <param name="siteUrl"></param>
+        /// <param name="repositoryUrl"></param>
+        /// <param name="containsBinaries">boolean flag indicating if the package contains binaries</param>
+        /// <param name="nodeLibraryNames"></param>
+        /// <param name="hostDependencies"> external programs this package depends on.</param
+        /// <param name="copyright_holder">Copyright Holder's name</param>
+        /// <param name="copyright_year">Year the copyright was put into effect.</param>
+        public PackageVersionUploadRequestBody(string name, string version, string description,
+          IEnumerable<string> keywords,
+          string contents, string engine, string engineVersion,
+          string metadata, string group, IEnumerable<PackageDependency> dependencies,
+          string siteUrl, string repositoryUrl, bool containsBinaries,
+          IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
+          string copyright_holder, string copyright_year, string compatibility_matrix, string releaseNotesUrl)
+
+        {
+            this.host_dependencies = hostDependencies;
+            this.copyright_holder = copyright_holder;
+            this.copyright_year = copyright_year;
+            this.name = name;
+            this.version = version;
+            this.description = description;
+            this.dependencies = dependencies;
+            this.keywords = keywords;
+            this.contents = contents;
+            this.engine = engine;
+            this.group = group;
+            this.engine_version = engineVersion;
+            this.engine_metadata = metadata;
+            this.site_url = siteUrl;
+            this.repository_url = repositoryUrl;
+            this.contains_binaries = containsBinaries;
+            this.node_libraries = nodeLibraryNames;
+            this.compatibility_matrix = compatibility_matrix;
+            this.releaseNotesUrl = releaseNotesUrl;
+        }
 
         /// <summary>
         /// Constructor which can be used to set hostDependencies
@@ -33,6 +82,7 @@ namespace Greg.Requests
         /// <param name="hostDependencies"> external programs this package depends on.</param
         /// <param name="copyright_holder">Copyright Holder's name</param>
         /// <param name="copyright_year">Year the copyright was put into effect.</param>
+        [Obsolete("This constructor may not initiate all the properties and will be removed in a future release of PackageManagerClient.")]
         public PackageVersionUploadRequestBody(string name, string version, string description,
           IEnumerable<string> keywords,
           string contents, string engine, string engineVersion,
@@ -82,5 +132,7 @@ namespace Greg.Requests
         public IEnumerable<string> node_libraries { get; set; }
         public string copyright_holder { get; set; }
         public string copyright_year { get; set; }
+        public string compatibility_matrix { get; set; }
+        public string releaseNotesUrl { get; set; }
     }
 }
