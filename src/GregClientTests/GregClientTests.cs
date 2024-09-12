@@ -83,7 +83,7 @@ namespace GregClientTests
         {
             var keywords = new List<string>() { "neat", "ok" };
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>(), new List<String>(), "", "");
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>(), new List<String>(), "", "", "", "");
 
             var files = new List<string>() {Assembly.GetExecutingAssembly().Location };
 
