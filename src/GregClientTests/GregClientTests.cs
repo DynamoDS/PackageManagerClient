@@ -60,7 +60,7 @@ namespace GregClientTests
 
             var files = new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" };
             var request = new PackageVersionUpload(nv, files);
-            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"neat\",\"ok\"],\"dependencies\":[{\"name\":\"peter\",\"version\":\"0.1.0\"},{\"name\":\"stephen\",\"version\":\"0.1.0\"}],\"host_dependencies\":[],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\"}"));
+            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"neat\",\"ok\"],\"dependencies\":[{\"name\":\"peter\",\"version\":\"0.1.0\"},{\"name\":\"stephen\",\"version\":\"0.1.0\"}],\"host_dependencies\":[],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\",\"compatibility_matrix\":\"\",\"releaseNotesUrl\":\"\"}"));
             Console.WriteLine(request.RequestBody.AsJson());
         }
         
@@ -74,7 +74,7 @@ namespace GregClientTests
 
             var files = new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" };
             var request = new PackageVersionUpload(nv, files);
-            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"Civil\"],\"dependencies\":[{\"name\":\"Ram\",\"version\":\"0.1.0\"},{\"name\":\"Ian\",\"version\":\"0.1.0\"}],\"host_dependencies\":[\"Civil3D\"],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\"}"));
+            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"Civil\"],\"dependencies\":[{\"name\":\"Ram\",\"version\":\"0.1.0\"},{\"name\":\"Ian\",\"version\":\"0.1.0\"}],\"host_dependencies\":[\"Civil3D\"],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\",\"compatibility_matrix\":\"\",\"releaseNotesUrl\":\"\"}"));
             Console.WriteLine(request.RequestBody.AsJson());
         }
         
