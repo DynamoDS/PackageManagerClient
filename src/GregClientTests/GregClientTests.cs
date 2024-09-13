@@ -56,11 +56,11 @@ namespace GregClientTests
             var keywords = new List<string>() { "neat", "ok" };
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
                             new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "",
-                            false, new List<String>(), new List<String>(), "Dynamo Team", "2021");
+                            false, new List<String>(), new List<String>(), "Dynamo Team", "2021","","");
 
             var files = new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" };
             var request = new PackageVersionUpload(nv, files);
-            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"neat\",\"ok\"],\"dependencies\":[{\"name\":\"peter\",\"version\":\"0.1.0\"},{\"name\":\"stephen\",\"version\":\"0.1.0\"}],\"host_dependencies\":[],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\"}"));
+            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"neat\",\"ok\"],\"dependencies\":[{\"name\":\"peter\",\"version\":\"0.1.0\"},{\"name\":\"stephen\",\"version\":\"0.1.0\"}],\"host_dependencies\":[],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\",\"compatibility_matrix\":\"\",\"releaseNotesUrl\":\"\"}"));
             Console.WriteLine(request.RequestBody.AsJson());
         }
         
@@ -70,11 +70,11 @@ namespace GregClientTests
             var keywords = new List<string>() { "Civil" };
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
                             new List<PackageDependency>() { new PackageDependency("Ram", "0.1.0"), new PackageDependency("Ian", "0.1.0") }, "", "",
-                            false, new List<String>(), new List<String>() { "Civil3D" }, "Dynamo Team", "2021");
+                            false, new List<String>(), new List<String>() { "Civil3D" }, "Dynamo Team", "2021", "", "");
 
             var files = new List<string>() { "../test/pedro.dyf", "../test/RootNode.dyf" };
             var request = new PackageVersionUpload(nv, files);
-            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"Civil\"],\"dependencies\":[{\"name\":\"Ram\",\"version\":\"0.1.0\"},{\"name\":\"Ian\",\"version\":\"0.1.0\"}],\"host_dependencies\":[\"Civil3D\"],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\"}"));
+            Assert.That(request.RequestBody.AsJson().Equals("{\"file_hash\":null,\"name\":\"Third .NET Package\",\"version\":\"2.1.0\",\"description\":\"\",\"group\":\"group\",\"keywords\":[\"Civil\"],\"dependencies\":[{\"name\":\"Ram\",\"version\":\"0.1.0\"},{\"name\":\"Ian\",\"version\":\"0.1.0\"}],\"host_dependencies\":[\"Civil3D\"],\"contents\":\"contents\",\"engine_version\":\"0.1.0\",\"engine\":\"dynamo\",\"engine_metadata\":\"metadata\",\"site_url\":\"\",\"repository_url\":\"\",\"contains_binaries\":false,\"node_libraries\":[],\"copyright_holder\":\"Dynamo Team\",\"copyright_year\":\"2021\",\"compatibility_matrix\":\"\",\"releaseNotesUrl\":\"\"}"));
             Console.WriteLine(request.RequestBody.AsJson());
         }
         
@@ -83,7 +83,7 @@ namespace GregClientTests
         {
             var keywords = new List<string>() { "neat", "ok" };
             var nv = new PackageVersionUploadRequestBody("Third .NET Package", "2.1.0", "", keywords, "contents", "dynamo", "0.1.0", "metadata", "group",
-                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>(), new List<String>(), "", "");
+                new List<PackageDependency>() { new PackageDependency("peter", "0.1.0"), new PackageDependency("stephen", "0.1.0") }, "", "", false, new List<String>(), new List<String>(), "", "", "", "");
 
             var files = new List<string>() {Assembly.GetExecutingAssembly().Location };
 
