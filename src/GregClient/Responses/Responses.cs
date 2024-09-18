@@ -124,6 +124,7 @@ namespace Greg.Responses
         public string latest_version_update { get; set; }
 
         public string size { get; set; }
+        public string release_notes_url { get; set; }
     }
 
     public class User

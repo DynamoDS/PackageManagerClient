@@ -59,7 +59,7 @@ namespace Greg.Requests
             this.contains_binaries = containsBinaries;
             this.node_libraries = nodeLibraryNames;
             this.compatibility_matrix = compatibility_matrix;
-            this.releaseNotesUrl = releaseNotesUrl;
+            this.release_notes_url = releaseNotesUrl;
         }
 
         /// <summary>
@@ -133,6 +133,6 @@ namespace Greg.Requests
         public string copyright_holder { get; set; }
         public string copyright_year { get; set; }
         public string compatibility_matrix { get; set; }
-        public string releaseNotesUrl { get; set; }
+        public string release_notes_url { get; set; }
     }
 }
