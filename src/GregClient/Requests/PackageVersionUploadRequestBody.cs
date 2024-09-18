@@ -38,7 +38,7 @@ namespace Greg.Requests
           string metadata, string group, IEnumerable<PackageDependency> dependencies,
           string siteUrl, string repositoryUrl, bool containsBinaries,
           IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
-          string copyright_holder, string copyright_year, string compatibility_matrix, string releaseNotesUrl)
+          string copyright_holder, string copyright_year, IEnumerable<PackageCompatibility> compatibilityMatrix, string releaseNotesUrl)
 
         {
             this.host_dependencies = hostDependencies;
@@ -60,6 +60,7 @@ namespace Greg.Requests
             this.node_libraries = nodeLibraryNames;
             this.compatibility_matrix = compatibility_matrix;
             this.release_notes_url = releaseNotesUrl;
+            this.compatibility_matrix = compatibilityMatrix;
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace Greg.Requests
         public IEnumerable<string> node_libraries { get; set; }
         public string copyright_holder { get; set; }
         public string copyright_year { get; set; }
-        public string compatibility_matrix { get; set; }
+        public IEnumerable<PackageCompatibility> compatibility_matrix { get; set; }
         public string release_notes_url { get; set; }
     }
 }

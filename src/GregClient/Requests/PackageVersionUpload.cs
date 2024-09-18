@@ -79,4 +79,18 @@ namespace Greg.Requests
         public string name { get; set; }
         public string version { get; set; }
     }
+    public class PackageCompatibility
+    {
+        public PackageCompatibility(string name, List<string> versions, string min, string max)
+        {
+            this.name = name;
+            this.versions = versions;
+            this.min = min;
+            this.max = max;
+        }
+        public string name { get; set; }
+        public List<string> versions { get; set; }
+        public string min { get; set; }
+        public string max { get; set; }
+    }
 }

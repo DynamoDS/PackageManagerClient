@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using RestSharp;
 using Greg.Converters;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Greg.Responses
 {
@@ -78,6 +77,13 @@ namespace Greg.Responses
 
         public string _id { get; set; }
     }
+    public class Compatibility
+    {
+        public string name { get; set; }
+        public List<string> versions { get; set; }
+        public string min { get; set; }
+        public string max { get; set; }
+    }
 
     public class PackageVersion
     {
@@ -125,6 +131,7 @@ namespace Greg.Responses
 
         public string size { get; set; }
         public string release_notes_url { get; set; }
+        public List<Compatibility> compatibility_matrix { get; set; }
     }
 
     public class User
