@@ -14,7 +14,7 @@ namespace Greg.Requests
         // Ex: Timeout property
         internal void InitReqParams(ref RestRequest request)
         {
-            request.Timeout = Timeout;
+            request.Timeout = TimeSpan.FromMilliseconds(Timeout);
         }
 
         internal override void Build(ref RestRequest request)

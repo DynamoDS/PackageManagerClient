@@ -54,12 +54,12 @@ namespace Greg
                 if (timeoutSetting != null)
                 {
                     // Timeout App Settings is in seconds.
-                    // RestRequest.Timeout is in milliseconds.
+                    // RestRequest.Timeout is now timespan object for clarity from RestSharp 112.0.0
                     var userVal = Convert.ToInt32(timeoutSetting);
                     // Sanity check.
                     if (userVal >= 0 && userVal < 86400/*24 hours*/)
                     {
-                        req.Timeout = Convert.ToInt32(timeoutSetting) * 1000;// get milliseconds
+                        req.Timeout = TimeSpan.FromSeconds(userVal);
                     }
                 }
             }
