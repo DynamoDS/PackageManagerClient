@@ -16,12 +16,13 @@ namespace Greg.Requests
         string metadata, string group, IEnumerable<PackageDependency> dependencies,
         string siteUrl, string repositoryUrl, bool containsBinaries,
         IEnumerable<string> nodeLibraryNames, IEnumerable<string> hostDependencies,
-        string copyright_holder, string copyright_year, string releaseNotesUrl)
+        string copyright_holder, string copyright_year, string releaseNotesUrl, IEnumerable<PackageCompatibility> compatibilityMatrix)
         {
             this.host_dependencies = hostDependencies;
             this.copyright_holder = copyright_holder;
             this.copyright_year = copyright_year;
             this.release_notes_url = releaseNotesUrl;
+            this.compatibility_matrix = compatibilityMatrix;
 
             this.name = name;
             this.version = version;
