@@ -2,6 +2,7 @@ using Greg;
 using Greg.Requests;
 using Greg.Responses;
 using Greg.Utility;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Reflection;
 using System.Text.Json;
@@ -159,6 +160,19 @@ namespace GregClientTests
             var hostsResponse = pmc.ExecuteAndDeserializeWithContent<List<String>>(hosts);
             Console.WriteLine(JsonSerializer.Serialize(hostsResponse.content));
             Assert.That(hostsResponse.content.Count, Is.EqualTo(5));
+        }
+
+        [Test]
+        public void ListCompatibilityMapTest()
+        {
+            GregClient pmc = new GregClient(null, "http://dynamopackages.com/");
+            var comMap = new GetCompatibilityMap();
+            var comMapResponse = pmc.ExecuteAndDeserializeWithContent<object>(comMap);
+            Assert.That(comMapResponse.content != null, Is.EqualTo(true));
+            var content = JsonSerializer.Serialize(comMapResponse.content);
+            Console.WriteLine(content);
+            var jsonResp = JArray.Parse(content);
+            Assert.That(jsonResp.Where(x => ((JObject)x).ContainsKey("Revit") || ((JObject)x).ContainsKey("Civil3D")).Any(), Is.EqualTo(true));
         }
 
         [Test]
