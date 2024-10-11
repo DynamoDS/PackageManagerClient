@@ -8,6 +8,10 @@ using RestSharp;
 
 namespace Greg.Requests
 {
+    /// <summary>
+    /// Returns the compatibility information with a fixed map of host applications
+    /// and it's respective supported Dynamo version
+    /// </summary>
     public class GetCompatibilityMap : Request
     {
         public GetCompatibilityMap()
