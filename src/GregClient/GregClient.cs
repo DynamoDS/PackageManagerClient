@@ -32,6 +32,13 @@ namespace Greg
             _client = new RestClient(packageManagerUrl);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GregClient"/> class with the specified authentication provider, 
+        /// package manager URL, and optional HTTP client.
+        /// </summary>
+        /// <param name="provider">The authentication provider used for managing authentication tokens.</param>
+        /// <param name="packageManagerUrl">The base URL of the package manager service.</param>
+        /// <param name="httpClient">An optional HTTP client to use for making requests. If null, a default client is created.</param>
         public GregClient(IAuthProvider provider, string packageManagerUrl, HttpClient httpClient)
         {
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
