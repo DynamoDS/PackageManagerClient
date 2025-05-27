@@ -4,6 +4,7 @@ using Greg.Utility;
 using RestSharp;
 using System;
 using System.Net;
+using System.Net.Http;
 
 namespace Greg
 {
@@ -17,10 +18,8 @@ namespace Greg
             get { return _authProvider; }
         }
 
-        public GregClient(IAuthProvider provider, string packageManagerUrl)
+        private static void SetTLSHelper()
         {
-
-
             // https://stackoverflow.com/questions/2819934/detect-windows-version-in-net
             // if the current OS is windows 7 or lower
             // set TLS to 1.2.
@@ -29,8 +28,38 @@ namespace Greg
             {
                 ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
             }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GregClient"/> class with the specified authentication provider, 
+        /// and package manager URL.
+        /// </summary>
+        /// <param name="provider">The authentication provider used for managing authentication tokens.</param>
+        /// <param name="packageManagerUrl">The base URL of the package manager service.</param>
+        public GregClient(IAuthProvider provider, string packageManagerUrl)
+        {
+            SetTLSHelper();
             _authProvider = provider;
             _client = new RestClient(packageManagerUrl);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GregClient"/> class with the specified authentication provider, 
+        /// package manager URL, and optional HTTP client.
+        /// </summary>
+        /// <param name="provider">The authentication provider used for managing authentication tokens.</param>
+        /// <param name="packageManagerUrl">The base URL of the package manager service.</param>
+        /// <param name="httpClient">An optional HTTP client to use for making requests. If null, a default client is created.</param>
+        public GregClient(IAuthProvider provider, string packageManagerUrl, HttpClient httpClient)
+        {
+            SetTLSHelper();
+            _authProvider = provider;
+
+            var baseUrl = new Uri(packageManagerUrl);
+            if (httpClient != null)
+                _client = new RestClient(httpClient, new RestClientOptions() { BaseUrl = baseUrl });
+            else
+                _client = new RestClient(packageManagerUrl);
         }
 
         private RestResponse ExecuteInternal(Request m)
