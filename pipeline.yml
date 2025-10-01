@@ -16,26 +16,22 @@ schedule:
   cron_schedule: "once_a_week"
 
 jenkins_creds:
-    -
-      type: secretText
-      credentialsId: dynamovisualprogramming_nuget_api_key
-      secretText: APIKEY
-    -
-     type: usernamePassword
-     credentialsId: local-svc_p_ors
-     username: GITADSK_USERNAME
-     password: GITADSK_PASSWORD
+  - type: secretText
+    credentialsId: dynamovisualprogramming_nuget_api_key
+    secretText: APIKEY
+  - type: usernamePassword
+    credentialsId: local-svc_p_ors
+    username: GITADSK_USERNAME
+    password: GITADSK_PASSWORD
 
 build:
-  -
-    setup_proj_deps: true
+  - setup_proj_deps: true
     solution: src\\GregClient.sln
     scripts:
       - "dotnet build --configuration Release src/GregClient.sln"
 ci_test:
   tests:
-    -
-      scripts:
+    - scripts:
         - dotnet coverage collect "dotnet test --no-build --configuration Release src/GregClient.sln --logger:junit --logger:trx" -f xml -o "coverage.xml"
 
   test_report_dir: src\\GregClientTests\\TestResults
@@ -54,14 +50,12 @@ soc2:
   harmony:
     hidden_email_list: dynamo_ws_access
     third_party_lib_paths:
-      - bin\Release\net8.0
+      - bin\Release\net10.0
 
 deployment:
-  -
-      type: sign
-      files_to_sign:
-        - "bin\\Release\\net8.0\\greg.dll"
-  -
-      type: customized
-      scripts:
-        - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches master"
+  - type: sign
+    files_to_sign:
+      - "bin\\Release\\net10.0\\greg.dll"
+  - type: customized
+    scripts:
+      - "pwsh.exe -ExecutionPolicy ByPass -File .\\cicdscripts\\PublishPackage.ps1 -ReleaseBranches master"

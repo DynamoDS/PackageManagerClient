@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Greg</RootNamespace>
     <AssemblyName>Greg</AssemblyName>
-    <TargetFrameworks>net8.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <TotalDays>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2023,1,1))).get_TotalDays())</TotalDays>
     <Days>$([MSBuild]::Multiply($(TotalDays), 10))</Days>
     <Hours>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalHours()), 3))</Hours>
