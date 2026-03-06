@@ -1,5 +1,7 @@
 # Dynamo Package Manager Client
 
+[![Build Status](https://c007.cloudbees-ci.autodesk.com/buildStatus/icon?job=DYNCI%2FDynamo%2FPackageManagerClient%2Fmaster)](https://c007.cloudbees-ci.autodesk.com/job/DYNCI/job/Dynamo/job/PackageManagerClient/job/master/)
+
 [![Nuget](https://img.shields.io/nuget/v/Greg?logo=nuget)](https://www.nuget.org/packages/Greg/)
 
 [![Build](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/build.yml/badge.svg)](https://github.com/DynamoDS/PackageManagerClient/actions/workflows/build.yml)
